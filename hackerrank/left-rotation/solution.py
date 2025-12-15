@@ -17,4 +17,6 @@ import sys
 
 def rotLeft(a, d):
     # Write your code here
-    return a
+    n = len(a)
+    r = d%n 
+    return a[r:] + a[:r]

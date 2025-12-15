@@ -50,3 +50,13 @@ python -m unittest hackerrank/left-rotation/test_solution.py
 ### Adding Test Cases
 The test suite automatically finds input files in `tests/input/` and compares them with expected outputs in `tests/output/`.
 You can add more test cases by adding `inputXX.txt` and `outputXX.txt` files to the `tests` directory.
+
+## Included Tests
+The `test_solution.py` suite includes:
+- **Sample Cases**: Verifies against the problem description's sample input/output.
+- **Edge Cases**:
+    - Rotation by `d = 0` (no change).
+    - Rotation by `d = n` (full cycle, no change).
+    - Rotation by `d > n` (should behave as `d % n`).
+    - Single element arrays.
+    - Large values of `d`.
