@@ -52,5 +52,35 @@ class TestLeftRotation(unittest.TestCase):
         expected = [1, 2, 3]
         self.assertEqual(rotLeft(a, d), expected)
 
+    def test_rotation_equals_n(self):
+        """Rotation by n should result in the same array."""
+        a = [1, 2, 3, 4, 5]
+        d = 5
+        expected = [1, 2, 3, 4, 5]
+        self.assertEqual(rotLeft(a, d), expected)
+
+    def test_rotation_greater_than_n(self):
+        """Rotation by d > n should equivalent to d % n."""
+        a = [1, 2, 3, 4, 5]
+        d = 7 # 7 % 5 = 2
+        expected = [3, 4, 5, 1, 2]
+        self.assertEqual(rotLeft(a, d), expected)
+
+    def test_single_element(self):
+        """Array with one element should remain unchanged regardless of d."""
+        a = [10]
+        d = 4
+        expected = [10]
+        self.assertEqual(rotLeft(a, d), expected)
+
+    def test_large_d(self):
+        """Test with a significantly large d."""
+        a = [1, 2, 3]
+        d = 1000000000
+        # 1000000000 % 3 = 1
+        expected = [2, 3, 1]
+        self.assertEqual(rotLeft(a, d), expected)
+
+
 if __name__ == '__main__':
     unittest.main()
