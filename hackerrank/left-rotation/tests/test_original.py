@@ -1,14 +1,14 @@
 import unittest
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from solution import rotLeft
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from solutions.original import rotLeft
 
 class TestLeftRotation(unittest.TestCase):
     def setUp(self):
         self.test_dir = os.path.dirname(os.path.abspath(__file__))
-        self.input_dir = os.path.join(self.test_dir, 'tests', 'input')
-        self.output_dir = os.path.join(self.test_dir, 'tests', 'output')
+        self.input_dir = os.path.join(self.test_dir, 'input')
+        self.output_dir = os.path.join(self.test_dir, 'output')
 
     def load_test_case(self, filename):
         input_path = os.path.join(self.input_dir, filename)
