@@ -5,13 +5,13 @@ Given a sorted array of distinct integers and a target value, return the index o
 ## Example 1
 
 **Input:**
-```
+```python
 nums = [1, 2, 3, 4, 5]
 target = 3
 ```
 
 **Output:**
-```
+```python
 2
 ```
 
@@ -21,13 +21,13 @@ Initialize low = 0, high = 4. Compute mid = (0 + 4) // 2 = 2. nums[2] = 3 matche
 ## Example 2
 
 **Input:**
-```
+```python
 nums = [2, 4, 6, 8, 10, 12, 14, 16]
 target = 16
 ```
 
 **Output:**
-```
+```python
 7
 ```
 
@@ -41,8 +41,8 @@ Finally mid = (7 + 7) // 2 = 7, nums[7] = 16 equals target, return 7.
 
 The function receives two parameters:
 
-- `nums` (INTEGER_ARRAY): a sorted array of distinct integers in strictly increasing order. Its length n satisfies $0 \le n \le 10^6$ and each element satisfies $-10^9 \le nums[i] \le 10^9$.
-- `target` (INTEGER): the integer value to search for in nums, satisfying $-10^9 \le target \le 10^9$.
+- `nums` (List[int]): a sorted array of distinct integers in strictly increasing order. Its length n satisfies $0 \le n \le 10^6$ and each element satisfies $-10^9 \le nums[i] \le 10^9$.
+- `target` (int): the integer value to search for in nums, satisfying $-10^9 \le target \le 10^9$.
 
 ## Constraints
 
@@ -53,7 +53,7 @@ The function receives two parameters:
 
 ## Output Format
 
-Return a single INTEGER: the 0-based index of target in nums if it exists; otherwise return -1.
+Return a single `int`: the 0-based index of target in nums if it exists; otherwise return -1.
 
 ### Solution Signature
 ```python
@@ -61,23 +61,22 @@ def target_index_search(nums: List[int], target: int) -> int:
 ```
 
 ## Sample Input 0
-```
-0
-5
+```python
+nums = [] # n = 0
+target = 5
 ```
 ## Sample Output 0
-```
+```python
 -1
 ```
 
 ## Sample Input 1
-```
-1
-10
-10
+```python
+nums = [10]
+target = 10
 ```
 ## Sample Output 1
-```
+```python
 0
 ```
 

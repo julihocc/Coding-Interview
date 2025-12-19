@@ -5,12 +5,12 @@ Given a sorted array of integers that may contain duplicates, return the index o
 ## Example
 
 **Input:**
-```
+```python
 nums = [1, 2, 3, 4, 5]
 target = 3
 ```
 **Output:**
-```
+```python
 2
 ```
 
@@ -23,9 +23,9 @@ We perform binary search on `[1,2,3,4,5]`.
 
 ## Input Format
 
-The input consists of two lines.
-1. Two space-separated integers `n` and `target`, where $0 \le n \le 1000$ and $-10^9 \le target \le 10^9$.
-2. `n` space-separated integers `nums[i]`, each satisfying $-10^9 \le nums[i] \le 10^9$, and `nums` is sorted in non-decreasing order.
+The function accepts two parameters:
+1. `nums` (List[int]): An array of integers sorted in non-decreasing order.
+2. `target` (int): The integer value to search for.
 
 ## Constraints
 
@@ -36,7 +36,7 @@ The input consists of two lines.
 
 ## Output Format
 
-Output a single integer: the index (0-based) of the first occurrence of `target` in the array `nums`. If `target` does not exist in `nums`, output `-1`.
+Output a single `int`: the index (0-based) of the first occurrence of `target` in the array `nums`. If `target` does not exist in `nums`, output `-1`.
 
 ### Solution Signature
 ```python
