@@ -2,77 +2,56 @@ import sys
 import os
 import time
 import glob
-# Need to adjust path to import solutions package
-# Assuming this script is run as "python hackerrank/target-index-search/judge.py" 
-# or using uv run which might handle paths differently.
-# Let's handle generic import structure.
+import importlib.util
 
-from solutions import naive, optimized, original
+def load_solutions(solutions_dir, function_name):
+    solutions = []
+    # List all .py files in solutions directory
+    sol_files = glob.glob(os.path.join(solutions_dir, "*.py"))
+    
+    for file_path in sol_files:
+        base_name = os.path.basename(file_path)
+        if base_name == "__init__.py":
+            continue
+            
+        module_name = base_name.replace(".py", "")
+        
+        # Dynamic import
+        spec = importlib.util.spec_from_file_location(module_name, file_path)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            
+            if hasattr(module, function_name):
+                func = getattr(module, function_name)
+                solutions.append((module_name, func))
+            else:
+                 print(f"Warning: {function_name} not found in {base_name}")
+                 
+    return sorted(solutions, key=lambda x: x[0])
 
 def run_test_case(solution_func, case_name, input_path, output_path):
     # Read input
-    # Format according to README:
-    # Line 1: target
-    # Line 2: n (or array elements?) NO, sample says:
-    # Sample Input 1:
-    # 1 (target)
-    # 10 (size?) -> actually the sample format in README is confusing or incomplete.
-    # Let's check test_original.py or input files to be sure.
-    # The PROBLEM description says: two parameters, nums and target.
-    # The SAMPLE INPUT says:
-    # 1
-    # 10
-    # 10
-    # Output: 0
-    # Wait, README Sample 1:
-    # 1 (Input?) No.
-    # checking README again...
-    
-    """
-    Sample Input 1
-    1
-    10
-    10
-    Sample Output 1
-    0
-    """ 
-    # This implies:
-    # Line 1: target?
-    # Line 2: size?
-    # Line 3: array elements? 
-    # Let's assume standard hackerrank format:
-    # Line 1: target (or n?)
-    # Line 2: ...
-    # I need to verify checking an actual input file or the test loader code. 
-    # But I can't check 'tests/input/file' content easily without listed files.
-    # Wait, previous `list_dir` showed `tests/input` exists.
-    # Let's ASSUME standard format based on typical problems or sample.
-    # Actually, let's write the judge to adapt or read robustly.
-    
     with open(input_path, 'r') as f:
         lines = [l.strip() for l in f.readlines() if l.strip()]
-        
-    # Heuristic parsing based on sample:
-    # If 3 lines: target, n, array_str
-    # If 2 lines: target, array_str? 
     
-    if len(lines) >= 3:
-        target = int(lines[0])
-        n = int(lines[1])
-        nums = list(map(int, lines[2].split()))
-    elif len(lines) == 2:
-        # Maybe target, nums?
-        try:
+    try:
+        if len(lines) >= 3:
+            # Format: Target, N, Array
+            target = int(lines[0])
+            n = int(lines[1])
+            nums = list(map(int, lines[2].split()))
+        elif len(lines) == 2:
+            # Fallback Format: Target, Array (or N, Array - but target is critical)
+            # Assuming Target, Array based on common formats if N is implicit
             target = int(lines[0])
             nums = list(map(int, lines[1].split()))
-        except:
-             # Maybe n, nums, and target is separate?
-             pass
-    else:
-        # Fallback or error
+        else:
+            return False, 0
+    except ValueError:
         return False, 0
 
-    # Read expected
+    # Read expected output
     with open(output_path, 'r') as f:
         expected = int(f.read().strip())
 
@@ -84,20 +63,23 @@ def run_test_case(solution_func, case_name, input_path, output_path):
     return (result == expected), duration
 
 def main():
-    test_dir = os.path.join(os.path.dirname(__file__), 'tests')
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    test_dir = os.path.join(base_dir, 'tests')
     input_dir = os.path.join(test_dir, 'input')
     output_dir = os.path.join(test_dir, 'output')
+    solutions_dir = os.path.join(base_dir, 'solutions')
     
     input_files = sorted(glob.glob(os.path.join(input_dir, 'input*.txt')))
     
-    solutions = [
-        ("Naive", naive.target_index_search),
-        ("Optimized", optimized.target_index_search),
-        ("Original", original.target_index_search)
-    ]
+    # Dynamic discovery
+    solutions = load_solutions(solutions_dir, 'target_index_search')
     
-    print(f"{'Solution':<12} | {'Case':<10} | {'Status':<10} | {'Time (s)':<10}")
-    print("-" * 50)
+    if not solutions:
+        print("No solutions found in", solutions_dir)
+        return
+
+    print(f"{'Solution':<15} | {'Case':<10} | {'Status':<10} | {'Time (s)':<10}")
+    print("-" * 55)
     
     for sol_name, sol_func in solutions:
         for input_path in input_files:
@@ -112,10 +94,10 @@ def main():
             try:
                 passed, duration = run_test_case(sol_func, case_name, input_path, output_path)
                 status = "PASS" if passed else "FAIL"
-                print(f"{sol_name:<12} | {case_name:<10} | {status:<10} | {duration:<10.6f}")
+                print(f"{sol_name:<15} | {case_name:<10} | {status:<10} | {duration:<10.6f}")
             except Exception as e:
-                print(f"{sol_name:<12} | {case_name:<10} | ERROR      | 0.000000")
-        print("-" * 50)
+                print(f"{sol_name:<15} | {case_name:<10} | ERROR      | 0.000000")
+        print("-" * 55)
 
 if __name__ == "__main__":
     main()
