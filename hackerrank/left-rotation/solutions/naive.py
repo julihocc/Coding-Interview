@@ -1,4 +1,6 @@
-def rotLeft(a, d):
+from typing import List
+
+def rotLeft(a: List[int], d: int) -> List[int]:
     """
     Naive implementation of left rotation.
     Rotates the array one element at a time, d times.

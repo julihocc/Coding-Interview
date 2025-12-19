@@ -1,4 +1,6 @@
-def find_first_occurrence(nums, target):
+from typing import List
+
+def find_first_occurrence(nums: List[int], target: int) -> int:
     """
     Naive implementation: Linear Scan.
     Iterate through the array and return the first index where matches target.

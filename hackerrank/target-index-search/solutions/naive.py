@@ -1,4 +1,6 @@
-def target_index_search(nums, target):
+from typing import List
+
+def target_index_search(nums: List[int], target: int) -> int:
     """
     Naive implementation using linear search.
     Time Complexity: O(n)

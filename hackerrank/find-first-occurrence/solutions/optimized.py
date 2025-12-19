@@ -1,4 +1,6 @@
-def find_first_occurrence(nums, target):
+from typing import List
+
+def find_first_occurrence(nums: List[int], target: int) -> int:
     """
     Optimized implementation: Binary Search.
     Finds the first occurrence of target.

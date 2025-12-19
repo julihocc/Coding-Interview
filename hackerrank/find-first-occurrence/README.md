@@ -38,6 +38,11 @@ The input consists of two lines.
 
 Output a single integer: the index (0-based) of the first occurrence of `target` in the array `nums`. If `target` does not exist in `nums`, output `-1`.
 
+### Solution Signature
+```python
+def find_first_occurrence(nums: List[int], target: int) -> int:
+```
+
 ## Local Testing
 
 ### Requirements

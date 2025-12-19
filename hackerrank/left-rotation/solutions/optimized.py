@@ -1,10 +1,12 @@
-def reverse(a, start, end):
+from typing import List
+
+def reverse(a: List[int], start: int, end: int) -> None:
     while start < end:
         a[start], a[end] = a[end], a[start]
         start += 1
         end -= 1
 
-def rotLeft(a, d):
+def rotLeft(a: List[int], d: int) -> List[int]:
     """
     Optimized in-place implementation of left rotation using the Reversal Algorithm.
     Time Complexity: O(n)

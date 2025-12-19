@@ -55,6 +55,11 @@ The function receives two parameters:
 
 Return a single INTEGER: the 0-based index of target in nums if it exists; otherwise return -1.
 
+### Solution Signature
+```python
+def target_index_search(nums: List[int], target: int) -> int:
+```
+
 ## Sample Input 0
 ```
 0

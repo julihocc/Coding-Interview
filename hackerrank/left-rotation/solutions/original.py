@@ -15,7 +15,9 @@ import sys
 #  2. INTEGER d
 #
 
-def rotLeft(a, d):
+from typing import List
+
+def rotLeft(a: List[int], d: int) -> List[int]:
     # Write your code here
     n = len(a)
     r = d%n 

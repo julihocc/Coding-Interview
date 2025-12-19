@@ -17,6 +17,11 @@ The second line contains `n` space-separated integers, each an `a[i]`.
 ## Output Format
 Print a single line of `n` space-separated integers denoting the final state of the array after performing `d` left rotations.
 
+### Solution Signature
+```python
+def rotLeft(a: List[int], d: int) -> List[int]:
+```
+
 ### Sample Input
 ```
 5 4
