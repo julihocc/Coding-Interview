@@ -35,28 +35,36 @@ Print a single line of `n` space-separated integers denoting the final state of 
 - `uv` (recommended) or standard python
 
 ### Running Tests
-This directory contains a standard Python `unittest` suite.
+This directory contains a **Modern Virtual Judge** system that automatically runs all solutions against defined test cases.
 
-To run the tests using `uv`:
+To run the judge using `uv`:
 ```bash
-uv run python -m unittest hackerrank/left-rotation/test_solution.py
+uv run python hackerrank/left-rotation/judge.py
 ```
 
 To run with standard python:
 ```bash
-python -m unittest hackerrank/left-rotation/test_solution.py
+python hackerrank/left-rotation/judge.py
 ```
 
 ### Adding Test Cases
-The test suite automatically finds input files in `tests/input/` and compares them with expected outputs in `tests/output/`.
-You can add more test cases by adding `inputXX.txt` and `outputXX.txt` files to the `tests` directory.
+Test cases are defined as pure Python dataclasses in `tests/cases.py`. To add a new test case:
+1. Open `tests/cases.py`.
+2. Add a new `TestCase` object to the `TEST_CASES` list.
 
-## Included Tests
-The `test_solution.py` suite includes:
-- **Sample Cases**: Verifies against the problem description's sample input/output.
-- **Edge Cases**:
-    - Rotation by `d = 0` (no change).
-    - Rotation by `d = n` (full cycle, no change).
-    - Rotation by `d > n` (should behave as `d % n`).
-    - Single element arrays.
-    - Large values of `d`.
+Example:
+```python
+TestCase(
+    id="My New Case",
+    n=3,
+    d=1,
+    a=[1, 2, 3],
+    expected=[2, 3, 1]
+)
+```
+
+### Adding Solutions
+The judge system automatically discovers any new Python file in the `solutions/` directory. 
+1. Create a new `.py` file in `solutions/` (e.g., `solutions/my_algo.py`).
+2. Implement the `rotLeft(a, d)` function.
+3. Run the judge, and your solution will be automatically tested and benchmarked.
