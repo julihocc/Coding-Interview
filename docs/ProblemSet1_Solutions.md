@@ -1,6 +1,6 @@
 ## Instructions
 
-> This assignment is to be completed and uploaded as a python3 notebook. 
+> This assignment is to be completed and uploaded as a python3 notebook.
 
 This problem set covers the following topics:
 
@@ -13,7 +13,7 @@ __Important Note__
 
 Although this is a programming assignment, we have asked you to work on the "design" and provided opportunities for you to analyze your solution and describe your design. __However, those parts will not be graded.__ You are welcome to compare your answers against our solutions once you have completed the assignments. Our solutions are provided at the very end.
 
-## Problem 1: Find Crossover Indices.
+## Problem 1: Find Crossover Indices
 
 You are given data that consists of points
 $(x_0, y_0), \ldots, (x_n, y_n)$, wherein $x_0 < x_1 < \ldots < x_n $, and  $y_0 < y_1 \ldots < y_n$ as well.
@@ -46,7 +46,7 @@ y_i & \color{red}{-2} & \color{red}{1.5} & 2 & \color{red}{4} & \color{red}{7} &
 
 We have two cross over points. Your algorithm may output either $i=0$ or $i=3$.
 
-__(A)__ Design an algorithm to find an index $i \in \{ 0, 1, \ldots, n-1\}$ such that $x_i \geq y_i$ but $x_{i+1} < y_{i+1}$. 
+__(A)__ Design an algorithm to find an index $i \in \{ 0, 1, \ldots, n-1\}$ such that $x_i \geq y_i$ but $x_{i+1} < y_{i+1}$.
 
 Describe your algorithm using python code for a function _findCrossoverIndexHelper(x, y, left, right)_
 
@@ -55,60 +55,17 @@ Describe your algorithm using python code for a function _findCrossoverIndexHelp
 - `x` and `y` are lists of same size (`n`).
 - `left` and `right` are indices that represent the current search region in the list such that 0 <= `left` < `right` <= `n`
 
-Your solution must use _recursion_. 
+Your solution must use _recursion_.
 
 **Hint:** Modify the binary search algorithm we presented in class.
 
-```python
-#First write a "helper" function with two extra parameters
-# left, right that ddedscribes the search region as shown below
-def findCrossoverIndexHelper(x, y, left, right):
-    # Note: Output index i such that 
-    #         left <= i <= right
-    #         x[i] <= y[i]
-    # First, Write down our invariants as assertions here
-    assert(len(x) == len(y))
-    assert(left >= 0)
-    assert(left <= right-1)
-    assert(right < len(x))
-    # Here is the key property we would like to maintain.
-    assert(x[left] > y[left])
-    assert(x[right] < y[right])
+### Solution
 
-    # your code here
-```
+The solution has been extracted to [`algorithms/search/find-crossover-indices/solutions/solution.py`](../algorithms/search/find-crossover-indices/solutions/solution.py)
 
-```python
-#Define the function findCrossoverIndex that wil 
-# call the helper function findCrossoverIndexHelper
-def findCrossoverIndex(x, y):
-    assert(len(x) == len(y))
-    assert(x[0] > y[0])
-    n = len(x)
-    assert(x[n-1] < y[n-1]) # Note: this automatically ensures n >= 2 why?
-    # your code here
-```
-
-```python
-# BEGIN TEST CASES
-j1 = findCrossoverIndex([0, 1, 2, 3, 4, 5, 6, 7], [-2, 0, 4, 5, 6, 7, 8, 9])
-print('j1 = %d' % j1)
-assert j1 == 1, "Test Case # 1 Failed"
-
-j2 = findCrossoverIndex([0, 1, 2, 3, 4, 5, 6, 7], [-2, 0, 4, 4.2, 4.3, 4.5, 8, 9])
-print('j2 = %d' % j2)
-assert j2 == 1 or j2 == 5, "Test Case # 2 Failed"
-
-j3 = findCrossoverIndex([0, 1], [-10, 10])
-print('j3 = %d' % j3)
-assert j3 == 0, "Test Case # 3 failed"
-
-j4 = findCrossoverIndex([0,1, 2, 3], [-10, -9, -8, 5])
-print('j4 = %d' % j4)
-assert j4 == 2, "Test Case # 4 failed"
-
-print('Congratulations: all test cases passed - 10 points')
-#END TEST CASES
+To run the solution and tests:
+```bash
+python algorithms/search/find-crossover-indices/judge.py
 ```
 
 __(B, 0 points)__ What is the running time of your algorithm above as a function of the input array size $n$?
@@ -119,7 +76,7 @@ YOUR ANSWER HERE
 
 ## Problem 2 (Find integer cube root.)
 
-The integer cube root of a positive number $n$ is the smallest number $i$ such that $i^3 \leq n$ but $(i+1)^3 > n$. 
+The integer cube root of a positive number $n$ is the smallest number $i$ such that $i^3 \leq n$ but $(i+1)^3 > n$.
 
 For instance, the integer cube root of $100$ is $4$ since $4^3 \leq 100$ but $5^3 > 100$. Likewise, the integer cube root of $1000$ is $10$.
 
@@ -130,60 +87,25 @@ Write a function `integerCubeRootHelper(n, left, right)` that searches for the i
 - $\text{left}^3 < n$
 - $\text{right}^3 > n$.
 
-```python
-def integerCubeRootHelper(n, left, right):
-    cube = lambda x: x * x * x # anonymous function to cube a number
-    assert(n >= 1)
-    assert(left < right)
-    assert(left >= 0)
-    assert(right < n)
-    assert(cube(left) < n), f'{left}, {right}'
-    assert(cube(right) > n), f'{left}, {right}'
-    # your code here
-```
+### Solution
 
-```python
-# Write down the main function
-def integerCubeRoot(n):
-    assert( n > 0)
-    if (n == 1): 
-        return 1
-    if (n == 2):
-        return 1
-    return integerCubeRootHelper(n, 0, n-1)
-```
+The solution has been extracted to [`algorithms/search/integer-cube-root/solutions/solution.py`](../algorithms/search/integer-cube-root/solutions/solution.py)
 
-```python
-assert(integerCubeRoot(1) == 1)
-assert(integerCubeRoot(2) == 1)
-assert(integerCubeRoot(4) == 1)
-assert(integerCubeRoot(7) == 1)
-assert(integerCubeRoot(8) == 2)
-assert(integerCubeRoot(20) == 2)
-assert(integerCubeRoot(26) == 2)
-for j in range(27, 64):
-    assert(integerCubeRoot(j) == 3)
-for j in range(64,125):
-    assert(integerCubeRoot(j) == 4)
-for j in range(125, 216):
-    assert(integerCubeRoot(j) == 5)
-for j in range(216, 343):
-    assert(integerCubeRoot(j) == 6)
-for j in range(343, 512):
-    assert(integerCubeRoot(j) == 7)
-print('Congrats: All tests passed! (10 points)')
+To run the solution and tests:
+```bash
+python algorithms/search/integer-cube-root/judge.py
 ```
 
 ### (B, 0 points)
 
-The inductive invariant for the function `integerCubeRootHelper(n, left, right)` that ensures that the overall algorithm for finding the integer cube root is correct is : 
+The inductive invariant for the function `integerCubeRootHelper(n, left, right)` that ensures that the overall algorithm for finding the integer cube root is correct is :
   $$\text{left}^3 < n\; \text{and}\; \text{right}^3 > n$$
 
-Use the inductive invariant to establish that the  integer cube root of $n$ (the final answer we seek) must lie between `left` and `right`. 
+Use the inductive invariant to establish that the  integer cube root of $n$ (the final answer we seek) must lie between `left` and `right`.
 
 In other words,  let $j$ be the integer cube root of $n$.  
 
-Prove using the inductive invariant and property of the integer cube root $j$ that: 
+Prove using the inductive invariant and property of the integer cube root $j$ that:
 
 $$ \text{left} \leq j  < \text{right}$$
 
@@ -193,7 +115,7 @@ YOUR ANSWER HERE
 
 ### (C, 0 points)
 
-Prove that your solution for `integerCubeRootHelper` maintains the overall inductive invariant from part (B). I.e, if the function were called with 
+Prove that your solution for `integerCubeRootHelper` maintains the overall inductive invariant from part (B). I.e, if the function were called with
 
 $0 \leq \text{left} < \text{right} < n$, and  $\text{left}^3 < n$ and $\text{right}^3 > n$.
 
@@ -211,9 +133,9 @@ In this problem, we will explore algorithms for merging `k` different sorted lis
 
 ### (A, 0 points)
 
-Suppose we have $k$ lists that we will represent as `lists[0]`, `lists[1]`, ..., `lists[k-1]` for convenience and the size of these lists are all assumed to be the same value $n$. 
+Suppose we have $k$ lists that we will represent as `lists[0]`, `lists[1]`, ..., `lists[k-1]` for convenience and the size of these lists are all assumed to be the same value $n$.
 
-We wish to solve multiway merge by merging two lists at a time: 
+We wish to solve multiway merge by merging two lists at a time:
 
 ```
   mergedList = lists[0] # start with list 0
@@ -230,22 +152,22 @@ YOUR ANSWER HERE
 
 __(B)__ Implement an algorithm that will implement the $k$ way merge by calling `twoWayMerge` repeatedly as follows:
 
-1. Call `twoWayMerge` on consecutive pairs of lists `twoWayMerge(lists[0], lists[1])`, ... , `twoWayMerge(lists[k-2], lists[k-1])` (assume k is even). 
-2. Thus, we create a new list of lists of size `k/2`. 
+1. Call `twoWayMerge` on consecutive pairs of lists `twoWayMerge(lists[0], lists[1])`, ... , `twoWayMerge(lists[k-2], lists[k-1])` (assume k is even).
+2. Thus, we create a new list of lists of size `k/2`.
 3. Repeat steps 1, 2 until we have a single list left.
 
 ```python
 def twoWayMerge(lst1, lst2):
-    # Implement the two way merge algorithm on 
+    # Implement the two way merge algorithm on
     #          two ascending order sorted lists
-    # return a fresh ascending order sorted list that 
+    # return a fresh ascending order sorted list that
     #          merges lst1 and lst2
     # your code here
 ```
 
 ```python
-# given a list_of_lists as input, 
-#   if list_of_lists has 2 or more lists, 
+# given a list_of_lists as input,
+#   if list_of_lists has 2 or more lists,
 #        compute 2 way merge on elements i, i+1 for i = 0, 2, ...
 #   return new list of lists after the merge
 #   Handle the case when the list size is odd carefully.
@@ -257,13 +179,13 @@ def oneStepKWayMerge(list_of_lists):
     for i in range(0, k, 2):
         if (i < k-1):
             ret_list_of_lists.append(twoWayMerge(list_of_lists[i], list_of_lists[i+1]))
-        else: 
+        else:
             ret_list_of_lists.append(list_of_lists[k-1])
     return ret_list_of_lists
 ```
 
 ```python
-# Given a list of lists wherein each 
+# Given a list of lists wherein each
 #    element of list_of_lists is sorted in ascending order,
 # use the oneStepKWayMerge function repeatedly to merge them.
 # Return a single merged list that is sorted in ascending order.
@@ -288,7 +210,7 @@ lst3 = kWayMerge([[-1, 1, 2, 3, 4, 5]])
 assert lst3 == [-1, 1, 2, 3, 4, 5], "Test 3 Failed"
 
 print('All Tests Passed = 15 points')
-#END TESTS
+# END TESTS
 ```
 
 ### (C, 0 points)
@@ -327,7 +249,7 @@ $j^3 \leq n$ and  $(j+1)^3 > n$. We have $\text{left} < j+1$ and likewise $\text
 If Call 1 happens, we note that   `cube(mid) > n`. However, `cube(left) < n` is already true since the value of `left` is unchanged. Thus Call 1 satisfies the invariant.
 
 Note that Call 2 will satisfy the property because  `cube(right) > n` and the call will only happen if
-`cube(mid+1) <= n`. This implies that `cube(mid)< n`. Therefore, we conclude that `Call 2` will satisfy 
+`cube(mid+1) <= n`. This implies that `cube(mid)< n`. Therefore, we conclude that `Call 2` will satisfy
 the invariant, as well.
 
 ### Problem 3A
