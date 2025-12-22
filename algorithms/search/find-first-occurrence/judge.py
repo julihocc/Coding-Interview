@@ -2,9 +2,9 @@ import sys
 import os
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.dirname(os.path.dirname(current_dir)))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(current_dir))))
 
-from hackerrank.judge_utils import load_solutions, run_tests
+from utils.judge_utils import load_solutions, run_tests
 from tests.cases import TEST_CASES
 
 def run_case_logic(sol_func, case):
