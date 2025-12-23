@@ -24,3 +24,12 @@ Your algorithm must find the index $i=3$ as the crossover point ($x_3=5, y_3=4 \
 ## Complexity
 
 The algorithm runs in $O(\log n)$ time complexity using a modified binary search approach.
+
+## Function Signature
+
+```python
+from typing import List
+
+def findCrossoverIndex(x: List[int], y: List[int]) -> int:
+    pass
+```

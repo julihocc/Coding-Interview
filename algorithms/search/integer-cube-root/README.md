@@ -12,3 +12,10 @@ The algorithm maintains the invariant:
 $$\text{left}^3 < n\; \text{and}\; \text{right}^3 > n$$
 
 This ensures that the answer lies strictly between `left` and `right`.
+
+## Function Signature
+
+```python
+def integerCubeRoot(n: int) -> int:
+    pass
+```

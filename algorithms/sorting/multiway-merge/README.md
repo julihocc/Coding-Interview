@@ -15,3 +15,12 @@ The algorithm implements a `k`-way merge by calling `twoWayMerge` repeatedly:
 ## Complexity
 
 The overall running time of the algorithm is $\Theta(n k \log(k))$, where each list is size $n$ and there are $k$ lists.
+
+## Function Signature
+
+```python
+from typing import List
+
+def kWayMerge(list_of_lists: List[List[int]]) -> List[int]:
+    pass
+```
