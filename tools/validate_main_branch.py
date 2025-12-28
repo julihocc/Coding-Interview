@@ -1,7 +1,7 @@
 import os
 import sys
 
-ALLOWED = {"naive.py", "optimized.py", "__init__.py", "heaps.py"}
+ALLOWED = {"naive.py", "optimized.py", "__init__.py"}
 
 
 def find_disallowed(root: str):
@@ -21,7 +21,7 @@ def main():
         print("Disallowed solution files detected for PR to main:")
         for path in bad:
             print(f" - {path}")
-        print("\nOnly allowed in main: naive.py, optimized.py, __init__.py, heaps.py (for shared utility modules)")
+        print("\nOnly allowed in main: naive.py, optimized.py, __init__.py")
         sys.exit(1)
     else:
         print("Branch policy check passed for main.")
