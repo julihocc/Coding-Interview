@@ -91,6 +91,26 @@ original        | Sample          | PASS       | 0.000001
 4. Create `judge.py` (you can copy from an existing problem) and update the import commands.
 5. Run the judge to verify.
 
+## Branch Strategy (Main vs Contributed)
+
+To keep the `main` branch clean with canonical solutions while allowing many alternative/community solutions, use two branches:
+
+- Main: Only curated solutions. Allowed files under any `solutions/` folder are `naive.py`, `optimized.py`, `original.py`, `__init__.py`.
+- Contributed: A shared branch (e.g., `contributed`) that accepts additional files (e.g., `my-solution.py`, `solution_v1.py`, etc.) from you and other users.
+
+Workflow:
+- Create the branch: `git checkout -b contributed && git push -u origin contributed`.
+- Open PRs targeting `contributed` for new/experimental solutions. Keep `main` for curated updates only.
+- Periodically sync: merge `main` → `contributed` to keep contributed branch up to date.
+
+Policy enforcement:
+- CI blocks PRs to `main` that introduce non-allowed files under `solutions/`. See `.github/workflows/branch-policy.yml` and `tools/validate_main_branch.py`.
+- PRs to `contributed` run a syntax check but do not restrict file names.
+
+Tips:
+- If you have existing personal files in `main`, move them to `contributed` via `git mv` in a feature branch and open a PR targeting `contributed`.
+- Keep solution function names consistent so `judge.py` can auto-discover them.
+
 ## License
 
 MIT

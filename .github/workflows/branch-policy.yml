@@ -1,0 +1,35 @@
+name: Branch Policy and Syntax Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - contributed
+      - contrib
+      - community-solutions
+
+jobs:
+  validate-main:
+    if: github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate allowed solution filenames
+        run: python tools/validate_main_branch.py
+
+  syntax-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile all Python files
+        run: python -m compileall -q .
