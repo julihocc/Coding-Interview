@@ -6,98 +6,58 @@ This is a **coding interview practice repository** implementing a **Virtual Judg
 
 ## Architecture Pattern: Virtual Judge System
 
-### Directory Structure (Problem Template)
-```
-problem-name/
-├── judge.py              # Test runner (imports utils.judge_utils)
-├── README.md             # Problem description
-├── solutions/            # Multiple solution approaches
-│   ├── naive.py         # O(n) or less efficient
-│   ├── optimized.py     # O(log n) or more efficient
-│   └── solution.py      # Alternative implementations
-└── tests/
-    └── cases.py         # Dataclass-based test cases
-```
+# Copilot Instructions: Google Interview Practice
 
-### Key Components
+This repo is a Virtual Judge for algorithm interview problems. Each problem has a local
+`judge.py`, a `README.md`, a `solutions/` folder with multiple approaches (`naive.py`, `optimized.py`, etc.),
+and `tests/cases.py` providing dataclass-based test input/expected pairs.
 
-**1. Test Cases (`tests/cases.py`)**: Define test cases using `@dataclass` with fields:
-- `id`: Test case name
-- Input parameters (problem-specific)
-- `expected`: Expected output (can be single value or `List` for multiple valid answers)
+**Quick links:** [utils/judge_utils.py](utils/judge_utils.py#L1),
+[algorithms/search/find-crossover-indices/judge.py](algorithms/search/find-crossover-indices/judge.py#L1)
 
-Example:
-```python
-@dataclass
-class TestCase:
-    id: str
-    x: List[float]
-    y: List[float]
-    expected: Union[int, List[int]]  # Multiple valid answers supported
-```
+**Architecture & data flow**
+- Per-problem `judge.py` loads `TEST_CASES` from `tests/cases.py` and uses
+    `utils.judge_utils.load_solutions()` to discover solution callables.
+- `run_tests()` in `utils/judge_utils.py` runs each solution against each case, timing and
+    reporting results. Input lists are copied (e.g. `list(case.a)`) to ensure isolation.
 
-**2. Solutions (`solutions/*.py`)**: Each file exports one function (problem-specific name like `rotLeft`, `findCrossoverIndex`). Function names are specified in `judge.py`.
+**Important patterns & conventions**
+- Problem template: a `judge.py`, `README.md`, `solutions/` and `tests/` directory.
+- Filenames: prefer `naive.py`, `optimized.py`, `original.py` for multiple implementations.
+- Each solution file should export exactly one function with the name `judge.py` expects.
+- `judge.py` uses this sys.path trick to import project-level utils:
+    ```python
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(current_dir))))
+    from utils.judge_utils import load_solutions, run_tests
+    ```
 
-**3. Judge Runner (`judge.py`)**: 
-- Uses `utils.judge_utils.load_solutions()` to dynamically discover all solution files
-- Imports `TEST_CASES` from `tests.cases`
-- Implements `run_case_logic()` to validate solution against expected output
-- Key pattern: Pass copies of mutable inputs (`list(case.a)`) to ensure test isolation
+**How tests and judges run**
+- From the repo root run a single judge: `python algorithms/search/find-crossover-indices/judge.py`
+- CI/quick-run examples use `uv run python <path>` in docs; `uv` is a convenience wrapper used
+    by contributors but normal `python` works too.
 
-**4. Shared Utilities (`utils/judge_utils.py`)**:
-- `load_solutions(dir, func_name)`: Auto-discovers and imports solution functions
-- `run_tests(solutions, cases, runner)`: Executes all combinations and prints formatted results with timing
+**Adding a new problem**
+1. Copy an existing problem folder (follow the template).
+2. Implement `tests/cases.py` with a `TestCase` dataclass and a `TEST_CASES` list.
+3. Add solutions to `solutions/` (one function per file). Keep function names in sync with `judge.py`.
+4. Update `judge.py` to call `load_solutions(<solutions_dir>, '<function_name>')` and validate via `run_case_logic()`.
+5. Run the new `judge.py` from the repo root to verify behavior and timings.
 
-### Path Resolution Pattern
-All `judge.py` files use this exact pattern to import from project root:
-```python
-import sys, os
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(current_dir))))
-from utils.judge_utils import load_solutions, run_tests
-```
+**Project-specific rules for agents**
+- Do not change `pyproject.toml` or global project settings without explicit instruction.
+- Preserve the `sys.path` import pattern in `judge.py` files — tests rely on this layout.
+- Keep solution function signatures and type hints intact; tests use these to call functions.
+- Use `list(case.<field>)` when forwarding lists to solutions to avoid cross-test mutation.
 
-## Workflows
+**Key files to inspect when making changes**
+- [utils/judge_utils.py](utils/judge_utils.py#L1) — test discovery & runner
+- [main.py](main.py#L1) — repo entry (if present)
+- Example problem judge: [algorithms/search/find-crossover-indices/judge.py](algorithms/search/find-crossover-indices/judge.py#L1)
 
-### Running Tests
+If anything here is unclear or you want me to expand examples (e.g., show a minimal
+`judge.py` or a compliant `solutions/naive.py`), tell me which area to expand.
+
+---
+Please review these edits and tell me if you'd like more examples or stricter rules.
 ```bash
-# Run judge for specific problem (from repo root)
-uv run python algorithms/search/find-crossover-indices/judge.py
-uv run python data-structures/arrays/left-rotation/judge.py
-
-# Output format:
-# Solution        | Case            | Status     | Time (s)  
-# ------------------------------------------------------------
-# naive           | Sample          | PASS       | 0.000006  
-# optimized       | Sample          | PASS       | 0.000003  
-```
-
-### Adding New Problems
-1. Copy an existing problem directory structure
-2. Update `tests/cases.py` with new TestCase dataclass fields
-3. Implement solutions in `solutions/` (ensure function name matches what `judge.py` loads)
-4. Modify `judge.py`: Update function name in `load_solutions()` call and `run_case_logic()` validation
-5. Run judge to verify
-
-## Code Conventions
-
-- **Type hints required**: All solution functions use typing (e.g., `List[int]`, `Union`)
-- **Docstrings include complexity**: Document time/space complexity in solution docstrings
-- **Naive vs Optimized naming**: Use these specific filenames to distinguish O(n) from O(log n) approaches
-- **No external dependencies**: Pure Python 3.14+ only (see `pyproject.toml`)
-- **Assertions in solutions**: Complex algorithms include invariant assertions for correctness proof
-
-## Problem Categories
-
-- `algorithms/search/`: Binary search variations (find-crossover-indices, integer-cube-root)
-- `algorithms/sorting/`: Sorting algorithms (multiway-merge)
-- `data-structures/arrays/`: Array manipulation (left-rotation)
-
-Reference: [docs/ProblemSet1_Solutions.md](docs/ProblemSet1_Solutions.md) contains mathematical problem descriptions.
-
-## Testing Philosophy
-
-- Solutions are isolated: Input mutations don't affect other tests (use `list()` copies)
-- Multiple valid answers: `expected` can be a list; `run_case_logic()` checks `result in case.expected`
-- Benchmark-driven: Every test reports execution time to compare naive vs optimized
-- Zero test configuration: Judge auto-discovers all `*.py` in `solutions/` (except `__init__.py`)
