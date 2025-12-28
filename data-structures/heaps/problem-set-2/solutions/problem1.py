@@ -1,5 +1,2 @@
-# Deprecated combined module. Tests are split into per-file modules:
-# - problem1_minheap.py
-# - problem1_topk.py
-
-print('note: problem1.py is deprecated; use problem1_minheap.py and problem1_topk.py')
+# DEPRECATED: Use naive.py and optimized.py instead
+# These consolidated solutions use reusable heap implementations from heaps.py
