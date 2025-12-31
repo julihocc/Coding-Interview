@@ -1,7 +1,7 @@
 import os
 import sys
 
-ALLOWED = {"naive.py", "optimized.py", "__init__.py"}
+ALLOWED = {"naive.py", "optimized.py", "__init__.py", "hints.py", "template.py"}
 
 
 def find_disallowed(root: str):
