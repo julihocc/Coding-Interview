@@ -1,12 +1,7 @@
 """TopKHeap - Optimized implementation using heapq for overflow elements."""
 
-import heapq
 
-
-def solve():
-    """Maintains k smallest values in a sorted buffer, rest in a min-heap."""
-
-    class TopKHeap:
+class TopKHeap:
         def __init__(self, k):
             self.k = k
             self.A = []  # sorted list of k smallest
@@ -49,4 +44,3 @@ def solve():
                     self.A[idx], self.A[idx - 1] = self.A[idx - 1], self.A[idx]
                     idx -= 1
 
-    return TopKHeap

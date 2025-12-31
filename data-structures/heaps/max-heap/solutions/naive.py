@@ -7,10 +7,7 @@ Time complexity:
 """
 
 
-def solve():
-    """Naive MaxHeap using recursive bubbling."""
-
-    class MaxHeap:
+class MaxHeap:
         def __init__(self):
             self.H = [None]  # 1-indexed array
 
@@ -54,4 +51,3 @@ def solve():
             self.H[1] = self.H.pop()
             self.bubble_down(1)
 
-    return MaxHeap

@@ -7,10 +7,7 @@ Time complexity:
 """
 
 
-def solve():
-    """Naive MinHeap using recursive bubbling."""
-
-    class MinHeap:
+class MinHeap:
         def __init__(self):
             self.H = [None]  # 1-indexed array
 
@@ -54,4 +51,3 @@ def solve():
             self.H[1] = self.H.pop()
             self.bubble_down(1)
 
-    return MinHeap

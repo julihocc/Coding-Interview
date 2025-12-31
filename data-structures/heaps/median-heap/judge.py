@@ -9,7 +9,7 @@ from tests.cases import TEST_CASES
 
 def run_case_logic(sol_func, case):
     """Run test case for MedianMaintainingHeap."""
-    MedianMaintainingHeap = sol_func()
+    MedianMaintainingHeap = sol_func
     
     mh = MedianMaintainingHeap()
     mh.insert(1); assert mh.get_median() == 1

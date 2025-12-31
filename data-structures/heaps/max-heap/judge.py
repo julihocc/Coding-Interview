@@ -9,7 +9,7 @@ from tests.cases import TEST_CASES
 
 def run_case_logic(sol_func, case):
     """Run test case for MaxHeap."""
-    MaxHeap = sol_func()
+    MaxHeap = sol_func
     
     h = MaxHeap()
     h.insert(5); assert h.max_element()==5

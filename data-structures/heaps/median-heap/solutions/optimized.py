@@ -1,12 +1,7 @@
 """MedianMaintainingHeap - Optimized implementation using heapq."""
 
-import heapq
 
-
-def solve():
-    """Uses two heaps: max-heap (as negatives) for lower half, min-heap for upper."""
-
-    class MedianMaintainingHeap:
+class MedianMaintainingHeap:
         def __init__(self):
             self.lower = []  # max-heap via negatives
             self.upper = []  # min-heap
@@ -35,4 +30,3 @@ def solve():
                 return -self.lower[0]
             return (-self.lower[0] + self.upper[0]) / 2
 
-    return MedianMaintainingHeap

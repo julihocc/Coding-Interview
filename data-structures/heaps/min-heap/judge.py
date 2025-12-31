@@ -10,7 +10,7 @@ from tests.cases import TEST_CASES
 
 def run_case_logic(sol_func, case):
     """Run test case for MinHeap."""
-    MinHeap = sol_func()
+    MinHeap = sol_func
     
     h = MinHeap()
     h.insert(5); assert h.min_element()==5

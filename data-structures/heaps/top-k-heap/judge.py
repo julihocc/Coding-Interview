@@ -9,7 +9,7 @@ from tests.cases import TEST_CASES
 
 def run_case_logic(sol_func, case):
     """Run test case for TopKHeap."""
-    TopKHeap = sol_func()
+    TopKHeap = sol_func
     
     tk = TopKHeap(3)
     for x in [7, 5, 3, 8, 1, 9, 2]:

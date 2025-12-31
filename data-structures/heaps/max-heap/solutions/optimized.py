@@ -1,10 +1,7 @@
 """MaxHeap - Optimized implementation using iterative bubble operations."""
 
 
-def solve():
-    """Iterative bubbling to avoid recursion overhead."""
-
-    class MaxHeap:
+class MaxHeap:
         def __init__(self):
             self.H = [None]  # 1-indexed array
 
@@ -44,4 +41,3 @@ def solve():
                 self.H[idx], self.H[child] = self.H[child], self.H[idx]
                 idx = child
 
-    return MaxHeap
