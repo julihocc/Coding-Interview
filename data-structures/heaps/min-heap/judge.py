@@ -27,8 +27,12 @@ def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     solutions_dir = os.path.join(base_dir, 'solutions')
 
-    solutions = load_classes(solutions_dir, 'MinHeap')
-    run_tests(solutions, TEST_CASES, run_case_logic)
-
+    # Load and test reference solutions
+    reference_solutions = load_classes(solutions_dir, 'MinHeap', 'reference')
+    run_tests(reference_solutions, TEST_CASES, run_case_logic, 'REFERENCE SOLUTIONS')
+    
+    # Load and test contributed solutions
+    contributed_solutions = load_classes(solutions_dir, 'MinHeap', 'contributed')
+    run_tests(contributed_solutions, TEST_CASES, run_case_logic, 'CONTRIBUTED SOLUTIONS')
 if __name__ == '__main__':
     main()

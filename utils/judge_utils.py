@@ -3,14 +3,24 @@ import glob
 import importlib.util
 import time
 
-def load_solutions(solutions_dir, function_name):
+def load_solutions(solutions_dir, function_name, subfolder='reference'):
     """
-    Dynamically loads Python modules from the solutions directory
+    Dynamically loads Python modules from a subfolder of the solutions directory
     and extracts the specified function.
     Excludes hints.py and template.py (learning guides, not solutions).
+    
+    Args:
+        solutions_dir: Path to the solutions directory
+        function_name: Name of the function to extract
+        subfolder: Subfolder to load from (default: 'reference')
     """
+    target_dir = os.path.join(solutions_dir, subfolder)
+    if not os.path.exists(target_dir):
+        print(f"Warning: {target_dir} does not exist")
+        return []
+    
     solutions = []
-    sol_files = glob.glob(os.path.join(solutions_dir, "*.py"))
+    sol_files = glob.glob(os.path.join(target_dir, "*.py"))
     
     for file_path in sol_files:
         base_name = os.path.basename(file_path)
@@ -34,14 +44,24 @@ def load_solutions(solutions_dir, function_name):
                  
     return sorted(solutions, key=lambda x: x[0])
 
-def load_classes(solutions_dir, class_name):
+def load_classes(solutions_dir, class_name, subfolder='reference'):
     """
-    Dynamically loads Python modules from the solutions directory
+    Dynamically loads Python modules from a subfolder of the solutions directory
     and extracts the specified class.
     Excludes hints.py and template.py (learning guides, not solutions).
+    
+    Args:
+        solutions_dir: Path to the solutions directory
+        class_name: Name of the class to extract
+        subfolder: Subfolder to load from (default: 'reference')
     """
+    target_dir = os.path.join(solutions_dir, subfolder)
+    if not os.path.exists(target_dir):
+        print(f"Warning: {target_dir} does not exist")
+        return []
+    
     solutions = []
-    sol_files = glob.glob(os.path.join(solutions_dir, "*.py"))
+    sol_files = glob.glob(os.path.join(target_dir, "*.py"))
     
     for file_path in sol_files:
         base_name = os.path.basename(file_path)
@@ -65,15 +85,25 @@ def load_classes(solutions_dir, class_name):
                  
     return sorted(solutions, key=lambda x: x[0])
 
-def run_tests(solutions, test_cases, runner_func):
+def run_tests(solutions, test_cases, runner_func, section_name=None):
     """
     Runs the provided test runner function for all solutions and cases,
     printing a formatted report.
+    
+    Args:
+        solutions: List of (name, callable) tuples
+        test_cases: List of test case objects
+        runner_func: Function that runs a single test
+        section_name: Optional section header for the output
     """
     if not solutions:
+        if section_name:
+            print(f"\n=== {section_name} ===")
         print("No solutions found.")
         return
 
+    if section_name:
+        print(f"\n=== {section_name} ===")
     print(f"{'Solution':<15} | {'Case':<15} | {'Status':<10} | {'Time (s)':<10}")
     print("-" * 60)
     

@@ -15,9 +15,13 @@ def run_case_logic(sol_func, case):
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     solutions_dir = os.path.join(base_dir, 'solutions')
-    
-    solutions = load_solutions(solutions_dir, 'target_index_search')
-    run_tests(solutions, TEST_CASES, run_case_logic)
 
+    # Load and test reference solutions
+    reference_solutions = load_solutions(solutions_dir, 'target_index_search', 'reference')
+    run_tests(reference_solutions, TEST_CASES, run_case_logic, 'REFERENCE SOLUTIONS')
+    
+    # Load and test contributed solutions
+    contributed_solutions = load_solutions(solutions_dir, 'target_index_search', 'contributed')
+    run_tests(contributed_solutions, TEST_CASES, run_case_logic, 'CONTRIBUTED SOLUTIONS')
 if __name__ == "__main__":
     main()
