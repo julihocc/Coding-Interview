@@ -13,53 +13,22 @@ Reference: See ../README.md for full problem description
 
 def twoWayMerge(lst1, lst2):
     """
-    Helper function: merge two sorted lists into one sorted list.
+    Helper: merge two sorted lists into one sorted list.
     
     Time Complexity: O(m + n) where m = len(lst1), n = len(lst2)
     """
-    i = 0
-    j = 0
-    m = len(lst1)
-    n = len(lst2)
-    merged = []
-    
-    while i < m and j < n:
-        if lst1[i] <= lst2[j]:
-            merged.append(lst1[i])
-            i += 1
-        else:
-            merged.append(lst2[j])
-            j += 1
-    
-    # Append remaining elements
-    while i < m:
-        merged.append(lst1[i])
-        i += 1
-    while j < n:
-        merged.append(lst2[j])
-        j += 1
-    
-    return merged
+    # TODO: Implement two-way merge using two pointers
+    pass
 
 
 def oneStepKWayMerge(list_of_lists):
     """
-    Helper function: perform one pass of pairwise merging.
+    Helper: perform one pass of pairwise merging.
     Merge lists at indices (0,1), (2,3), etc.
-    Handles odd-length lists by keeping the last list unmerged.
+    Handle odd-length lists by keeping the last unmerged.
     """
-    if len(list_of_lists) <= 1:
-        return list_of_lists
-    
-    ret_list_of_lists = []
-    k = len(list_of_lists)
-    for i in range(0, k, 2):
-        if i < k - 1:
-            ret_list_of_lists.append(twoWayMerge(list_of_lists[i], list_of_lists[i + 1]))
-        else:
-            ret_list_of_lists.append(list_of_lists[k - 1])
-    
-    return ret_list_of_lists
+    # TODO: Implement one pass of pairwise merges
+    pass
 
 
 def kWayMerge(list_of_lists):
@@ -67,10 +36,10 @@ def kWayMerge(list_of_lists):
     Merge k sorted lists using pairwise merging recursively.
     
     APPROACH:
-    Divide and conquer: repeatedly merge pairs of lists until only one remains.
+    [Describe your divide-and-conquer strategy]
     
-    Time Complexity: O(n log k) where n = total elements, k = number of lists
-    Space Complexity: O(n)
+    Time Complexity: O(?)
+    Space Complexity: O(?)
     """
     
     # STEP 1: Input validation
@@ -82,5 +51,5 @@ def kWayMerge(list_of_lists):
         return list_of_lists[0]
     
     # STEP 3: Recursively merge
-    new_list_of_lists = oneStepKWayMerge(list_of_lists)
-    return kWayMerge(new_list_of_lists)
+    # TODO: Use helper functions to merge and recurse
+    pass

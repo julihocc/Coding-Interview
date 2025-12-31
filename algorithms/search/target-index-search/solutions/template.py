@@ -18,10 +18,10 @@ def target_index_search(nums: List[int], target: int) -> int:
     Find target using binary search.
     
     APPROACH:
-    Classic binary search on sorted array.
+    [Describe your strategy here]
     
-    Time Complexity: O(log n)
-    Space Complexity: O(1)
+    Time Complexity: O(?)
+    Space Complexity: O(?)
     """
     
     # STEP 1: Input validation
@@ -32,15 +32,8 @@ def target_index_search(nums: List[int], target: int) -> int:
     left, right = 0, len(nums) - 1
     
     # STEP 3: Binary search loop
-    while left <= right:
-        mid = (left + right) // 2
-        
-        if nums[mid] == target:
-            return mid
-        elif nums[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
+    # TODO: Implement search logic
+    pass
     
     # STEP 4: Return result
     return -1

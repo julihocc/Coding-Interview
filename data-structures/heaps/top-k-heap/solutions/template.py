@@ -15,94 +15,50 @@ Reference: See ../README.md for full problem description
 """
 
 from typing import List
-import heapq
 
 
 def solve():
     """
-    Implement TopKHeap using hybrid storage: sorted buffer + overflow heap.
+    Implement TopKHeap.
     
-    APPROACH:
-    Maintain k smallest values in sorted buffer A and overflow in min-heap H.
-    - Top k largest = contents of buffer A
-    - When new element arrives:
-      * If < A[-1] and A is full, replace and push displaced to H
-      * Otherwise, push to H
-    
-    Key insight:
-    - Min-heap H contains elements not in top k
-    - Sorted buffer A contains current top k
-    - Insert maintains both: O(log k) + O(k) sorting, amortized O(log k)
-    - Access is O(k) to return A
-    
-    Time Complexity:
-        - insert: O(log k) heap op + O(k) insertion in sorted buffer
-        - top_k: O(k) to copy buffer
-    Space Complexity: O(k)
+    Key insight: Maintain only k largest elements efficiently.
+    Consider using a min-heap of size k, or hybrid approaches.
     """
     
     class TopKHeap:
         def __init__(self, k: int):
             """
-            Initialize structure to track top k largest elements.
+            Initialize heap to track top k elements.
             
             Args:
                 k: Number of largest elements to track
             """
             self.k = k
-            self.A = []  # Sorted buffer of k smallest (from top k)
-            self.H = []  # Min-heap for overflow elements
+            # TODO: Set up data structure(s)
+            pass
         
         def size(self):
             """Return total number of elements seen."""
-            return len(self.A) + len(self.H)
+            # TODO: Return total size
+            pass
         
         def insert(self, elt: int) -> None:
             """
             Add element while maintaining top k largest.
             
-            Time Complexity: O(log k) + O(k) amortized
+            Strategy: If heap has k elements, only add if larger than min.
+            Time Complexity: O(log k)
             """
-            if len(self.A) < self.k:
-                # Buffer not full, insert into sorted buffer
-                idx = len(self.A)
-                self.A.append(elt)
-                # Maintain sorted order by shifting
-                while idx > 0 and self.A[idx] < self.A[idx - 1]:
-                    self.A[idx], self.A[idx - 1] = self.A[idx - 1], self.A[idx]
-                    idx -= 1
-                return
-            
-            # Buffer is full
-            if elt < self.A[-1]:
-                # Element is in top k, replace smallest
-                self.A.append(elt)
-                idx = len(self.A) - 1
-                while idx > 0 and self.A[idx] < self.A[idx - 1]:
-                    self.A[idx], self.A[idx - 1] = self.A[idx - 1], self.A[idx]
-                    idx -= 1
-                # Displace last element to overflow heap
-                displaced = self.A.pop()
-                heapq.heappush(self.H, displaced)
-            else:
-                # Element not in top k, push to overflow heap
-                heapq.heappush(self.H, elt)
+            # TODO: Insert with size and value constraints
+            pass
         
-        def delete_top_k(self, j: int) -> None:
+        def top_k(self) -> List[int]:
             """
-            Helper: remove element at position j from top k buffer,
-            refilling from overflow heap if available.
+            Return k largest elements.
+            
+            Time Complexity: O(k)
             """
-            assert 0 <= j < len(self.A)
-            del self.A[j]
-            if self.H:
-                # Refill from overflow heap
-                min_val = heapq.heappop(self.H)
-                # Insert back into sorted position
-                self.A.append(min_val)
-                idx = len(self.A) - 1
-                while idx > 0 and self.A[idx] < self.A[idx - 1]:
-                    self.A[idx], self.A[idx - 1] = self.A[idx - 1], self.A[idx]
-                    idx -= 1
+            # TODO: Extract and return top k elements
+            pass
     
     return TopKHeap

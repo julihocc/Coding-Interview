@@ -15,29 +15,24 @@ from typing import List
 
 def reverse(a: List[int], start: int, end: int) -> None:
     """
-    Helper function: reverse elements in array from start to end (inclusive).
+    Helper: reverse elements in array from start to end (inclusive).
     
     Time Complexity: O(n)
     Space Complexity: O(1)
     """
-    while start < end:
-        a[start], a[end] = a[end], a[start]
-        start += 1
-        end -= 1
+    # TODO: Implement in-place reversal
+    pass
 
 
 def rotLeft(a: List[int], d: int) -> List[int]:
     """
-    Rotate array left by d positions using reversal algorithm.
+    Rotate array left by d positions.
     
     APPROACH:
-    1. Reverse first d elements
-    2. Reverse remaining n-d elements
-    3. Reverse entire array
-    Result: array rotated left by d positions.
+    Consider the reversal algorithm or other rotation techniques.
     
-    Time Complexity: O(n)
-    Space Complexity: O(1) auxiliary (though we create a copy of the array)
+    Time Complexity: O(?)
+    Space Complexity: O(?)
     """
     
     n = len(a)
@@ -51,18 +46,12 @@ def rotLeft(a: List[int], d: int) -> List[int]:
     if d == 0:
         return a
     
-    # STEP 2: Create a copy to avoid modifying input
+    # STEP 2: Create working copy (or modify in-place if allowed)
     result = list(a)
     
-    # STEP 3: Apply reversal algorithm
-    # Reverse first d elements
-    reverse(result, 0, d - 1)
-    
-    # Reverse remaining n - d elements
-    reverse(result, d, n - 1)
-    
-    # Reverse entire array
-    reverse(result, 0, n - 1)
+    # STEP 3: Implement rotation algorithm
+    # TODO: Apply your chosen rotation strategy
+    pass
     
     # STEP 4: Return rotated array
     return result

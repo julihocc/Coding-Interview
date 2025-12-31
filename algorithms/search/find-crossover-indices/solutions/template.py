@@ -13,26 +13,16 @@ Reference: See ../README.md for full problem description
 
 def findCrossoverIndexHelper(x, y, left, right):
     """
-    Binary search helper: find index i in [left, right] where x[i] >= y[i] and x[i+1] < y[i+1].
-    Maintains invariants: x[left] >= y[left] and x[right] < y[right].
+    Binary search helper: find index i in [left, right] where crossover occurs.
+    
+    Key invariants to maintain:
+    - x[left] >= y[left] (left is in "left" region)
+    - x[right] < y[right] (right is in "right" region)
+    
+    Time Complexity: O(log n)
     """
-    assert len(x) == len(y)
-    assert left >= 0
-    assert left <= right - 1
-    assert right < len(x)
-    
-    # Base case: adjacent indices
-    if left + 1 == right:
-        return left
-    
-    mid = (left + right) // 2
-    
-    if x[mid] >= y[mid]:
-        # Mid is in the "left" region, continue searching right
-        return findCrossoverIndexHelper(x, y, mid, right)
-    else:
-        # x[mid] < y[mid], mid is in the "right" region, search left
-        return findCrossoverIndexHelper(x, y, left, mid)
+    # TODO: Implement binary search logic
+    pass
 
 
 def findCrossoverIndex(x, y):
@@ -40,11 +30,10 @@ def findCrossoverIndex(x, y):
     Find the crossover index using binary search.
     
     APPROACH:
-    Binary search to find the largest index i where x[i] >= y[i].
-    Uses helper function to maintain search invariants.
+    [Describe your strategy here]
     
-    Time Complexity: O(log n)
-    Space Complexity: O(log n) due to recursion
+    Time Complexity: O(?)
+    Space Complexity: O(?)
     """
     
     # STEP 1: Input validation
@@ -56,4 +45,5 @@ def findCrossoverIndex(x, y):
         return -1
     
     # STEP 3: Call binary search helper
-    return findCrossoverIndexHelper(x, y, 0, n - 1)
+    # TODO: Call helper with appropriate bounds
+    pass

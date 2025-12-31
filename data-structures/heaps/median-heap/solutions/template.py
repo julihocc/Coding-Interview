@@ -14,79 +14,48 @@ Problem:
 Reference: See ../README.md for full problem description
 """
 
-import heapq
-
 
 def solve():
     """
-    Implement MedianHeap using two heaps: max-heap (lower) + min-heap (upper).
+    Implement MedianHeap.
     
-    APPROACH:
-    Maintain two heaps to track lower and upper halves of values.
-    - Lower half: stored in max-heap (using negatives in Python)
-    - Upper half: stored in min-heap
-    - Keep heaps balanced for O(1) median access.
+    Key insight: Consider using two heaps to track lower and upper halves.
+    - One heap for lower half (e.g., max-heap)
+    - One heap for upper half (e.g., min-heap)
     
-    Key insight:
-    - Elements in lower heap <= elements in upper heap
-    - len(lower) >= len(upper) and len(lower) - len(upper) <= 1
-    - Median is root of lower heap (odd count) or average of roots (even count)
-    
-    Time Complexity:
-        - addNum: O(log n)
-        - findMedian: O(1)
+    Maintain balance so median is always accessible.
     """
     
     class MedianHeap:
         def __init__(self):
-            """Initialize two heaps for tracking median."""
-            self.lower = []  # max-heap (stored as negatives) for lower half
-            self.upper = []  # min-heap for upper half
+            """Initialize the median finder."""
+            # TODO: Set up data structure(s) for tracking halves
+            pass
         
         def size(self):
             """Return total number of elements."""
-            return len(self.lower) + len(self.upper)
+            # TODO: Return total size
+            pass
         
         def addNum(self, num: int) -> None:
             """
-            Add number while maintaining heap invariants.
-            Ensures lower half values <= upper half values.
-            Keeps heaps balanced for efficient median computation.
+            Add a number while maintaining balance.
+            Ensure median remains efficiently computable.
             
             Time Complexity: O(log n)
             """
-            # Add to appropriate heap
-            if not self.lower or num <= -self.lower[0]:
-                heapq.heappush(self.lower, -num)
-            else:
-                heapq.heappush(self.upper, num)
-            
-            # Rebalance: maintain len(lower) >= len(upper) and difference <= 1
-            if len(self.lower) > len(self.upper) + 1:
-                # Move from lower to upper
-                max_val = -heapq.heappop(self.lower)
-                heapq.heappush(self.upper, max_val)
-            elif len(self.upper) > len(self.lower):
-                # Move from upper to lower
-                min_val = heapq.heappop(self.upper)
-                heapq.heappush(self.lower, -min_val)
+            # TODO: Insert into appropriate heap/section and rebalance
+            pass
         
         def findMedian(self) -> float:
             """
             Return current median.
-            For odd count: median is root of lower heap.
-            For even count: median is average of both roots.
+            For odd count: middle value.
+            For even count: average of two middle values.
             
             Time Complexity: O(1)
             """
-            if not self.lower:
-                raise AssertionError("Cannot get median from empty heap")
-            
-            if len(self.lower) > len(self.upper):
-                # Odd count: return root of lower heap
-                return float(-self.lower[0])
-            else:
-                # Even count: return average of both roots
-                return (-self.lower[0] + self.upper[0]) / 2.0
+            # TODO: Compute and return median from heap roots
+            pass
     
     return MedianHeap

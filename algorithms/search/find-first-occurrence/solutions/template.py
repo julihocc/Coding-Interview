@@ -18,10 +18,10 @@ def find_first_occurrence(nums: List[int], target: int) -> int:
     Find the first occurrence of target using binary search.
     
     APPROACH:
-    Binary search to find target, then continue searching left to find first occurrence.
+    [Describe your strategy here - e.g., Binary search + left refinement]
     
-    Time Complexity: O(log n)
-    Space Complexity: O(1)
+    Time Complexity: O(?)
+    Space Complexity: O(?)
     """
     
     # STEP 1: Input validation
@@ -32,17 +32,10 @@ def find_first_occurrence(nums: List[int], target: int) -> int:
     low, high = 0, len(nums) - 1
     result = -1
     
-    # STEP 3: Binary search
-    while low <= high:
-        mid = (low + high) // 2
-        if nums[mid] == target:
-            result = mid
-            # Continue searching in left half for first occurrence
-            high = mid - 1
-        elif nums[mid] < target:
-            low = mid + 1
-        else:
-            high = mid - 1
+    # STEP 3: Binary search loop
+    # TODO: Implement search logic
+    # When target is found, continue searching left for first occurrence
+    pass
     
     # STEP 4: Return result
     return result
