@@ -15,6 +15,8 @@ Problem:
 Reference: See ../README.md for full problem description
 """
 
+from typing import List
+
 
 def solve():
     """
