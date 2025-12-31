@@ -1,5 +1,4 @@
-"""
-TEMPLATE: Top K Heap Solution
+"""TEMPLATE: Top K Heap Solution
 
 Function Signature:
     def solve():
@@ -16,56 +15,94 @@ Reference: See ../README.md for full problem description
 """
 
 from typing import List
+import heapq
 
 
 def solve():
     """
-    [FILL IN: Brief one-liner describing your approach]
+    Implement TopKHeap using hybrid storage: sorted buffer + overflow heap.
     
     APPROACH:
-    [Describe your strategy - e.g., Min Heap of size k, Max Heap technique]
+    Maintain k smallest values in sorted buffer A and overflow in min-heap H.
+    - Top k largest = contents of buffer A
+    - When new element arrives:
+      * If < A[-1] and A is full, replace and push displaced to H
+      * Otherwise, push to H
     
     Key insight:
-    - Why use a min heap of size k instead of tracking all elements?
-    - How do you maintain exactly k largest elements?
+    - Min-heap H contains elements not in top k
+    - Sorted buffer A contains current top k
+    - Insert maintains both: O(log k) + O(k) sorting, amortized O(log k)
+    - Access is O(k) to return A
     
     Time Complexity:
-        - add: O(log k)
-        - top_k: O(k)
+        - insert: O(log k) heap op + O(k) insertion in sorted buffer
+        - top_k: O(k) to copy buffer
     Space Complexity: O(k)
     """
     
     class TopKHeap:
         def __init__(self, k: int):
             """
-            Initialize heap to track top k elements.
+            Initialize structure to track top k largest elements.
             
             Args:
                 k: Number of largest elements to track
             """
-            # STEP 1: Set up data structure
-            # [Use min heap of size k to track k largest?]
-            # [Or alternative approach?]
             self.k = k
-            pass
+            self.A = []  # Sorted buffer of k smallest (from top k)
+            self.H = []  # Min-heap for overflow elements
         
-        def add(self, element: int) -> None:
-            """
-            Add element to structure.
-            Maintain heap with only k largest elements.
-            """
-            # STEP 2: Add element
-            # - If less than k elements, just add
-            # - If element > min in heap, remove min and add element
-            # - If element <= min, ignore
-            pass
+        def size(self):
+            """Return total number of elements seen."""
+            return len(self.A) + len(self.H)
         
-        def top_k(self) -> List[int]:
+        def insert(self, elt: int) -> None:
             """
-            Return k largest elements (not necessarily sorted).
+            Add element while maintaining top k largest.
+            
+            Time Complexity: O(log k) + O(k) amortized
             """
-            # STEP 3: Return top k
-            # [Extract from heap and return as list]
-            pass
+            if len(self.A) < self.k:
+                # Buffer not full, insert into sorted buffer
+                idx = len(self.A)
+                self.A.append(elt)
+                # Maintain sorted order by shifting
+                while idx > 0 and self.A[idx] < self.A[idx - 1]:
+                    self.A[idx], self.A[idx - 1] = self.A[idx - 1], self.A[idx]
+                    idx -= 1
+                return
+            
+            # Buffer is full
+            if elt < self.A[-1]:
+                # Element is in top k, replace smallest
+                self.A.append(elt)
+                idx = len(self.A) - 1
+                while idx > 0 and self.A[idx] < self.A[idx - 1]:
+                    self.A[idx], self.A[idx - 1] = self.A[idx - 1], self.A[idx]
+                    idx -= 1
+                # Displace last element to overflow heap
+                displaced = self.A.pop()
+                heapq.heappush(self.H, displaced)
+            else:
+                # Element not in top k, push to overflow heap
+                heapq.heappush(self.H, elt)
+        
+        def delete_top_k(self, j: int) -> None:
+            """
+            Helper: remove element at position j from top k buffer,
+            refilling from overflow heap if available.
+            """
+            assert 0 <= j < len(self.A)
+            del self.A[j]
+            if self.H:
+                # Refill from overflow heap
+                min_val = heapq.heappop(self.H)
+                # Insert back into sorted position
+                self.A.append(min_val)
+                idx = len(self.A) - 1
+                while idx > 0 and self.A[idx] < self.A[idx - 1]:
+                    self.A[idx], self.A[idx - 1] = self.A[idx - 1], self.A[idx]
+                    idx -= 1
     
     return TopKHeap
