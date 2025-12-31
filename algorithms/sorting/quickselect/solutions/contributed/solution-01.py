@@ -56,9 +56,9 @@ class YourQuickselect:
             if pivot_index==k:
                 return self.nums[pivot_index]
             if pivot_index < k:
-                left += 1
+                left = pivot_index + 1
             if pivot_index > k:
-                right -= 1
+                right = pivot_index - 1
 
     
     def _partition(self, left: int, right: int, pivot_index: int) -> int:
