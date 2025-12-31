@@ -1,39 +1,27 @@
 """TEMPLATE: Target Index Search Solution
 
-Function Signature:
-    def target_index_search(nums: List[int], target: int) -> int:
-
-Problem:
-    Find the index of target in sorted array.
-    Return -1 if not found.
+Implement a class whose name reflects the strategy (e.g., BinarySearchTargetIndexFinder).
+Judges instantiate the class and call its `target_index_search` method directly.
 
 Reference: See ../README.md for full problem description
 """
 
+from abc import ABC, abstractmethod
 from typing import List
 
 
-def target_index_search(nums: List[int], target: int) -> int:
-    """
-    Find target using binary search.
-    
-    APPROACH:
-    [Describe your strategy here]
-    
-    Time Complexity: O(?)
-    Space Complexity: O(?)
-    """
-    
-    # STEP 1: Input validation
-    if not nums:
-        return -1
-    
-    # STEP 2: Initialize binary search pointers
-    left, right = 0, len(nums) - 1
-    
-    # STEP 3: Binary search loop
-    # TODO: Implement search logic
-    pass
-    
-    # STEP 4: Return result
-    return -1
+class TargetIndexSearchBase(ABC):
+    """Abstract base defining the required interface."""
+
+    @abstractmethod
+    def target_index_search(self, nums: List[int], target: int) -> int:
+        """Return the index of target in sorted nums, or -1 if absent."""
+        raise NotImplementedError
+
+
+class YourTargetIndexFinder(TargetIndexSearchBase):
+    """Rename and implement this class to match your approach."""
+
+    def target_index_search(self, nums: List[int], target: int) -> int:
+        # TODO: implement your search strategy (e.g., binary search)
+        raise NotImplementedError

@@ -1,5 +1,8 @@
 from typing import List
 
-def quicksort(nums: List[int]) -> List[int]:
-    """Return a sorted copy using built-in sorting."""
-    return sorted(nums)
+
+class BuiltinSorter:
+    """Use built-in sort to return a sorted copy."""
+
+    def quicksort(self, nums: List[int]) -> List[int]:
+        return sorted(nums)

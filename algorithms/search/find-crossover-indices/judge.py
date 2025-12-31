@@ -5,11 +5,12 @@ import os
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(current_dir))))
 
-from utils.judge_utils import load_solutions, run_tests
+from utils.judge_utils import load_classes_with_method, run_tests
 from tests.cases import TEST_CASES
 
-def run_case_logic(sol_func, case):
-    result = sol_func(case.x, case.y)
+def run_case_logic(SolutionClass, case):
+    instance = SolutionClass()
+    result = instance.findCrossoverIndex(list(case.x), list(case.y))
     # Check if result matches any of the expected valid outputs
     if isinstance(case.expected, list):
          return result in case.expected
@@ -20,11 +21,11 @@ def main():
     solutions_dir = os.path.join(base_dir, 'solutions')
 
     # Load and test reference solutions
-    reference_solutions = load_solutions(solutions_dir, 'findCrossoverIndex', 'reference')
+    reference_solutions = load_classes_with_method(solutions_dir, 'findCrossoverIndex', 'reference')
     run_tests(reference_solutions, TEST_CASES, run_case_logic, 'REFERENCE SOLUTIONS')
     
     # Load and test contributed solutions
-    contributed_solutions = load_solutions(solutions_dir, 'findCrossoverIndex', 'contributed')
+    contributed_solutions = load_classes_with_method(solutions_dir, 'findCrossoverIndex', 'contributed')
     run_tests(contributed_solutions, TEST_CASES, run_case_logic, 'CONTRIBUTED SOLUTIONS')
 if __name__ == "__main__":
     main()

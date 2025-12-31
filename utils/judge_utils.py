@@ -1,3 +1,4 @@
+import inspect
 import os
 import glob
 import importlib.util
@@ -83,6 +84,50 @@ def load_classes(solutions_dir, class_name, subfolder='reference'):
             else:
                  print(f"Warning: {class_name} not found in {base_name}")
                  
+    return sorted(solutions, key=lambda x: x[0])
+
+
+def load_classes_with_method(solutions_dir, method_name, subfolder='reference'):
+    """
+    Dynamically loads Python modules from a subfolder of the solutions directory
+    and extracts any class that defines the required method.
+
+    This is useful when solution class names vary by approach (e.g.,
+    BinarySearchFinder, LinearScanFinder) but share a common method contract.
+    Excludes hints.py and template.py (learning guides, not solutions).
+    """
+    target_dir = os.path.join(solutions_dir, subfolder)
+    if not os.path.exists(target_dir):
+        print(f"Warning: {target_dir} does not exist")
+        return []
+
+    solutions = []
+    sol_files = glob.glob(os.path.join(target_dir, "*.py"))
+
+    for file_path in sol_files:
+        base_name = os.path.basename(file_path)
+        if base_name in ("__init__.py", "hints.py", "template.py"):
+            continue
+
+        module_name = base_name.replace(".py", "")
+        spec = importlib.util.spec_from_file_location(module_name, file_path)
+        if not (spec and spec.loader):
+            continue
+
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        found = False
+        for _, obj in inspect.getmembers(module, inspect.isclass):
+            if obj.__module__ != module.__name__:
+                continue
+            if hasattr(obj, method_name):
+                solutions.append((module_name, obj))
+                found = True
+
+        if not found:
+            print(f"Warning: no class with '{method_name}' found in {base_name}")
+
     return sorted(solutions, key=lambda x: x[0])
 
 def run_tests(solutions, test_cases, runner_func, section_name=None):
