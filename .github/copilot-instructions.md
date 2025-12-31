@@ -88,8 +88,18 @@ run_tests(solutions, TEST_CASES, run_case_logic)
 
 **File Structure:**
 - Problem folder contains: `judge.py`, `README.md`, `PSEUDOCODE.md`, `solutions/`, `tests/`
-- Solution files: `naive.py`, `optimized.py` (one implementation per file)
-- No `hints.py` or solution code in `template.py`
+- Solutions folder organized as:
+  ```
+  solutions/
+    __init__.py
+    template.py           (learning scaffold - not tested)
+    reference/
+      __init__.py
+      naive.py           (reference implementation)
+      optimized.py       (reference implementation)
+    contributed/         (for user submissions)
+  ```
+- No `hints.py` files in repository
 
 **For Function-Based Solutions:**
 - Export exactly one function named `solve` (or other name specified in judge)
@@ -112,6 +122,9 @@ from utils.judge_utils import load_solutions, load_classes, run_tests
 
 - From repo root, run single judge: `python algorithms/search/find-crossover-indices/judge.py`
 - Or: `python data-structures/heaps/min-heap/judge.py`
+- Output shows two result tables:
+  1. **REFERENCE SOLUTIONS** — test the provided naive and optimized implementations
+  2. **CONTRIBUTED SOLUTIONS** — test any user-submitted solutions
 - CI/quick-run uses `uv run python <path>` (uv is optional convenience wrapper)
 
 ## Adding a New Problem
@@ -119,7 +132,9 @@ from utils.judge_utils import load_solutions, load_classes, run_tests
 ### For Algorithm (Function-Based)
 1. Copy existing search/sorting problem folder structure
 2. Implement `tests/cases.py` with `TestCase` dataclass and `TEST_CASES` list
-3. Add solutions: `solutions/naive.py`, `solutions/optimized.py` (export `solve` function)
+3. Add solutions to `solutions/reference/`:
+   - `naive.py` (export `solve` function)
+   - `optimized.py` (export `solve` function)
 4. Create `judge.py` that calls `load_solutions(solutions_dir, 'solve')`
 5. Define `run_case_logic(sol_func, case)` to test the function
 6. Run judge to verify
@@ -127,7 +142,9 @@ from utils.judge_utils import load_solutions, load_classes, run_tests
 ### For Data Structure (Class-Based)
 1. Copy existing heap problem folder structure
 2. Implement `tests/cases.py` with `TestCase` dataclass and `TEST_CASES` list
-3. Add solutions: `solutions/naive.py`, `solutions/optimized.py` (export the class, no wrapper)
+3. Add solutions to `solutions/reference/`:
+   - `naive.py` (export the class, no wrapper)
+   - `optimized.py` (export the class, no wrapper)
 4. Create `judge.py` that calls `load_classes(solutions_dir, 'ClassName')`
 5. Define `run_case_logic(ClassName, case)` to test the class
 6. Run judge to verify
@@ -139,8 +156,10 @@ from utils.judge_utils import load_solutions, load_classes, run_tests
 - Keep solution function/class signatures and type hints intact
 - Use `list(case.<field>)` when forwarding mutable inputs to solutions to avoid cross-test mutation
 - Templates show structure only (class/function signatures with TODOs), not implementations
-- Validate files: only `naive.py`, `optimized.py`, `__init__.py`, `template.py` allowed in `solutions/`
-- No `hints.py` files in repository (validation script enforces this)
+- Validate files: only files in `solutions/reference/` and `solutions/` root allowed on main branch
+- Reference folder must contain: `naive.py`, `optimized.py`, `__init__.py`
+- Solutions root must contain: `template.py`, `__init__.py`
+- Contributed folder is for user submissions (not part of main branch validation)
 
 ## Key Files to Reference
 
