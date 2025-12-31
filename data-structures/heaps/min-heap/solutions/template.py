@@ -15,18 +15,103 @@ Reference: See ../README.md for full problem description
 
 
 class MinHeap:
-    """
-    Implement MinHeap using array (1-indexed is often convenient).
+    """Implement MinHeap using array (1-indexed is often convenient).
     
-    Helper function suggestions:
-    - Parent of index i: i // 2 (if 1-indexed)
+    Helper index formulas (if 1-indexed):
+    - Parent of index i: i // 2
     - Left child of index i: 2 * i
     - Right child of index i: 2 * i + 1
     """
     
     def __init__(self):
-        """Initialize empty heap."""
+        """Initialize empty heap.
+        
+        Expected behavior:
+        - Set up internal array structure (1-indexed or 0-indexed)
+        - Initialize to empty state
+        """
         # TODO: Set up 1-indexed or 0-indexed array
+        pass
+
+    def insert(self, elt):
+        """Insert element into heap, maintaining min-heap property.
+        
+        Expected behavior:
+        - Add element to heap
+        - Restore min-heap property via bubble-up (sift-up) operation
+        - Time: O(log n)
+        
+        Hint: After appending, compare with parent and swap upward until sorted.
+        Use _bubble_up() helper method.
+        
+        Args:
+            elt: The element to insert.
+        """
+        # TODO: Append element and bubble up
+        pass
+
+    def delete_min(self):
+        """Remove and return the minimum element.
+        
+        Expected behavior:
+        - Return the root (minimum) element
+        - Move last element to root
+        - Restore min-heap property via bubble-down (sift-down) operation
+        - Time: O(log n)
+        
+        Hint: After moving last to root, compare with children and swap downward.
+        Use _bubble_down() helper method. Handle edge cases: empty heap, single element.
+        """
+        # TODO: Remove min, move last to root, bubble down
+        pass
+
+    def min_element(self):
+        """Return the minimum element without removing it.
+        
+        Expected behavior:
+        - Return root element (minimum)
+        - Do not modify heap
+        - Time: O(1)
+        
+        Returns:
+            The minimum element in the heap.
+        """
+        # TODO: Return root element
+        pass
+
+    def size(self):
+        """Return the number of elements in the heap.
+        
+        Expected behavior:
+        - Return count of elements currently stored
+        - Time: O(1)
+        
+        Returns:
+            Number of elements in heap.
+        """
+        # TODO: Return heap size
+        pass
+
+    def _bubble_up(self, idx):
+        """Restore min-heap property by moving element up.
+        
+        Swap with parent while element is smaller than parent.
+        
+        Args:
+            idx: Index of element to bubble up from.
+        """
+        # TODO: Compare with parent, swap upward until min-heap property holds
+        pass
+
+    def _bubble_down(self, idx):
+        """Restore min-heap property by moving element down.
+        
+        Swap with smaller child while element is larger than a child.
+        
+        Args:
+            idx: Index of element to bubble down from.
+        """
+        # TODO: Compare with children, swap downward until min-heap property holds
         pass
     
     def size(self):

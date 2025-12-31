@@ -1,57 +1,93 @@
-"""TEMPLATE: Median Heap Solution
+"""TEMPLATE: MedianMaintainingHeap Solution
 
 Class Signature:
-    class MedianHeap:
+    class MedianMaintainingHeap:
 
 Problem:
-    Implement a Median Heap data structure that efficiently:
-    - addNum(num): Add a number, O(log n)
-    - findMedian(): Return current median, O(1)
-    
-    Median is the middle value(s) in sorted sequence.
+    Implement a data structure that efficiently tracks the median as elements are inserted:
+    - insert(elt): Add element, O(log n)
+    - get_median(): Return current median, O(1)
+    - size(): Return number of elements, O(1)
 
 Reference: See ../README.md for full problem description
 """
 
+import heapq
 
-class MedianHeap:
-    """
-    Implement MedianHeap.
+
+class MedianMaintainingHeap:
+    """Implement median tracking using dual heaps.
     
-    Key insight: Consider using two heaps to track lower and upper halves.
-    - One heap for lower half (e.g., max-heap)
-    - One heap for upper half (e.g., min-heap)
-    
-    Maintain balance so median is always accessible.
+    Strategy: Maintain two heaps:
+    - Max-heap (via negatives in Python's min-heap) for elements below median
+    - Min-heap for elements above median
+    - Balance sizes to ensure efficient median retrieval
     """
     
     def __init__(self):
-        """Initialize the median finder."""
-        # TODO: Set up data structure(s) for tracking halves
+        """Initialize two heaps for dual-heap strategy.
+        
+        Expected behavior:
+        - Create max-heap for lower half (using negatives)
+        - Create min-heap for upper half
+        - Initialize empty state
+        """
+        # TODO: Set up self.lower (max-heap via negatives) and self.upper (min-heap)
         pass
-    
+
+    def insert(self, elt):
+        """Insert element while maintaining median property.
+        
+        Expected behavior:
+        - Add element to appropriate heap (lower or upper)
+        - Rebalance heaps to ensure: len(lower) >= len(upper) and |len(lower) - len(upper)| <= 1
+        - Median should be median of combined elements
+        - Time: O(log n)
+        
+        Hint: Insert into appropriate heap, then rebalance by moving elements between heaps.
+        Use _rebalance() helper method.
+        
+        Args:
+            elt: The element to insert.
+        """
+        # TODO: Insert into appropriate heap and rebalance
+        pass
+
+    def get_median(self):
+        """Return the median of all inserted elements.
+        
+        Expected behavior:
+        - If odd count: return middle element
+        - If even count: return average of two middle elements
+        - Time: O(1)
+        
+        Returns:
+            The median (int or float depending on element count).
+        """
+        # TODO: Calculate median from heap roots
+        pass
+
     def size(self):
-        """Return total number of elements."""
-        # TODO: Return total size
-        pass
-    
-    def addNum(self, num: int) -> None:
-        """
-        Add a number while maintaining balance.
-        Ensure median remains efficiently computable.
+        """Return the total number of elements inserted.
         
-        Time Complexity: O(log n)
-        """
-        # TODO: Insert into appropriate heap/section and rebalance
-        pass
-    
-    def findMedian(self) -> float:
-        """
-        Return current median.
-        For odd count: middle value.
-        For even count: average of two middle values.
+        Expected behavior:
+        - Return sum of sizes of both heaps
+        - Time: O(1)
         
-        Time Complexity: O(1)
+        Returns:
+            Total number of elements in both heaps.
         """
-        # TODO: Compute and return median from heap roots
+        # TODO: Return total element count
         pass
+
+    def _rebalance(self):
+        """Rebalance the two heaps to maintain median property.
+        
+        Ensures: len(lower) >= len(upper) and len(lower) - len(upper) <= 1
+        Move elements between heaps to maintain balance.
+        """
+        # TODO: Balance heaps by moving elements between them
+        # Check if lower has too many (> upper + 1), move largest from lower to upper
+        # Check if upper has too many (> lower), move smallest from upper to lower
+        pass
+
