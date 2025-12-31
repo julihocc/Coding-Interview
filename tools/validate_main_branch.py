@@ -21,7 +21,7 @@ def main():
         print("Disallowed solution files detected for PR to main:")
         for path in bad:
             print(f" - {path}")
-        print("\nOnly allowed in main: naive.py, optimized.py, __init__.py")
+        print("\nOnly allowed in main: naive.py, optimized.py, __init__.py, hints.py, template.py")
         sys.exit(1)
     else:
         print("Branch policy check passed for main.")
