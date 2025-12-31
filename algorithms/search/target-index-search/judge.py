@@ -9,8 +9,8 @@ from utils.judge_utils import load_classes_with_method, run_tests
 from tests.cases import TEST_CASES
 
 def run_case_logic(SolutionClass, case):
-    instance = SolutionClass()
-    result = instance.target_index_search(list(case.nums), case.target)
+    instance = SolutionClass(list(case.nums))
+    result = instance.target_index_search(case.target)
     return result == case.expected
 
 def main():

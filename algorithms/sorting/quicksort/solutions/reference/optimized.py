@@ -5,29 +5,32 @@ from typing import List
 class InPlaceRandomizedQuicksort:
     """In-place quicksort with randomized pivots."""
 
-    def quicksort(self, nums: List[int]) -> List[int]:
-        if len(nums) < 2:
-            return nums
+    def __init__(self, nums: List[int]):
+        self.nums = nums
 
-        self._quicksort(nums, 0, len(nums) - 1)
-        return nums
+    def quicksort(self) -> List[int]:
+        if len(self.nums) < 2:
+            return self.nums
 
-    def _quicksort(self, arr: List[int], low: int, high: int) -> None:
+        self._quicksort(0, len(self.nums) - 1)
+        return self.nums
+
+    def _quicksort(self, low: int, high: int) -> None:
         if low < high:
-            pivot_pos = self._partition(arr, low, high)
-            self._quicksort(arr, low, pivot_pos - 1)
-            self._quicksort(arr, pivot_pos + 1, high)
+            pivot_pos = self._partition(low, high)
+            self._quicksort(low, pivot_pos - 1)
+            self._quicksort(pivot_pos + 1, high)
 
-    def _partition(self, arr: List[int], low: int, high: int) -> int:
+    def _partition(self, low: int, high: int) -> int:
         pivot_index = random.randint(low, high)
-        arr[pivot_index], arr[high] = arr[high], arr[pivot_index]
-        pivot = arr[high]
+        self.nums[pivot_index], self.nums[high] = self.nums[high], self.nums[pivot_index]
+        pivot = self.nums[high]
         i = low
 
         for j in range(low, high):
-            if arr[j] <= pivot:
-                arr[i], arr[j] = arr[j], arr[i]
+            if self.nums[j] <= pivot:
+                self.nums[i], self.nums[j] = self.nums[j], self.nums[i]
                 i += 1
 
-        arr[i], arr[high] = arr[high], arr[i]
+        self.nums[i], self.nums[high] = self.nums[high], self.nums[i]
         return i

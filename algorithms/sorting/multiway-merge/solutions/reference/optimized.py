@@ -2,13 +2,17 @@
 class PairwiseMergeKWay:
     """Pairwise merge with recursive reduction to a single list."""
 
-    def kWayMerge(self, list_of_lists):
-        k = len(list_of_lists)
+    def __init__(self, list_of_lists):
+        self.list_of_lists = list_of_lists
+
+    def kWayMerge(self):
+        k = len(self.list_of_lists)
         if k == 0:
             return []
         if k == 1:
-            return list_of_lists[0]
-        return self.kWayMerge(self._one_step(list_of_lists))
+            return self.list_of_lists[0]
+        merged_lists = self._one_step(self.list_of_lists)
+        return PairwiseMergeKWay(merged_lists).kWayMerge()
 
     def _one_step(self, list_of_lists):
         if len(list_of_lists) <= 1:

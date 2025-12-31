@@ -1,27 +1,20 @@
-"""TEMPLATE: Quicksort Solution
+"""TEMPLATE: Class-based solution for Quicksort
 
 Implement a class whose name reflects the strategy (e.g., InPlaceRandomizedQuicksort).
-Judges instantiate the class and call its `quicksort` method directly.
+Judges instantiate your class with nums in __init__ and call the method.
 
 Reference: See ../README.md for full problem description
 """
 
-from abc import ABC, abstractmethod
 from typing import List
 
 
-class QuicksortBase(ABC):
-    """Abstract base defining the required interface."""
-
-    @abstractmethod
-    def quicksort(self, nums: List[int]) -> List[int]:
-        """Return a sorted list."""
-        raise NotImplementedError
-
-
-class YourQuicksort(QuicksortBase):
+class YourQuicksort:
     """Rename and implement this class to match your approach."""
 
-    def quicksort(self, nums: List[int]) -> List[int]:
-        # TODO: implement your quicksort strategy
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+
+    def quicksort(self) -> List[int]:
+        # TODO: Sort the array and return the sorted copy
         raise NotImplementedError

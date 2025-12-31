@@ -4,6 +4,9 @@ from typing import List
 class SortThenPickSelector:
     """Sort then pick the k-th element."""
 
-    def quickselect(self, nums: List[int], k: int) -> int:
-        sorted_nums = sorted(nums)
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+
+    def quickselect(self, k: int) -> int:
+        sorted_nums = sorted(self.nums)
         return sorted_nums[k]

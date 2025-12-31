@@ -1,26 +1,19 @@
-"""TEMPLATE: Find Crossover Indices Solution
+"""TEMPLATE: Class-based solution for Find Crossover Indices
 
 Implement a class whose name reflects the strategy (e.g., BinarySearchCrossoverFinder).
-Judges instantiate the class and call its `findCrossoverIndex` method directly.
+Judges instantiate your class with x and y arrays in __init__ and call the method.
 
 Reference: See ../README.md for full problem description
 """
 
-from abc import ABC, abstractmethod
 
-
-class FindCrossoverBase(ABC):
-    """Abstract base defining the required interface."""
-
-    @abstractmethod
-    def findCrossoverIndex(self, x, y):
-        """Return the crossover index or -1 if none exists."""
-        raise NotImplementedError
-
-
-class YourCrossoverFinder(FindCrossoverBase):
+class YourCrossoverFinder:
     """Rename and implement this class to match your approach."""
 
-    def findCrossoverIndex(self, x, y):
-        # TODO: implement your strategy (e.g., binary search over crossover)
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def findCrossoverIndex(self):
+        # TODO: Find and return the crossover index or -1 if none exists
         raise NotImplementedError

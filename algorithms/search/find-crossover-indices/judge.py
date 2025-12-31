@@ -9,8 +9,8 @@ from utils.judge_utils import load_classes_with_method, run_tests
 from tests.cases import TEST_CASES
 
 def run_case_logic(SolutionClass, case):
-    instance = SolutionClass()
-    result = instance.findCrossoverIndex(list(case.x), list(case.y))
+    instance = SolutionClass(list(case.x), list(case.y))
+    result = instance.findCrossoverIndex()
     # Check if result matches any of the expected valid outputs
     if isinstance(case.expected, list):
          return result in case.expected

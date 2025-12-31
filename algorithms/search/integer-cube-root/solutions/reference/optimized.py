@@ -1,21 +1,24 @@
 class BinarySearchCubeRootFinder:
     """Binary search to find the largest k with k^3 <= n."""
 
-    def integerCubeRoot(self, n):
+    def __init__(self, n):
         assert n > 0
-        if n == 1:
-            return 1
-        if n == 2:
-            return 1
-        return self._helper(n, 0, n - 1)
+        self.n = n
 
-    def _helper(self, n, left, right):
+    def integerCubeRoot(self):
+        if self.n == 1:
+            return 1
+        if self.n == 2:
+            return 1
+        return self._helper(0, self.n - 1)
+
+    def _helper(self, left, right):
         cube = lambda x: x * x * x
         assert left < right
         mid = (left + right) // 2
 
-        if cube(mid) <= n and cube(mid + 1) > n:
+        if cube(mid) <= self.n and cube(mid + 1) > self.n:
             return mid
-        if cube(mid) > n:
-            return self._helper(n, left, mid)
-        return self._helper(n, mid, right)
+        if cube(mid) > self.n:
+            return self._helper(left, mid)
+        return self._helper(mid, right)

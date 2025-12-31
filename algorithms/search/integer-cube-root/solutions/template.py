@@ -1,26 +1,18 @@
-"""TEMPLATE: Integer Cube Root Solution
+"""TEMPLATE: Class-based solution for Integer Cube Root
 
 Implement a class whose name reflects the strategy (e.g., BinarySearchCubeRootFinder).
-Judges instantiate the class and call its `integerCubeRoot` method directly.
+Judges instantiate your class with n in __init__ and call the method.
 
 Reference: See ../README.md for full problem description
 """
 
-from abc import ABC, abstractmethod
 
-
-class IntegerCubeRootBase(ABC):
-    """Abstract base defining the required interface."""
-
-    @abstractmethod
-    def integerCubeRoot(self, n: int) -> int:
-        """Return the largest integer k such that k^3 <= n."""
-        raise NotImplementedError
-
-
-class YourCubeRootFinder(IntegerCubeRootBase):
+class YourCubeRootFinder:
     """Rename and implement this class to match your approach."""
 
-    def integerCubeRoot(self, n: int) -> int:
-        # TODO: implement your chosen strategy (e.g., binary search over k)
+    def __init__(self, n: int):
+        self.n = n
+
+    def integerCubeRoot(self) -> int:
+        # TODO: Find and return the largest k such that k^3 <= self.n
         raise NotImplementedError

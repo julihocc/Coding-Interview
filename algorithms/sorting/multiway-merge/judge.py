@@ -8,8 +8,8 @@ from utils.judge_utils import load_classes_with_method, run_tests
 from tests.cases import TEST_CASES
 
 def run_case_logic(SolutionClass, case):
-    instance = SolutionClass()
-    result = instance.kWayMerge([list(lst) for lst in case.lists])
+    instance = SolutionClass([list(lst) for lst in case.lists])
+    result = instance.kWayMerge()
     return result == case.expected
 
 def main():

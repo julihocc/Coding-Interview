@@ -8,8 +8,8 @@ from utils.judge_utils import load_classes_with_method, run_tests
 from tests.cases import TEST_CASES
 
 def run_case_logic(SolutionClass, case):
-    instance = SolutionClass()
-    result = instance.quicksort(list(case.nums))
+    instance = SolutionClass(list(case.nums))
+    result = instance.quicksort()
     return result == case.expected
 
 def main():

@@ -1,12 +1,16 @@
 class LinearScanCrossoverFinder:
     """Linear scan from the right to locate the crossover index."""
 
-    def findCrossoverIndex(self, x, y):
+    def __init__(self, x, y):
         assert len(x) == len(y)
-        n = len(x)
+        self.x = x
+        self.y = y
+
+    def findCrossoverIndex(self):
+        n = len(self.x)
 
         for i in range(n - 1, -1, -1):
-            if x[i] >= y[i]:
+            if self.x[i] >= self.y[i]:
                 return i
 
         return -1

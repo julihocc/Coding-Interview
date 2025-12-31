@@ -1,13 +1,16 @@
 class LinearCubeRootFinder:
     """Linear search for the largest k with k^3 <= n."""
 
-    def integerCubeRoot(self, n):
-        if n == 0:
+    def __init__(self, n):
+        self.n = n
+
+    def integerCubeRoot(self):
+        if self.n == 0:
             return 0
-        if n < 0:
-            return -self.integerCubeRoot(-n)
+        if self.n < 0:
+            return -LinearCubeRootFinder(-self.n).integerCubeRoot()
 
         k = 1
-        while (k + 1) ** 3 <= n:
+        while (k + 1) ** 3 <= self.n:
             k += 1
         return k

@@ -1,28 +1,20 @@
 """TEMPLATE: Class-based solution for Find First Occurrence
 
-Implement a class whose name conveys the strategy (e.g., BinarySearchFinder,
-TwoPointerFinder). Judges will instantiate your class and call its
-`find_first_occurrence` method directly—no standalone solve() wrapper.
+Implement a class whose name conveys the strategy (e.g., BinarySearchFinder).
+Judges instantiate your class with array data in __init__ and call the method.
 
 Reference: See ../README.md for full problem description
 """
 
-from abc import ABC, abstractmethod
 from typing import List
 
 
-class FindFirstOccurrenceBase(ABC):
-    """Abstract base defining the required interface."""
+class YourStrategyFinder:
+    """Rename and implement this class to match your approach."""
 
-    @abstractmethod
-    def find_first_occurrence(self, nums: List[int], target: int) -> int:
-        """Return the leftmost index of target in sorted nums, or -1 if absent."""
-        raise NotImplementedError
+    def __init__(self, nums: List[int]):
+        self.nums = nums
 
-
-class YourStrategyFinder(FindFirstOccurrenceBase):
-    """Rename this class to describe your approach and implement the method."""
-
-    def find_first_occurrence(self, nums: List[int], target: int) -> int:
-        # TODO: implement your chosen strategy (e.g., binary search)
+    def find_first_occurrence(self, target: int) -> int:
+        # TODO: Find and return the leftmost index of target, or -1 if absent
         raise NotImplementedError

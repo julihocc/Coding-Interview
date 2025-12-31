@@ -1,26 +1,18 @@
-"""TEMPLATE: Multiway Merge Solution
+"""TEMPLATE: Class-based solution for Multiway Merge
 
 Implement a class whose name reflects the strategy (e.g., PairwiseMergeKWay).
-Judges instantiate the class and call its `kWayMerge` method directly.
+Judges instantiate your class with list_of_lists in __init__ and call the method.
 
 Reference: See ../README.md for full problem description
 """
 
-from abc import ABC, abstractmethod
 
-
-class KWayMergeBase(ABC):
-    """Abstract base defining the required interface."""
-
-    @abstractmethod
-    def kWayMerge(self, list_of_lists):
-        """Return a single sorted list from sorted input lists."""
-        raise NotImplementedError
-
-
-class YourKWayMerger(KWayMergeBase):
+class YourKWayMerger:
     """Rename and implement this class to match your approach."""
 
-    def kWayMerge(self, list_of_lists):
-        # TODO: implement your merge strategy (e.g., pairwise merging, heap)
+    def __init__(self, list_of_lists):
+        self.list_of_lists = list_of_lists
+
+    def kWayMerge(self):
+        # TODO: Merge all lists and return a single sorted list
         raise NotImplementedError
