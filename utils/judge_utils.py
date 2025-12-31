@@ -7,13 +7,15 @@ def load_solutions(solutions_dir, function_name):
     """
     Dynamically loads Python modules from the solutions directory
     and extracts the specified function.
+    Excludes hints.py and template.py (learning guides, not solutions).
     """
     solutions = []
     sol_files = glob.glob(os.path.join(solutions_dir, "*.py"))
     
     for file_path in sol_files:
         base_name = os.path.basename(file_path)
-        if base_name == "__init__.py":
+        # Skip __init__.py and learning guide files
+        if base_name in ("__init__.py", "hints.py", "template.py"):
             continue
             
         module_name = base_name.replace(".py", "")
