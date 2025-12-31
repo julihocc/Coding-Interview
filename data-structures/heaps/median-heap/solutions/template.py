@@ -12,7 +12,6 @@ Problem:
 Reference: See ../README.md for full problem description
 """
 
-import heapq
 
 
 class MedianMaintainingHeap:

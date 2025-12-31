@@ -14,7 +14,6 @@ Reference: See ../README.md for full problem description
 """
 
 from typing import List
-import heapq
 
 
 class TopKHeap:

@@ -6,7 +6,6 @@ Moves naive.py and optimized.py to reference/, creates contributed/ folder.
 
 import os
 import shutil
-from pathlib import Path
 
 def reorganize_problem(problem_dir):
     """Reorganize a single problem's solutions folder."""
@@ -22,12 +21,12 @@ def reorganize_problem(problem_dir):
     # Create reference directory if it doesn't exist
     if not os.path.exists(reference_dir):
         os.makedirs(reference_dir)
-        print(f"  ✓ Created reference/")
+        print("  ✓ Created reference/")
     
     # Create contributed directory if it doesn't exist
     if not os.path.exists(contributed_dir):
         os.makedirs(contributed_dir)
-        print(f"  ✓ Created contributed/")
+        print("  ✓ Created contributed/")
     
     # Move naive.py and optimized.py to reference/
     for filename in ['naive.py', 'optimized.py']:
@@ -41,7 +40,7 @@ def reorganize_problem(problem_dir):
             print(f"  ✓ {filename} already in reference/")
     
     # Keep template.py, __init__.py at solutions root (don't move)
-    print(f"  ✓ template.py and __init__.py stay at root")
+    print("  ✓ template.py and __init__.py stay at root")
     
     return True
 
@@ -66,7 +65,7 @@ def main():
         print(f"{relative_path}")
         reorganize_problem(problem_dir)
     
-    print(f"\n✅ Reorganization complete!")
+    print("\n✅ Reorganization complete!")
 
 if __name__ == '__main__':
     main()

@@ -5,7 +5,6 @@ Update all judge.py files to load from reference/ and contributed/ subfolders.
 
 import os
 import re
-from pathlib import Path
 
 def update_judge_file(judge_path, is_class_based):
     """Update a judge.py file to use new structure."""
@@ -81,11 +80,11 @@ def main():
         is_class_based = 'load_classes' in content
         
         if update_judge_file(judge_path, is_class_based):
-            print(f"  ✓ Updated")
+            print("  ✓ Updated")
         else:
-            print(f"  ⚠️  Failed to update")
+            print("  ⚠️  Failed to update")
     
-    print(f"\n✅ Judge files updated!")
+    print("\n✅ Judge files updated!")
 
 if __name__ == '__main__':
     main()
