@@ -231,3 +231,274 @@ BinarySearchFinder| Example   | PASS   | 0.000009
 - **Data Structure Example:** [data-structures/heaps/min-heap/judge.py](data-structures/heaps/min-heap/judge.py)
 - **Template Example:** [algorithms/sorting/quickselect/solutions/template.py](algorithms/sorting/quickselect/solutions/template.py)
 - **Reference Implementation:** [algorithms/search/find-first-occurrence/solutions/reference/optimized.py](algorithms/search/find-first-occurrence/solutions/reference/optimized.py)
+
+## Advanced Pattern: Dual-Heap Strategy (Median Heap)
+
+The **MedianMaintainingHeap** demonstrates managing two interrelated heaps to efficiently track a median:
+
+**Architecture:**
+```python
+class MedianMaintainingHeap:
+    def __init__(self):
+        self.lower = []  # max-heap via negatives for elements below median
+        self.upper = []  # min-heap for elements above median
+    
+    def insert(self, elt):
+        # Step 1: Insert into appropriate heap
+        if not self.lower or elt <= -self.lower[0]:
+            heapq.heappush(self.lower, -elt)  # Negate for max-heap behavior
+        else:
+            heapq.heappush(self.upper, elt)
+        
+        # Step 2: Rebalance to maintain: len(lower) >= len(upper) and diff <= 1
+        self._rebalance()
+    
+    def get_median(self):
+        # If uneven: return element from larger heap (always lower)
+        if len(self.lower) > len(self.upper):
+            return -self.lower[0]
+        # If even: return average of both roots
+        return (-self.lower[0] + self.upper[0]) / 2
+    
+    def _rebalance(self):
+        # Move excess from lower to upper, or from upper to lower
+        if len(self.lower) > len(self.upper) + 1:
+            mv = -heapq.heappop(self.lower)
+            heapq.heappush(self.upper, mv)
+        elif len(self.upper) > len(self.lower):
+            mv = heapq.heappop(self.upper)
+            heapq.heappush(self.lower, -mv)
+```
+
+**Key Insight:** The invariant `len(lower) >= len(upper)` ensures O(1) median access. Always rebalance after every insert to maintain this property.
+
+**When adding similar problems:** Use the dual-structure pattern whenever you need to maintain two conflicting orderings (e.g., top-k smallest with overflow heap, or lower/upper half of sorted data).
+
+## Adding a New Problem Type: Complete Walkthrough
+
+### Scenario: Implement "Find Peak in Mountain Array"
+**Expected:** A problem where we need to find a peak element using binary search.
+
+### Step 1: Create Directory Structure
+```bash
+mkdir -p algorithms/search/find-peak-in-mountain/solutions/reference
+mkdir -p algorithms/search/find-peak-in-mountain/solutions/contributed
+mkdir -p algorithms/search/find-peak-in-mountain/tests
+touch algorithms/search/find-peak-in-mountain/solutions/__init__.py
+touch algorithms/search/find-peak-in-mountain/solutions/reference/__init__.py
+```
+
+### Step 2: Write Test Cases (`tests/cases.py`)
+```python
+from dataclasses import dataclass
+from typing import List
+
+@dataclass
+class TestCase:
+    arr: List[int]
+    expected: int
+    name: str
+
+TEST_CASES = [
+    TestCase([1, 3, 2], 1, "Example"),
+    TestCase([1, 2, 3, 1], 2, "Peak at end of rise"),
+    TestCase([3, 4, 5, 1, 2], 2, "Peak before drop"),
+]
+```
+
+### Step 3: Write Reference Solutions
+```python
+# solutions/reference/naive.py
+class LinearSearchPeakFinder:
+    def __init__(self, arr: List[int]):
+        self.arr = arr
+    
+    def find_peak(self) -> int:
+        for i in range(1, len(self.arr) - 1):
+            if self.arr[i] > self.arr[i-1] and self.arr[i] > self.arr[i+1]:
+                return i
+        # Handle edge cases (peak at boundaries)
+        return 0 if self.arr[0] > self.arr[-1] else len(self.arr) - 1
+
+# solutions/reference/optimized.py
+class BinarySearchPeakFinder:
+    def __init__(self, arr: List[int]):
+        self.arr = arr
+    
+    def find_peak(self) -> int:
+        left, right = 0, len(self.arr) - 1
+        while left < right:
+            mid = (left + right) // 2
+            if self.arr[mid] > self.arr[mid + 1]:
+                right = mid  # Peak is on left side (including mid)
+            else:
+                left = mid + 1  # Peak is on right side
+        return left
+```
+
+### Step 4: Create Template (`solutions/template.py`)
+```python
+"""TEMPLATE: Find Peak in Mountain Array
+
+Implement a class whose name reflects the strategy (e.g., BinarySearchPeakFinder).
+Judges instantiate your class with arr in __init__ and call the method.
+"""
+
+class YourPeakFinder:
+    """Rename and implement this class to match your approach.
+    
+    Example strategies: LinearSearchPeakFinder, BinarySearchPeakFinder
+    """
+
+    def __init__(self, arr: List[int]):
+        """Initialize with the mountain array.
+        
+        Args:
+            arr: A mountain array (increases then decreases).
+        """
+        self.arr = arr
+
+    def find_peak(self) -> int:
+        """Find index of peak element in the mountain.
+        
+        Expected behavior:
+        - Return the index where arr[index] > arr[index-1] and arr[index] > arr[index+1]
+        - For O(log n), use binary search to narrow down the peak location
+        
+        Args:
+            None (data in self.arr)
+            
+        Returns:
+            The index of the peak element.
+        """
+        # TODO: Implement peak-finding strategy
+        pass
+```
+
+### Step 5: Create Judge (`judge.py`)
+```python
+import os
+import sys
+from typing import List
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(current_dir))))
+
+from utils.judge_utils import load_classes_with_method, run_tests
+from tests.cases import TEST_CASES
+
+solutions_dir = os.path.join(current_dir, "solutions")
+
+def run_case_logic(SolutionClass, case):
+    instance = SolutionClass(list(case.arr))
+    result = instance.find_peak()
+    return result == case.expected
+
+solutions = load_classes_with_method(solutions_dir, 'find_peak')
+run_tests(solutions, TEST_CASES, run_case_logic, case_name_attr='name')
+```
+
+### Step 6: Test
+```bash
+python algorithms/search/find-peak-in-mountain/judge.py
+```
+
+**Expected Output:**
+```
+=== REFERENCE SOLUTIONS ===
+Solution              | Case              | Status | Time (s)
+----------------------------------------------------------------
+LinearSearchPeakFinder| Example           | PASS   | 0.000015
+BinarySearchPeakFinder| Example           | PASS   | 0.000009
+LinearSearchPeakFinder| Peak at end...    | PASS   | 0.000003
+BinarySearchPeakFinder| Peak at end...    | PASS   | 0.000002
+```
+
+## Debugging & Testing Workflow
+
+### Running Individual Judges
+```bash
+# Run all tests for a problem
+python algorithms/search/find-first-occurrence/judge.py
+
+# Capture output to file for inspection
+python algorithms/search/find-first-occurrence/judge.py > results.txt
+```
+
+### Debugging a Failing Solution
+If a solution fails a test case:
+
+1. **Print intermediate state:**
+   ```python
+   # In your solution, add debug output
+   def find_peak(self) -> int:
+       left, right = 0, len(self.arr) - 1
+       print(f"Array: {self.arr}, searching for peak...")
+       while left < right:
+           mid = (left + right) // 2
+           print(f"left={left}, right={right}, mid={mid}, arr[mid]={self.arr[mid]}")
+           # ... rest of logic
+   ```
+
+2. **Test locally with print:**
+   ```python
+   # Create minimal test
+   from solutions.reference.optimized import BinarySearchPeakFinder
+   finder = BinarySearchPeakFinder([1, 3, 2])
+   result = finder.find_peak()
+   print(f"Result: {result}, Expected: 1")
+   ```
+
+3. **Verify TestCase structure:**
+   - Check `tests/cases.py` that `TestCase` has all required fields
+   - Ensure `TEST_CASES` list is properly formatted
+   - Verify field names match what judge expects (e.g., `arr`, `expected`, `name`)
+
+### Common Issues & Fixes
+
+**"TypeError: takes no arguments"**
+- **Cause:** Method signature doesn't match judge expectations
+- **Fix:** Verify `__init__` takes test data, method takes only remaining args
+- **Example:** Judge does `instance.find_peak()`, so method must have 0 args (data in self)
+
+**"KeyError: 'expected'"**
+- **Cause:** TestCase missing required field
+- **Fix:** Check `tests/cases.py` has all fields the judge expects
+
+**"ModuleNotFoundError: No module named 'solutions'"**
+- **Cause:** sys.path not set correctly in judge.py
+- **Fix:** Ensure judge uses 3-level directory traversal (from problem dir → algorithms/data-structures → root)
+
+**Inconsistent results across runs**
+- **Cause:** Solutions modifying mutable input (list/dict)
+- **Fix:** Ensure judge passes copies: `list(case.arr)` not `case.arr`
+- **Also fix:** Solutions should not mutate input unless explicitly testing in-place behavior
+
+### Verifying Judge Correctness
+```bash
+# Run all problem judges in sequence (quick validation)
+for dir in algorithms/search/*/; do
+    echo "Testing $dir"
+    python "$dir/judge.py" || exit 1
+done
+
+# Run with timing
+time python data-structures/heaps/min-heap/judge.py
+```
+
+### Manual Verification Pattern
+```python
+# Manual test to verify solution logic before running judge
+from solutions.reference.optimized import MinHeap
+
+h = MinHeap()
+test_elements = [5, 3, 7, 1]
+for x in test_elements:
+    h.insert(x)
+
+assert h.min_element() == 1, "Expected min to be 1"
+assert h.size() == 4, "Expected size to be 4"
+assert h.delete_min() == 1, "Expected delete_min to return 1"
+assert h.size() == 3, "Expected size to be 3 after deletion"
+print("✓ All manual tests passed!")
+```
