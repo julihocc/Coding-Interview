@@ -34,6 +34,37 @@ def load_solutions(solutions_dir, function_name):
                  
     return sorted(solutions, key=lambda x: x[0])
 
+def load_classes(solutions_dir, class_name):
+    """
+    Dynamically loads Python modules from the solutions directory
+    and extracts the specified class.
+    Excludes hints.py and template.py (learning guides, not solutions).
+    """
+    solutions = []
+    sol_files = glob.glob(os.path.join(solutions_dir, "*.py"))
+    
+    for file_path in sol_files:
+        base_name = os.path.basename(file_path)
+        # Skip __init__.py and learning guide files
+        if base_name in ("__init__.py", "hints.py", "template.py"):
+            continue
+            
+        module_name = base_name.replace(".py", "")
+        
+        # Dynamic import
+        spec = importlib.util.spec_from_file_location(module_name, file_path)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            
+            if hasattr(module, class_name):
+                cls = getattr(module, class_name)
+                solutions.append((module_name, cls))
+            else:
+                 print(f"Warning: {class_name} not found in {base_name}")
+                 
+    return sorted(solutions, key=lambda x: x[0])
+
 def run_tests(solutions, test_cases, runner_func):
     """
     Runs the provided test runner function for all solutions and cases,

@@ -1,5 +1,7 @@
 """MedianMaintainingHeap - Optimized implementation using heapq."""
 
+import heapq
+
 
 class MedianMaintainingHeap:
         def __init__(self):
@@ -29,4 +31,3 @@ class MedianMaintainingHeap:
             if len(self.lower) > len(self.upper):
                 return -self.lower[0]
             return (-self.lower[0] + self.upper[0]) / 2
-

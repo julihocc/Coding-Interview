@@ -41,3 +41,12 @@ class MinHeap:
                 self.H[idx], self.H[child] = self.H[child], self.H[idx]
                 idx = child
 
+
+
+
+def solve():
+    """Return MinHeap class."""
+    
+    
+    
+    return MinHeap

@@ -1,5 +1,7 @@
 """TopKHeap - Optimized implementation using heapq for overflow elements."""
 
+import heapq
+
 
 class TopKHeap:
         def __init__(self, k):
@@ -43,4 +45,3 @@ class TopKHeap:
                 while idx > 0 and self.A[idx] < self.A[idx - 1]:
                     self.A[idx], self.A[idx - 1] = self.A[idx - 1], self.A[idx]
                     idx -= 1
-

@@ -41,3 +41,12 @@ class MaxHeap:
                 self.H[idx], self.H[child] = self.H[child], self.H[idx]
                 idx = child
 
+
+
+
+def solve():
+    """Return MaxHeap class."""
+    
+    
+    
+    return MaxHeap
