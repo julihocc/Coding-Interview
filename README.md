@@ -1,116 +1,291 @@
 # Google Interview Practice
 
-A repository of coding interview problems and solutions, focusing on HackerRank challenges. This project implements a **Modern Virtual Judge** system to verify multiple solution approaches (Naive vs. Optimized) for each problem.
+A repository of coding interview problems and solutions implementing a **Virtual Judge System** for algorithm and data structure problems. Each problem features multiple solution approaches (Naive vs. Optimized) that are automatically tested and benchmarked.
 
-## Structure
+## Architecture: Virtual Judge System
 
-The repository is organized by problem platform and name:
+This repo uses a **class-based solution pattern** where solutions are implemented as reusable classes with:
+- **Init-based stateful design:** Test data stored in `__init__()` for reusability across method calls
+- **Descriptive class names:** Names reflect the strategy (e.g., `BinarySearchFinder`, `RandomizedQuickselect`)
+- **Comprehensive templates:** Guiding method structures with docstrings showing helper methods and algorithm hints
+- **Automatic judge discovery:** Judges load classes via reflection and instantiate them with test data
+
+## Repository Structure
 
 ```text
 google-interview/
 ├── algorithms/
 │   ├── search/
+│   │   ├── find-first-occurrence/
+│   │   │   ├── solutions/
+│   │   │   │   ├── template.py           # Guiding template with method stubs
+│   │   │   │   └── reference/
+│   │   │   │       ├── naive.py          # LinearScanFinder class
+│   │   │   │       └── optimized.py      # BinarySearchFinder class
+│   │   │   ├── tests/cases.py            # Test case dataclasses
+│   │   │   ├── judge.py                  # Virtual judge for this problem
+│   │   │   ├── README.md                 # Problem description
+│   │   │   └── PSEUDOCODE.md             # Algorithm pseudocode
 │   │   ├── find-crossover-indices/
 │   │   ├── integer-cube-root/
-│   │   └── ...
+│   │   └── target-index-search/
 │   └── sorting/
-│       └── multiway-merge/
-├── hackerrank/
-│   ├── judge_utils.py       # Shared utilities for the virtual judge system
-│   ├── left-rotation/       # Problem: Arrays - Left Rotation
-│   │   ├── solutions/       # Implementation files
-│   │   │   ├── naive.py     # Naive O(n*d) solution
-│   │   │   └── optimized.py # Optimized O(n) solution
-│   │   ├── tests/
-│   │   │   └── cases.py     # Python-defined test cases
-│   │   ├── judge.py         # Testing script for this problem
-│   │   └── README.md        # Problem description
-│   └── target-index-search/ # Problem: Target Index Search
-│       └── ...              # Same structure as above
+│       ├── multiway-merge/
+│       ├── quickselect/
+│       └── quicksort/
+├── data-structures/
+│   ├── arrays/
+│   │   └── left-rotation/                # Function-based problem
+│   └── heaps/
+│       ├── min-heap/                     # Class-based data structure
+│       ├── max-heap/
+│       ├── median-heap/
+│       └── top-k-heap/
+├── utils/
+│   └── judge_utils.py                    # Utilities: load_classes(), load_solutions(), run_tests()
+└── tools/
+    └── validate_main_branch.py           # CI policy enforcement
 ```
+
+## Problem Patterns
+
+### 1. Algorithm Problems (Search & Sorting)
+**Pattern:** Class-based solutions with method calls
+
+**Solution structure:**
+```python
+# Example: find-first-occurrence/solutions/reference/optimized.py
+class BinarySearchFinder:
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+    
+    def find_first_occurrence(self, target: int) -> int:
+        # Binary search implementation
+        pass
+```
+
+**Judge pattern:**
+```python
+# Judge instantiates with test data, calls method with reduced args
+instance = BinarySearchFinder(list(case.nums))
+result = instance.find_first_occurrence(case.target)
+```
+
+### 2. Data Structure Problems (Heaps, Arrays)
+**Pattern:** Class-based implementations with structural helpers
+
+**Solution structure (Heap example):**
+```python
+# Example: heaps/min-heap/solutions/reference/optimized.py
+class MinHeap:
+    def __init__(self):
+        self.H = [None]  # 1-indexed array
+    
+    def insert(self, elt):
+        # Insert and bubble-up
+        pass
+    
+    def delete_min(self):
+        # Remove min and bubble-down
+        pass
+    
+    def _bubble_up(self, idx):
+        # Helper for maintaining heap property
+        pass
+```
+
+**Judge pattern:**
+```python
+# Judge instantiates, inserts test data, verifies structure
+h = MinHeap()
+for x in case.elements:
+    h.insert(x)
+assert h.min_element() == case.expected_min
+```
+
+## Solution Templates
+
+All templates now include **comprehensive guidance** without revealing solutions:
+
+### Algorithms (Search/Sort)
+Templates show:
+- **Main method docstring** with expected behavior and examples
+- **Helper method stubs** (e.g., `_partition()`, `_helper()`, `_swap()`)
+- **Implementation hints** showing strategy options
+- **Time/space complexity notes**
+
+Example: Quickselect template guides users to implement:
+- `quickselect(k)` – main selection logic
+- `_partition(left, right, pivot_index)` – split around pivot
+- `_swap(i, j)` – element exchange helper
+
+### Data Structures (Heaps, Arrays)
+Templates show:
+- **Data structure initialization** guidance
+- **Core operation methods** with docstrings
+- **Helper operations** (e.g., `_bubble_up()`, `_bubble_down()`)
+- **Rebalancing logic** for complex structures
+
+Example: MedianHeap template guides users to implement:
+- `insert(elt)` – add element and rebalance
+- `get_median()` – retrieve median efficiently
+- `_rebalance()` – maintain heap balance invariants
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Python 3.14+**
-- **uv** (Recommended for dependency management and running scripts)
+- **Python 3.10+**
+- **uv** (Recommended for dependency management)
 
 ### Installation
 
-Clone the repository:
-
 ```bash
-git clone https://github.com/yourusername/google-interview.git
+git clone https://github.com/julihocc/google-interview.git
 cd google-interview
-```
-
-Install dependencies (if any) using uv:
-
-```bash
 uv sync
 ```
 
-## Running Tests (The Virtual Judge)
+## Running Judges (Virtual Judge System)
 
-Each problem directory contains a `judge.py` script. This script automatically:
+Each problem directory contains a `judge.py` that automatically:
+1. **Discovers** all solution classes via reflection
+2. **Loads** test cases from `tests/cases.py`
+3. **Executes** every solution against every test case
+4. **Reports** results (PASS/FAIL) with execution time
 
-1. **Discovers** all Python solution files in the `solutions/` directory.
-2. **Loads** test cases from `tests/cases.py`.
-3. **Executes** every solution against every test case.
-4. **Reports** validity (PASS/FAIL) and execution time.
-
-To run the judge for a specific problem:
+### Run Individual Judges
 
 ```bash
-# Example: Left Rotation
-uv run python hackerrank/left-rotation/judge.py
+# Algorithm example: Binary search problem
+python algorithms/search/find-first-occurrence/judge.py
 
-# Example: Target Index Search
-uv run python hackerrank/target-index-search/judge.py
+# Data structure example: Heap problem
+python data-structures/heaps/min-heap/judge.py
 
-# Example: Find Crossover Indices (Algorithm)
-uv run python algorithms/search/find-crossover-indices/judge.py
+# Sorting example
+python algorithms/sorting/quickselect/judge.py
 ```
 
 ### Sample Output
 
 ```text
-Solution        | Case            | Status     | Time (s)  
+=== REFERENCE SOLUTIONS ===
+Solution        | Case            | Status     | Time (s)
 ------------------------------------------------------------
-naive           | Sample          | PASS       | 0.000006  
-optimized       | Sample          | PASS       | 0.000003  
-original        | Sample          | PASS       | 0.000001  
+LinearScanFinder | Example         | PASS       | 0.000022
+BinarySearchFinder | Example         | PASS       | 0.000009
+LinearScanFinder | Sample 1        | PASS       | 0.000021
+BinarySearchFinder | Sample 1        | PASS       | 0.000006
+
+=== CONTRIBUTED SOLUTIONS ===
+No solutions found.
 ```
 
-## Adding New Problems
+## Creating Solutions
 
-1. Create a new directory in `hackerrank/`.
-2. Create `solutions/` folder and add `naive.py` / `optimized.py`.
-3. Create `tests/cases.py` using `dataclasses`.
-4. Create `judge.py` (you can copy from an existing problem) and update the import commands.
-5. Run the judge to verify.
+### From Algorithm Template
 
-## Branch Strategy (Main vs Contributed)
+1. **Rename the class** to reflect your strategy:
+   ```python
+   class MySearchStrategy(YourStrategyFinder):
+       pass
+   ```
 
-To keep the `main` branch clean with canonical solutions while allowing many alternative/community solutions, use two branches:
+2. **Implement required methods** shown in template stubs:
+   - Main method (e.g., `find_first_occurrence(target)`)
+   - Helper methods (e.g., `_helper()` for binary search)
 
-- Main: Only curated solutions. Allowed files under any `solutions/` folder are `naive.py`, `optimized.py`, `original.py`, `__init__.py`.
-- Contributed: A shared branch (e.g., `contributed`) that accepts additional files (e.g., `my-solution.py`, `solution_v1.py`, etc.) from you and other users.
+3. **Use template guidance:**
+   - Expected behavior section explains what to do
+   - Implementation hints suggest strategies
+   - Helper methods show algorithm decomposition
 
-Workflow:
-- Create the branch: `git checkout -b contributed && git push -u origin contributed`.
-- Open PRs targeting `contributed` for new/experimental solutions. Keep `main` for curated updates only.
-- Periodically sync: merge `main` → `contributed` to keep contributed branch up to date.
+### From Data Structure Template
 
-Policy enforcement:
-- CI blocks PRs to `main` that introduce non-allowed files under `solutions/`. See `.github/workflows/branch-policy.yml` and `tools/validate_main_branch.py`.
-- PRs to `contributed` run a syntax check but do not restrict file names.
+1. **Initialize internal state** (e.g., heap array, dual heaps)
+2. **Implement core operations** with helper methods
+3. **Follow template docstrings** for method contracts
+4. **Test by running judge** to verify against test cases
 
-Tips:
-- If you have existing personal files in `main`, move them to `contributed` via `git mv` in a feature branch and open a PR targeting `contributed`.
-- Keep solution function names consistent so `judge.py` can auto-discover them.
+### Example: Complete Quickselect Solution
+
+```python
+# solutions/contributed/my_quickselect.py
+import random
+from typing import List
+
+class RandomizedQuickselect:
+    def __init__(self, nums: List[int]):
+        self.nums = nums
+    
+    def quickselect(self, k: int) -> int:
+        return self._select(0, len(self.nums) - 1, k)
+    
+    def _select(self, left: int, right: int, k: int) -> int:
+        if left == right:
+            return self.nums[left]
+        
+        pivot_index = random.randint(left, right)
+        pivot_index = self._partition(left, right, pivot_index)
+        
+        if k == pivot_index:
+            return self.nums[k]
+        elif k < pivot_index:
+            return self._select(left, pivot_index - 1, k)
+        else:
+            return self._select(pivot_index + 1, right, k)
+    
+    def _partition(self, left: int, right: int, pivot_index: int) -> int:
+        pivot_value = self.nums[pivot_index]
+        self._swap(pivot_index, right)
+        store_index = left
+        
+        for i in range(left, right):
+            if self.nums[i] < pivot_value:
+                self._swap(store_index, i)
+                store_index += 1
+        
+        self._swap(right, store_index)
+        return store_index
+    
+    def _swap(self, i: int, j: int) -> None:
+        self.nums[i], self.nums[j] = self.nums[j], self.nums[i]
+```
+
+Run `python algorithms/sorting/quickselect/judge.py` to test!
+
+## Submitting Solutions
+
+### Main Branch Policy
+
+The `main` branch accepts only **curated reference solutions**:
+- ✅ Allowed: `naive.py`, `optimized.py`, `__init__.py`
+- ❌ Not allowed: `my_solution.py`, `solution_v1.py`, etc.
+
+CI blocks PRs to `main` with non-conforming files via `tools/validate_main_branch.py`.
+
+### Contributing Alternative Solutions
+
+Use the `contributed` branch for personal/experimental implementations:
+
+```bash
+# Create or switch to contributed branch
+git checkout -b contributed
+git push -u origin contributed
+
+# Add your solution
+mkdir -p algorithms/search/find-first-occurrence/solutions/contributed
+cp my_solution.py algorithms/search/find-first-occurrence/solutions/contributed/
+
+# Commit and open PR targeting contributed branch
+git add .
+git commit -m "Add my quicksearch implementation"
+git push origin contributed
+# Open PR: contributed ← your-feature-branch
+```
 
 ## License
 
 MIT
+
