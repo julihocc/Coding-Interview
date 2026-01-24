@@ -11,11 +11,12 @@ sys.path.append(ROOT_DIR)
 from utils import judge_utils  # noqa: E402
 
 
-def run_test_case(sol_func, case):
+def run_test_case(sol_class, case):
     """
     Runner function for a single test case.
     """
-    result = sol_func(case.nums, case.target)
+    sol = sol_class()
+    result = sol.search_range(case.nums, case.target)
     return result == case.expected
 
 
@@ -26,14 +27,20 @@ def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     solutions_dir = os.path.join(current_dir, "solutions")
 
-    # Load solutions that have the 'search_range' function
-    solutions = judge_utils.load_solutions(
-        solutions_dir, "search_range", subfolder="reference"
+    # Load and test reference solutions
+    reference_solutions = judge_utils.load_classes(
+        solutions_dir, "Solution", subfolder="reference"
+    )
+    judge_utils.run_tests(
+        reference_solutions, TEST_CASES, run_test_case, section_name="Reference Solutions"
     )
 
-    # Run tests
+    # Load and test contributed solutions
+    contributed_solutions = judge_utils.load_classes(
+        solutions_dir, "Solution", subfolder="contributed"
+    )
     judge_utils.run_tests(
-        solutions, TEST_CASES, run_test_case, section_name="Locate First and Last Position"
+        contributed_solutions, TEST_CASES, run_test_case, section_name="Contributed Solutions"
     )
 
 
