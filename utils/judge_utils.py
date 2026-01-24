@@ -184,7 +184,8 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
                     write_both(f"{sol_name:<15} | {case.id:<15} | {status:<10} | {duration:<10.6f}")
                 except Exception as e:
                     write_both(f"{sol_name:<15} | {case.id:<15} | ERROR      | 0.000000")
-                    write_both(f"Error details: {e}")
+                    error_msg = f"{type(e).__name__}: {str(e)}" if str(e) else type(e).__name__
+                    write_both(f"Error details: {error_msg}")
             write_both("-" * 60)
 
 def run_judge_from_file(judge_file_path, test_cases, run_case_logic, section_name='SOLUTIONS'):
