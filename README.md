@@ -260,6 +260,80 @@ class RandomizedQuickselect:
 
 Run `python algorithms/sorting/quickselect/judge.py` to test!
 
+## Contributing New Problems
+
+We welcome new algorithm and data structure challenges! Follow this guide to ensure your problem integrates properly with the Virtual Judge System.
+
+### 1. Structure the Problem Directory
+
+Create a new directory in the appropriate category (e.g., `algorithms/dp/climbing-stairs/`) with this exact structure:
+
+```text
+problem-name/
+├── solutions/
+│   ├── reference/
+│   │   ├── naive.py          # Brute force / easy baseline
+│   │   └── optimized.py      # Optimal solution
+│   └── template.py           # Starter code for users
+├── tests/
+│   └── cases.py              # Test case definitions
+├── judge.py                  # Problem-specific judge script
+└── README.md                 # Problem statement
+```
+
+### 2. Define Test Cases
+
+In `tests/cases.py`, define a `TestCase` dataclass and a list of cases.
+
+```python
+from dataclasses import dataclass
+from typing import List
+
+@dataclass
+class TestCase:
+    nums: List[int]
+    target: int
+    expected: int
+    name: str = "Test Case"
+```
+
+### 3. Create the Template
+
+In `solutions/template.py`, define the class structure. **Crucially**, solutions must be class-based with `__init__` for state setup and a method for the logic.
+
+```python
+# solutions/template.py
+from typing import List
+
+class ClimbingStairsSolver:
+    def __init__(self, n: int):
+        self.n = n
+
+    def solve(self) -> int:
+        """
+        Calculates the number of distinct ways to climb to the top.
+        """
+        pass
+```
+
+### 4. Implement Reference Solutions
+
+Create `solutions/reference/naive.py` (e.g., recursion) and `solutions/reference/optimized.py` (e.g., DP) inheriting from or implementing the same interface as the template.
+
+### 5. Configure the Judge
+
+Copy `judge.py` from an existing problem and adapt it:
+1. Update imports to point to your new `TestCase`.
+2. Update the `run_test_case` function to instantiate your class and call the method.
+3. Update `load_solutions` call if necessary (usually auto-dectected if following patterns).
+
+### 6. Add Documentation
+
+Create a `README.md` in the problem directory with:
+- **Problem Statement**: Clear description.
+- **Input/Output**: Data types and constraints.
+- **Examples**: Walkthroughs of simple cases.
+
 ## Submitting Solutions
 
 ### Main Branch Policy
