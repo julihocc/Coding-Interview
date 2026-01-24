@@ -9,8 +9,8 @@ from tests.cases import TEST_CASES
 
 def run_case_logic(SolutionClass, case):
     """Test a single case for find first occurrence."""
-    instance = SolutionClass()
-    result = instance.findFirst(case.arr, case.target)
+    instance = SolutionClass(case.nums)
+    result = instance.find_first_occurrence(case.target)
     return result == case.expected
 
 if __name__ == "__main__":
