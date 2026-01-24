@@ -166,10 +166,25 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
             write_both("No solutions found.")
             return
 
+        # Calculate dynamic column widths
+        max_sol_name = max(len(sol_name) for sol_name, _ in solutions)
+        max_case_id = max(len(case.id) for case in test_cases)
+        
+        # Set minimum widths and add padding
+        sol_width = max(max_sol_name, len("Solution")) + 2
+        case_width = max(max_case_id, len("Case")) + 2
+        status_width = 10
+        time_width = 12
+        
+        # Calculate total width for separator
+        total_width = sol_width + case_width + status_width + time_width + 9  # 9 for separators and spaces
+
         if section_name:
             write_both(f"\n=== {section_name} ===")
-        write_both(f"{'Solution':<15} | {'Case':<15} | {'Status':<10} | {'Time (s)':<10}")
-        write_both("-" * 60)
+        
+        # Print header
+        write_both(f"{'Solution':<{sol_width}} | {'Case':<{case_width}} | {'Status':<{status_width}} | {'Time (s)':<{time_width}}")
+        write_both("-" * total_width)
         
         for sol_name, sol_func in solutions:
             for case in test_cases:
@@ -181,12 +196,12 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
                     duration = end_time - start_time
                     
                     status = "PASS" if passed else "FAIL"
-                    write_both(f"{sol_name:<15} | {case.id:<15} | {status:<10} | {duration:<10.6f}")
+                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | {status:<{status_width}} | {duration:<{time_width}.6f}")
                 except Exception as e:
-                    write_both(f"{sol_name:<15} | {case.id:<15} | ERROR      | 0.000000")
+                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | ERROR      | 0.000000")
                     error_msg = f"{type(e).__name__}: {str(e)}" if str(e) else type(e).__name__
                     write_both(f"Error details: {error_msg}")
-            write_both("-" * 60)
+            write_both("-" * total_width)
 
 def run_judge_from_file(judge_file_path, test_cases, run_case_logic, section_name='SOLUTIONS'):
     """
