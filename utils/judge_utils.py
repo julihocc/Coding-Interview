@@ -183,7 +183,7 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
             write_both(f"\n=== {section_name} ===")
         
         # Print header
-        write_both(f"{'Solution':<{sol_width}} | {'Case':<{case_width}} | {'Status':<{status_width}} | {'Time (s)':<{time_width}}")
+        write_both(f"{'Solution':<{sol_width}} | {'Case':<{case_width}} | {'Status':<{status_width}} | {'Time (μs)':<{time_width}}")
         write_both("-" * total_width)
         
         for sol_name, sol_func in solutions:
@@ -193,12 +193,12 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
                     start_time = time.perf_counter()
                     passed = runner_func(sol_func, case)
                     end_time = time.perf_counter()
-                    duration = end_time - start_time
+                    duration_us = (end_time - start_time) * 1_000_000  # Convert to microseconds
                     
                     status = "PASS" if passed else "FAIL"
-                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | {status:<{status_width}} | {duration:<{time_width}.6f}")
+                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | {status:<{status_width}} | {duration_us:<{time_width}.2f}")
                 except Exception as e:
-                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | ERROR      | 0.000000")
+                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | ERROR      | 0.00")
                     error_msg = f"{type(e).__name__}: {str(e)}" if str(e) else type(e).__name__
                     write_both(f"Error details: {error_msg}")
             write_both("-" * total_width)
