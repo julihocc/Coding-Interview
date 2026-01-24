@@ -31,17 +31,21 @@ def load_solutions(solutions_dir, function_name, subfolder='reference'):
             
         module_name = base_name.replace(".py", "")
         
-        # Dynamic import
-        spec = importlib.util.spec_from_file_location(module_name, file_path)
-        if spec and spec.loader:
-            module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
-            
-            if hasattr(module, function_name):
-                func = getattr(module, function_name)
-                solutions.append((module_name, func))
-            else:
-                 print(f"Warning: {function_name} not found in {base_name}")
+        try:
+            # Dynamic import
+            spec = importlib.util.spec_from_file_location(module_name, file_path)
+            if spec and spec.loader:
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                
+                if hasattr(module, function_name):
+                    func = getattr(module, function_name)
+                    solutions.append((module_name, func))
+                else:
+                    print(f"Warning: {function_name} not found in {base_name}")
+        except Exception as e:
+            # Gracefully handle any errors during module loading
+            print(f"Warning: Failed to load {base_name}: {type(e).__name__}: {e}")
                  
     return sorted(solutions, key=lambda x: x[0])
 
@@ -75,19 +79,23 @@ def load_classes(solutions_dir, class_name, subfolder='reference', file_pattern=
             
         module_name = base_name.replace(".py", "")
         
-        # Dynamic import
-        spec = importlib.util.spec_from_file_location(module_name, file_path)
-        if spec and spec.loader:
-            module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
-            
-            if hasattr(module, class_name):
-                cls = getattr(module, class_name)
-                solutions.append((module_name, cls))
-            else:
-                 # Only warn if we expect a solution (e.g. filename starts with solution_)
-                 if base_name.startswith("solution_"):
-                     print(f"Warning: {class_name} not found in {base_name}")
+        try:
+            # Dynamic import
+            spec = importlib.util.spec_from_file_location(module_name, file_path)
+            if spec and spec.loader:
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                
+                if hasattr(module, class_name):
+                    cls = getattr(module, class_name)
+                    solutions.append((module_name, cls))
+                else:
+                    # Only warn if we expect a solution (e.g. filename starts with solution_)
+                    if base_name.startswith("solution_"):
+                        print(f"Warning: {class_name} not found in {base_name}")
+        except Exception as e:
+            # Gracefully handle any errors during module loading
+            print(f"Warning: Failed to load {base_name}: {type(e).__name__}: {e}")
                  
     return sorted(solutions, key=lambda x: x[0])
 
