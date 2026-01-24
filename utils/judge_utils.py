@@ -70,7 +70,7 @@ def load_classes(solutions_dir, class_name, subfolder='reference', file_pattern=
     for file_path in sol_files:
         base_name = os.path.basename(file_path)
         # Skip __init__.py and learning guide files
-        if base_name in ("__init__.py", "hints.py", "template.py", "solution_template.py"):
+        if base_name in ("__init__.py", "hints.py", "template.py"):
             continue
             
         module_name = base_name.replace(".py", "")
