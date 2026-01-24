@@ -174,7 +174,7 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
         sol_width = max(max_sol_name, len("Solution")) + 2
         case_width = max(max_case_id, len("Case")) + 2
         status_width = 10
-        time_width = 12
+        time_width = 10  # Adjusted for single decimal place
         
         # Calculate total width for separator
         total_width = sol_width + case_width + status_width + time_width + 9  # 9 for separators and spaces
@@ -196,9 +196,9 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
                     duration_us = (end_time - start_time) * 1_000_000  # Convert to microseconds
                     
                     status = "PASS" if passed else "FAIL"
-                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | {status:<{status_width}} | {duration_us:<{time_width}.2f}")
+                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | {status:<{status_width}} | {duration_us:<{time_width}.1f}")
                 except Exception as e:
-                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | ERROR      | 0.00")
+                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | ERROR      | 0.0")
                     error_msg = f"{type(e).__name__}: {str(e)}" if str(e) else type(e).__name__
                     write_both(f"Error details: {error_msg}")
             write_both("-" * total_width)
