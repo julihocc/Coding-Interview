@@ -9,8 +9,8 @@ from tests.cases import TEST_CASES
 
 def run_case_logic(SolutionClass, case):
     """Test a single case for integer cube root."""
-    instance = SolutionClass()
-    result = instance.integerCubeRoot(case.n)
+    instance = SolutionClass(case.n)
+    result = instance.integerCubeRoot()
     return result == case.expected
 
 if __name__ == "__main__":

@@ -9,8 +9,8 @@ from tests.cases import TEST_CASES
 
 def run_case_logic(SolutionClass, case):
     """Test a single case for target index search."""
-    instance = SolutionClass()
-    result = instance.targetIndices(list(case.nums), case.target)
+    instance = SolutionClass(case.nums)
+    result = instance.target_index_search(case.target)
     return result == case.expected
 
 if __name__ == "__main__":
