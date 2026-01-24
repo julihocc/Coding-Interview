@@ -14,6 +14,8 @@ class Solution:
 
     def _helper(self, left, right):
         assert left <= right
+        if left == right:
+            return left
         if left + 1 == right:
             return left
 
