@@ -186,3 +186,40 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
                     write_both(f"{sol_name:<15} | {case.id:<15} | ERROR      | 0.000000")
                     write_both(f"Error details: {e}")
             write_both("-" * 60)
+
+def run_judge_from_file(judge_file_path, test_cases, run_case_logic, section_name='SOLUTIONS'):
+    """
+    Simplified judge runner that eliminates boilerplate code.
+    
+    This function handles:
+    - Determining the base directory from the judge file path
+    - Loading solution classes from the solutions directory
+    - Running tests with proper report directory
+    
+    Args:
+        judge_file_path: __file__ from the calling judge script
+        test_cases: List of test case objects
+        run_case_logic: Function that runs a single test case
+        section_name: Optional section header for the output
+    
+    Example usage in a judge.py file:
+        from utils.judge_utils import run_judge_from_file
+        from tests.cases import TEST_CASES
+        
+        def run_case_logic(SolutionClass, case):
+            instance = SolutionClass()
+            result = instance.some_method(case.input)
+            return result == case.expected
+        
+        if __name__ == '__main__':
+            run_judge_from_file(__file__, TEST_CASES, run_case_logic)
+    """
+    base_dir = os.path.dirname(os.path.abspath(judge_file_path))
+    solutions_dir = os.path.join(base_dir, 'solutions')
+    
+    solutions = load_classes(
+        solutions_dir, "Solution", subfolder=None, file_pattern="solution_*.py"
+    )
+    
+    run_tests(solutions, test_cases, run_case_logic, section_name, report_dir=base_dir)
+

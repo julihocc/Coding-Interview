@@ -8,33 +8,13 @@ script_dir = os.path.dirname(__file__)
 ROOT_DIR = os.path.abspath(os.path.join(script_dir, "../../../"))
 sys.path.append(ROOT_DIR)
 
-from utils import judge_utils  # noqa: E402
-
+from utils.judge_utils import run_judge_from_file  # noqa: E402
 
 def run_test_case(sol_class, case):
-    """
-    Runner function for a single test case.
-    """
+    """Test a single case for search in rotated descending array."""
     sol = sol_class()
     result = sol.search(case.nums, case.target)
     return result == case.expected
 
-
-def main():
-    """
-    Main function to run tests for Search Rotated Descending Array.
-    """
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    solutions_dir = os.path.join(current_dir, "solutions")
-
-    # Load all solutions (from solutions/solution_*.py)
-    solutions = judge_utils.load_classes(
-        solutions_dir, "Solution", subfolder=None, file_pattern="solution_*.py"
-    )
-    judge_utils.run_tests(
-        solutions, TEST_CASES, run_test_case, section_name="Solutions", report_dir=current_dir
-    )
-
-
 if __name__ == "__main__":
-    main()
+    run_judge_from_file(__file__, TEST_CASES, run_test_case, section_name="Solutions")
