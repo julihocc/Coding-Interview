@@ -34,7 +34,7 @@ def main():
 
     # Run tests
     judge_utils.run_tests(
-        solutions, TEST_CASES, run_test_case, section_name="Solutions"
+        solutions, TEST_CASES, run_test_case, section_name="Solutions", report_dir=current_dir
     )
 
 if __name__ == "__main__":

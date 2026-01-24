@@ -135,40 +135,54 @@ def load_classes_with_method(solutions_dir, method_name, subfolder='reference'):
 
     return sorted(solutions, key=lambda x: x[0])
 
-def run_tests(solutions, test_cases, runner_func, section_name=None):
+def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=None):
     """
     Runs the provided test runner function for all solutions and cases,
-    printing a formatted report.
+    printing a formatted report and writing it to report.txt.
     
     Args:
         solutions: List of (name, callable) tuples
         test_cases: List of test case objects
         runner_func: Function that runs a single test
         section_name: Optional section header for the output
+        report_dir: Optional directory where report.txt should be created (defaults to current directory)
     """
-    if not solutions:
-        if section_name:
-            print(f"\n=== {section_name} ===")
-        print("No solutions found.")
-        return
-
-    if section_name:
-        print(f"\n=== {section_name} ===")
-    print(f"{'Solution':<15} | {'Case':<15} | {'Status':<10} | {'Time (s)':<10}")
-    print("-" * 60)
+    # Determine report file path
+    if report_dir:
+        report_path = os.path.join(report_dir, "report.txt")
+    else:
+        report_path = "report.txt"
     
-    for sol_name, sol_func in solutions:
-        for case in test_cases:
-            try:
-                # Measure time
-                start_time = time.perf_counter()
-                passed = runner_func(sol_func, case)
-                end_time = time.perf_counter()
-                duration = end_time - start_time
-                
-                status = "PASS" if passed else "FAIL"
-                print(f"{sol_name:<15} | {case.id:<15} | {status:<10} | {duration:<10.6f}")
-            except Exception as e:
-                print(f"{sol_name:<15} | {case.id:<15} | ERROR      | 0.000000")
-                print(f"Error details: {e}")
-        print("-" * 60)
+    # Open report file for writing
+    with open(report_path, "w") as report_file:
+        def write_both(message):
+            """Helper to write to both console and file"""
+            print(message)
+            report_file.write(message + "\n")
+        
+        if not solutions:
+            if section_name:
+                write_both(f"\n=== {section_name} ===")
+            write_both("No solutions found.")
+            return
+
+        if section_name:
+            write_both(f"\n=== {section_name} ===")
+        write_both(f"{'Solution':<15} | {'Case':<15} | {'Status':<10} | {'Time (s)':<10}")
+        write_both("-" * 60)
+        
+        for sol_name, sol_func in solutions:
+            for case in test_cases:
+                try:
+                    # Measure time
+                    start_time = time.perf_counter()
+                    passed = runner_func(sol_func, case)
+                    end_time = time.perf_counter()
+                    duration = end_time - start_time
+                    
+                    status = "PASS" if passed else "FAIL"
+                    write_both(f"{sol_name:<15} | {case.id:<15} | {status:<10} | {duration:<10.6f}")
+                except Exception as e:
+                    write_both(f"{sol_name:<15} | {case.id:<15} | ERROR      | 0.000000")
+                    write_both(f"Error details: {e}")
+            write_both("-" * 60)

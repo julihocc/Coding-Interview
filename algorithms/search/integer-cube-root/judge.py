@@ -20,7 +20,7 @@ def main():
     solutions = load_classes(
         solutions_dir, "Solution", subfolder=None, file_pattern="solution_*.py"
     )
-    run_tests(solutions, TEST_CASES, run_case_logic, 'SOLUTIONS')
+    run_tests(solutions, TEST_CASES, run_case_logic, 'SOLUTIONS', report_dir=base_dir)
 
 if __name__ == "__main__":
     main()
