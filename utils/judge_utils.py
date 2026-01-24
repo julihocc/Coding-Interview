@@ -45,29 +45,32 @@ def load_solutions(solutions_dir, function_name, subfolder='reference'):
                  
     return sorted(solutions, key=lambda x: x[0])
 
-def load_classes(solutions_dir, class_name, subfolder='reference'):
+def load_classes(solutions_dir, class_name, subfolder='reference', file_pattern="*.py"):
     """
-    Dynamically loads Python modules from a subfolder of the solutions directory
-    and extracts the specified class.
-    Excludes hints.py and template.py (learning guides, not solutions).
+    Dynamically loads Python modules from a directory and extracts the specified class.
     
     Args:
         solutions_dir: Path to the solutions directory
         class_name: Name of the class to extract
-        subfolder: Subfolder to load from (default: 'reference')
+        subfolder: Subfolder to load from (default: 'reference'). If None, loads from solutions_dir directly.
+        file_pattern: Glob pattern to match files (default: "*.py")
     """
-    target_dir = os.path.join(solutions_dir, subfolder)
+    if subfolder:
+        target_dir = os.path.join(solutions_dir, subfolder)
+    else:
+        target_dir = solutions_dir
+
     if not os.path.exists(target_dir):
         print(f"Warning: {target_dir} does not exist")
         return []
     
     solutions = []
-    sol_files = glob.glob(os.path.join(target_dir, "*.py"))
+    sol_files = glob.glob(os.path.join(target_dir, file_pattern))
     
     for file_path in sol_files:
         base_name = os.path.basename(file_path)
         # Skip __init__.py and learning guide files
-        if base_name in ("__init__.py", "hints.py", "template.py"):
+        if base_name in ("__init__.py", "hints.py", "template.py", "solution_template.py"):
             continue
             
         module_name = base_name.replace(".py", "")
@@ -82,7 +85,9 @@ def load_classes(solutions_dir, class_name, subfolder='reference'):
                 cls = getattr(module, class_name)
                 solutions.append((module_name, cls))
             else:
-                 print(f"Warning: {class_name} not found in {base_name}")
+                 # Only warn if we expect a solution (e.g. filename starts with solution_)
+                 if base_name.startswith("solution_"):
+                     print(f"Warning: {class_name} not found in {base_name}")
                  
     return sorted(solutions, key=lambda x: x[0])
 

@@ -27,15 +27,15 @@ def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     solutions_dir = os.path.join(current_dir, "solutions")
 
-    # Load and test reference solutions
+    # Load and test reference solutions (from solutions/solution_*.py)
     reference_solutions = judge_utils.load_classes(
-        solutions_dir, "Solution", subfolder="reference"
+        solutions_dir, "Solution", subfolder=None, file_pattern="solution_*.py"
     )
     judge_utils.run_tests(
         reference_solutions, TEST_CASES, run_test_case, section_name="Reference Solutions"
     )
 
-    # Load and test contributed solutions
+    # Load and test contributed solutions (from solutions/contributed/*.py)
     contributed_solutions = judge_utils.load_classes(
         solutions_dir, "Solution", subfolder="contributed"
     )
