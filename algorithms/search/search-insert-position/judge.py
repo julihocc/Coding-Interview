@@ -11,11 +11,12 @@ sys.path.append(ROOT_DIR)
 from utils import judge_utils  # noqa: E402
 
 
-def run_test_case(sol_func, case):
+def run_test_case(sol_class, case):
     """
     Runner function for a single test case.
     """
-    result = sol_func(case.nums, case.target)
+    sol = sol_class()
+    result = sol.search_insert(case.nums, case.target)
     return result == case.expected
 
 
@@ -26,16 +27,15 @@ def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     solutions_dir = os.path.join(current_dir, "solutions")
 
-    # Load solutions that have the 'search_insert' function
-    solutions = judge_utils.load_solutions(
-        solutions_dir, "search_insert", subfolder="reference"
+    # Load all solutions (from solutions/solution_*.py)
+    solutions = judge_utils.load_classes(
+        solutions_dir, "Solution", subfolder=None, file_pattern="solution_*.py"
     )
 
     # Run tests
     judge_utils.run_tests(
-        solutions, TEST_CASES, run_test_case, section_name="Search Insert Position"
+        solutions, TEST_CASES, run_test_case, section_name="Solutions"
     )
-
 
 if __name__ == "__main__":
     main()
