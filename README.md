@@ -28,6 +28,11 @@ google-interview/
 │   │   │   └── PSEUDOCODE.md             # Algorithm pseudocode
 │   │   ├── find-crossover-indices/
 │   │   ├── integer-cube-root/
+│   │   ├── locate-first-last-float/
+│   │   ├── locate-first-last-position/
+│   │   ├── search-insert-position/
+│   │   ├── search-rotated-sorted-array/
+│   │   ├── search-rotated-sorted-array-descending/
 │   │   └── target-index-search/
 │   └── sorting/
 │       ├── multiway-merge/
