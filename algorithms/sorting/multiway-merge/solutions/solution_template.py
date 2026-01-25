@@ -39,7 +39,7 @@ class Solution:
         """
         # TODO: Implement merge strategy
         # Consider: Flat sort vs. pairwise merge with recursive reduction
-        raise NotImplementedError
+        raise NotImplementedError("Merge strategy not implemented yet")
     
     def _one_step(self, list_of_lists: List[List[int]]) -> List[List[int]]:
         """Perform one round of pairwise merging.
@@ -55,7 +55,7 @@ class Solution:
         """
         # TODO: Iterate through list_of_lists, merging pairs
         # Handle odd-length case by passing last list unchanged
-        raise NotImplementedError
+        raise NotImplementedError("One step helper not implemented yet")
     
     def _merge_two(self, lst1: List[int], lst2: List[int]) -> List[int]:
         """Merge two sorted lists into a single sorted list.
@@ -69,4 +69,27 @@ class Solution:
         """
         # TODO: Use two pointers to merge lists in linear time
         # Compare elements from both lists and append smaller one
-        raise NotImplementedError
+        raise NotImplementedError("Merge two helper not implemented yet")
+
+if __name__ == "__main__":
+    import sys
+    import os
+
+    # Add the project root to sys.path
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    problem_dir = os.path.dirname(current_dir)
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(problem_dir)))
+    
+    sys.path.append(project_root)
+    sys.path.append(problem_dir)
+
+    from utils.judge_utils import test_solution
+    from tests.cases import TEST_CASES
+
+    def run_case_logic(SolutionClass, case):
+        # The test case has 'lists' but the class expects 'list_of_lists'
+        instance = SolutionClass(list(case.lists))
+        result = instance.kWayMerge()
+        return result == case.expected
+    
+    test_solution(Solution, TEST_CASES, run_case_logic)

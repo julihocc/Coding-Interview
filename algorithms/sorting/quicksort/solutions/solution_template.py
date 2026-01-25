@@ -78,7 +78,29 @@ class YourQuicksort:
         # 3. Iterate left to right, moving smaller elements left
         # 4. Swap pivot to final position
         # 5. Return final position
-        raise NotImplementedError
+        raise NotImplementedError("Partition helper not implemented yet")
+
+if __name__ == "__main__":
+    import sys
+    import os
+
+    # Add the project root to sys.path
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    problem_dir = os.path.dirname(current_dir)
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(problem_dir)))
+    
+    sys.path.append(project_root)
+    sys.path.append(problem_dir)
+
+    from utils.judge_utils import test_solution
+    from tests.cases import TEST_CASES
+
+    def run_case_logic(SolutionClass, case):
+        instance = SolutionClass(list(case.nums))
+        result = instance.quicksort()
+        return result == case.expected
+    
+    test_solution(YourQuicksort, TEST_CASES, run_case_logic)
     
     def _swap(self, i: int, j: int) -> None:
         """Swap two elements in self.nums by their indices.

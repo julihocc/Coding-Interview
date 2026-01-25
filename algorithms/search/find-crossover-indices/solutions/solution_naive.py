@@ -14,3 +14,29 @@ class Solution:
                 return i
 
         return -1
+
+if __name__ == "__main__":
+    import sys
+    import os
+
+    # Add the project root to sys.path
+    # Current file: .../algorithms/search/find-crossover-indices/solutions/solution_naive.py
+    # Root: .../
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    problem_dir = os.path.dirname(current_dir)
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(problem_dir)))
+    
+    sys.path.append(project_root)
+    sys.path.append(problem_dir)
+
+    from utils.judge_utils import test_solution
+    from tests.cases import TEST_CASES
+
+    def run_case_logic(SolutionClass, case):
+        instance = SolutionClass(list(case.x), list(case.y))
+        result = instance.findCrossoverIndex()
+        if isinstance(case.expected, list):
+             return result in case.expected
+        return result == case.expected
+    
+    test_solution(Solution, TEST_CASES, run_case_logic)

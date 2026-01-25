@@ -176,7 +176,7 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
 
         # Calculate dynamic column widths
         max_sol_name = max(len(sol_name) for sol_name, _ in solutions)
-        max_case_id = max(len(case.id) for case in test_cases)
+        max_case_id = max(len(str(getattr(case, 'id', i+1))) for i, case in enumerate(test_cases))
         
         # Set minimum widths and add padding
         sol_width = max(max_sol_name, len("Solution")) + 2
@@ -195,7 +195,8 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
         write_both("-" * total_width)
         
         for sol_name, sol_func in solutions:
-            for case in test_cases:
+            for i, case in enumerate(test_cases):
+                case_id = str(getattr(case, 'id', i+1))
                 try:
                     # Measure time
                     start_time = time.perf_counter()
@@ -204,11 +205,11 @@ def run_tests(solutions, test_cases, runner_func, section_name=None, report_dir=
                     duration_us = (end_time - start_time) * 1_000_000  # Convert to microseconds
                     
                     status = "PASS" if passed else "FAIL"
-                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | {status:<{status_width}} | {duration_us:<{time_width}.1f}")
+                    write_both(f"{sol_name:<{sol_width}} | {case_id:<{case_width}} | {status:<{status_width}} | {duration_us:<{time_width}.1f}")
                 except Exception as e:
-                    write_both(f"{sol_name:<{sol_width}} | {case.id:<{case_width}} | ERROR      | 0.0")
+                    write_both(f"{sol_name:<{sol_width}} | {case_id:<{case_width}} | ERROR      | 0.0")
                     error_msg = f"{type(e).__name__}: {str(e)}" if str(e) else type(e).__name__
-                    write_both(f"Error details: {error_msg}")
+                    write_both(f"  {error_msg}")
             write_both("-" * total_width)
 
 def run_judge_from_file(judge_file_path, test_cases, run_case_logic, section_name='SOLUTIONS'):
@@ -247,3 +248,15 @@ def run_judge_from_file(judge_file_path, test_cases, run_case_logic, section_nam
     
     run_tests(solutions, test_cases, run_case_logic, section_name, report_dir=base_dir)
 
+
+def test_solution(solution_cls, test_cases, run_case_logic):
+    """
+    Test a single solution class against a list of test cases.
+    
+    Args:
+        solution_cls: The solution class to test
+        test_cases: List of test cases
+        run_case_logic: Function that runs a single test case
+    """
+    solutions = [(solution_cls.__name__, solution_cls)]
+    run_tests(solutions, test_cases, run_case_logic, section_name=None)
