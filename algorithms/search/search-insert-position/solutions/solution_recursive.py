@@ -4,7 +4,8 @@ from typing import List
 class Solution:
     def search_insert(self, nums: List[int], target: int) -> int:
         """
-        Finds the insert position of a target element in a sorted array using recursive binary search.
+        Finds the insert position (lower bound) of a target element in a sorted array using recursive binary search.
+        If duplicates exist, returns the index of the first occurrence.
         """
         return self._search_recursive(nums, target, 0, len(nums) - 1)
 
@@ -14,12 +15,20 @@ class Solution:
         
         mid = (low + high) // 2
         
-        if nums[mid] == target:
-            return mid
-        elif nums[mid] < target:
-            return self._search_recursive(nums, target, mid + 1, high)
-        else:
+        if nums[mid] >= target:
+            # Even if we found it, we must check left to guarantee finding the first occurrence
+            # effectively reducing the search space to [low, mid-1] and eventually returning 'low' (which will be this mid or smaller)
+            # Standard logic: if matches, treat as if it's "greater or equal" and push search left, 
+            # the answer will be in the 'low' variable when high < low. 
+            # In recursion, we just return the result of the left subproblem.
+            # But wait, we need to distinguish.
+            # bisect_left logic:
+            # if x < a[mid]: high = mid
+            # else: low = mid + 1
+            # Here indices are inclusive.
             return self._search_recursive(nums, target, low, mid - 1)
+        else:
+            return self._search_recursive(nums, target, mid + 1, high)
 
 if __name__ == "__main__":
     import sys

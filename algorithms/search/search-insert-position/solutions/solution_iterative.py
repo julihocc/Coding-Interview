@@ -4,7 +4,8 @@ from typing import List
 class Solution:
     def search_insert(self, nums: List[int], target: int) -> int:
         """
-        Finds the insert position of a target element in a sorted array using binary search.
+        Finds the insert position (lower bound) of a target element in a sorted array using binary search.
+        If duplicates exist, returns the index of the first occurrence.
         Time Complexity: O(log n)
         Space Complexity: O(1)
         """
@@ -13,12 +14,10 @@ class Solution:
         while left <= right:
             mid = (left + right) // 2
             
-            if nums[mid] == target:
-                return mid
-            elif nums[mid] < target:
-                left = mid + 1
-            else:
+            if nums[mid] >= target:
                 right = mid - 1
+            else:
+                left = mid + 1
                 
         return left
 

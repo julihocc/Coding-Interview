@@ -4,7 +4,7 @@
 
 ### Approach
 
-We iterate through the sorted array. The first element that is greater than or equal to the target is the correct insert position. If we reach the end of the array without finding such an element, the insert position is at the end (index `n`).
+We iterate through the sorted array. The first element that is greater than or equal to the target is the correct insert position (Lower Bound).
 
 ### Pseudocode (CLRS Style)
 
@@ -26,13 +26,11 @@ NAIVE-SEARCH-INSERT(A, v)
 
 ### Approach
 
-We use **Binary Search**. We want to find the first index `i` such that `A[i] >= target`.
+We use **Binary Search (Lower Bound)**. We want to find the first index `i` such that `A[i] >= target`.
 
-- If `A[mid] == target`, we return `mid`.
-- If `A[mid] < target`, the insert position must be to the right (`low = mid + 1`).
-- If `A[mid] > target`, the insert position is at `mid` or to the left (`right = mid - 1`).
-
-When the loop terminates (`low > right`), `low` will be the correct insert position.
+- If `A[mid] >= target`, we search the left half (`right = mid - 1`) to typically find a smaller index.
+- If `A[mid] < target`, we search the right half (`left = mid + 1`).
+- When the loop terminates (`left > right`), `left` is the answer.
 
 ### Pseudocode (CLRS Style)
 
@@ -42,13 +40,11 @@ BINARY-SEARCH-INSERT-ITERATIVE(A, v)
 2  high = A.length
 3  while low <= high
 4      mid = floor((low + high) / 2)
-5      if A[mid] == v
-6          return mid
-7      elseif A[mid] < v
+5      if A[mid] >= v
+6          high = mid - 1
+7      else
 8          low = mid + 1
-9      else
-10         high = mid - 1
-11 return low
+9  return low
 ```
 
 ### Complexity
@@ -60,7 +56,7 @@ BINARY-SEARCH-INSERT-ITERATIVE(A, v)
 
 ### Approach
 
-Recursive binary search logic.
+Recursive binary search implementing the same lower bound logic.
 
 ### Pseudocode (CLRS Style)
 
@@ -69,12 +65,10 @@ BINARY-SEARCH-INSERT-RECURSIVE(A, v, low, high)
 1  if low > high
 2      return low
 3  mid = floor((low + high) / 2)
-4  if A[mid] == v
-5      return mid
-6  elseif A[mid] < v
+4  if A[mid] >= v
+5      return BINARY-SEARCH-INSERT-RECURSIVE(A, v, low, mid - 1)
+6  else
 7      return BINARY-SEARCH-INSERT-RECURSIVE(A, v, mid + 1, high)
-8  else
-9      return BINARY-SEARCH-INSERT-RECURSIVE(A, v, low, mid - 1)
 ```
 
 ### Complexity
