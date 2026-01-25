@@ -5,6 +5,7 @@ A repository of coding interview problems and solutions implementing a **Virtual
 ## Architecture: Virtual Judge System
 
 This repo uses a **class-based solution pattern** where solutions are implemented as reusable classes with:
+
 - **Init-based stateful design:** Test data stored in `__init__()` for reusability across method calls
 - **Descriptive class names:** Names reflect the strategy (e.g., `BinarySearchFinder`, `RandomizedQuickselect`)
 - **Comprehensive templates:** Guiding method structures with docstrings showing helper methods and algorithm hints
@@ -18,10 +19,9 @@ google-interview/
 │   ├── search/
 │   │   ├── find-first-occurrence/
 │   │   │   ├── solutions/
-│   │   │   │   ├── template.py           # Guiding template with method stubs
-│   │   │   │   └── reference/
-│   │   │   │       ├── naive.py          # LinearScanFinder class
-│   │   │   │       └── optimized.py      # BinarySearchFinder class
+│   │   │   │   ├── solution_template.py  # Guiding template with method stubs
+│   │   │   │   ├── solution_naive.py     # LinearScanFinder class
+│   │   │   │   └── solution_optimized.py # BinarySearchFinder class
 │   │   │   ├── tests/cases.py            # Test case dataclasses
 │   │   │   ├── judge.py                  # Virtual judge for this problem
 │   │   │   ├── README.md                 # Problem description
@@ -55,11 +55,13 @@ google-interview/
 ## Problem Patterns
 
 ### 1. Algorithm Problems (Search & Sorting)
+
 **Pattern:** Class-based solutions with method calls
 
 **Solution structure:**
+
 ```python
-# Example: find-first-occurrence/solutions/reference/optimized.py
+# Example: find-first-occurrence/solutions/solution_optimized.py
 class BinarySearchFinder:
     def __init__(self, nums: List[int]):
         self.nums = nums
@@ -70,6 +72,7 @@ class BinarySearchFinder:
 ```
 
 **Judge pattern:**
+
 ```python
 # Judge instantiates with test data, calls method with reduced args
 instance = BinarySearchFinder(list(case.nums))
@@ -77,11 +80,13 @@ result = instance.find_first_occurrence(case.target)
 ```
 
 ### 2. Data Structure Problems (Heaps, Arrays)
+
 **Pattern:** Class-based implementations with structural helpers
 
 **Solution structure (Heap example):**
+
 ```python
-# Example: heaps/min-heap/solutions/reference/optimized.py
+# Example: heaps/min-heap/solutions/solution_optimized.py
 class MinHeap:
     def __init__(self):
         self.H = [None]  # 1-indexed array
@@ -100,6 +105,7 @@ class MinHeap:
 ```
 
 **Judge pattern:**
+
 ```python
 # Judge instantiates, inserts test data, verifies structure
 h = MinHeap()
@@ -113,25 +119,31 @@ assert h.min_element() == case.expected_min
 All templates now include **comprehensive guidance** without revealing solutions:
 
 ### Algorithms (Search/Sort)
+
 Templates show:
+
 - **Main method docstring** with expected behavior and examples
 - **Helper method stubs** (e.g., `_partition()`, `_helper()`, `_swap()`)
 - **Implementation hints** showing strategy options
 - **Time/space complexity notes**
 
 Example: Quickselect template guides users to implement:
+
 - `quickselect(k)` – main selection logic
 - `_partition(left, right, pivot_index)` – split around pivot
 - `_swap(i, j)` – element exchange helper
 
 ### Data Structures (Heaps, Arrays)
+
 Templates show:
+
 - **Data structure initialization** guidance
 - **Core operation methods** with docstrings
 - **Helper operations** (e.g., `_bubble_up()`, `_bubble_down()`)
 - **Rebalancing logic** for complex structures
 
 Example: MedianHeap template guides users to implement:
+
 - `insert(elt)` – add element and rebalance
 - `get_median()` – retrieve median efficiently
 - `_rebalance()` – maintain heap balance invariants
@@ -154,6 +166,7 @@ uv sync
 ## Running Judges (Virtual Judge System)
 
 Each problem directory contains a `judge.py` that automatically:
+
 1. **Discovers** all solution classes via reflection
 2. **Loads** test cases from `tests/cases.py`
 3. **Executes** every solution against every test case
@@ -170,6 +183,15 @@ python data-structures/heaps/min-heap/judge.py
 
 # Sorting example
 python algorithms/sorting/quickselect/judge.py
+```
+
+### Run Individual Solutions
+
+You can also run any solution file directly to test it against the cases. This is useful for debugging a specific implementation without running all other solutions.
+
+```bash
+# Run specific solution implementation
+python algorithms/search/find-first-occurrence/solutions/solution_naive.py
 ```
 
 ### Sample Output
@@ -192,6 +214,7 @@ No solutions found.
 ### From Algorithm Template
 
 1. **Rename the class** to reflect your strategy:
+
    ```python
    class MySearchStrategy(YourStrategyFinder):
        pass
@@ -271,10 +294,9 @@ Create a new directory in the appropriate category (e.g., `algorithms/dp/climbin
 ```text
 problem-name/
 ├── solutions/
-│   ├── reference/
-│   │   ├── naive.py          # Brute force / easy baseline
-│   │   └── optimized.py      # Optimal solution
-│   └── template.py           # Starter code for users
+│   ├── solution_naive.py     # Brute force / easy baseline
+│   ├── solution_optimized.py # Optimal solution
+│   └── solution_template.py  # Starter code for users
 ├── tests/
 │   └── cases.py              # Test case definitions
 ├── judge.py                  # Problem-specific judge script
@@ -299,10 +321,10 @@ class TestCase:
 
 ### 3. Create the Template
 
-In `solutions/template.py`, define the class structure. **Crucially**, solutions must be class-based with `__init__` for state setup and a method for the logic.
+In `solutions/solution_template.py`, define the class structure. **Crucially**, solutions must be class-based with `__init__` for state setup and a method for the logic.
 
 ```python
-# solutions/template.py
+# solutions/solution_template.py
 from typing import List
 
 class ClimbingStairsSolver:
@@ -318,11 +340,12 @@ class ClimbingStairsSolver:
 
 ### 4. Implement Reference Solutions
 
-Create `solutions/reference/naive.py` (e.g., recursion) and `solutions/reference/optimized.py` (e.g., DP) inheriting from or implementing the same interface as the template.
+Create `solutions/solution_naive.py` (e.g., recursion) and `solutions/solution_optimized.py` (e.g., DP) inheriting from or implementing the same interface as the template.
 
 ### 5. Configure the Judge
 
 Copy `judge.py` from an existing problem and adapt it:
+
 1. Update imports to point to your new `TestCase`.
 2. Update the `run_test_case` function to instantiate your class and call the method.
 3. Update `load_solutions` call if necessary (usually auto-dectected if following patterns).
@@ -330,6 +353,7 @@ Copy `judge.py` from an existing problem and adapt it:
 ### 6. Add Documentation
 
 Create a `README.md` in the problem directory with:
+
 - **Problem Statement**: Clear description.
 - **Input/Output**: Data types and constraints.
 - **Examples**: Walkthroughs of simple cases.
@@ -339,7 +363,8 @@ Create a `README.md` in the problem directory with:
 ### Main Branch Policy
 
 The `main` branch accepts only **curated reference solutions**:
-- ✅ Allowed: `naive.py`, `optimized.py`, `__init__.py`
+
+- ✅ Allowed: `solution_naive.py`, `solution_optimized.py`, `__init__.py`
 - ❌ Not allowed: `my_solution.py`, `solution_v1.py`, etc.
 
 CI blocks PRs to `main` with non-conforming files via `tools/validate_main_branch.py`.
@@ -367,4 +392,3 @@ git push origin contributed
 ## License
 
 MIT
-
