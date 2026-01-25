@@ -40,22 +40,24 @@ class Solution:
         return [first, last]
 
 if __name__ == "__main__":
-    s = Solution()
-    first, last = s.search_range([5,7,7,8,8,8,10], 8)
-    print(first, last)
-    first, last = s.search_range([5,7,7,8,8,8], 8)
-    print(first, last)
-    first, last = s.search_range([8,8,8,10], 8)
-    print(first, last)
-    first, last = s.search_range([5,7,7,8,8,8,10], 6)
-    print(first, last)
-    first, last = s.search_range([5,7,7,8,8,8,10], 11)
-    print(first, last)
-    first, last = s.search_range([5,5,5,8,9,9], 8)
-    print(first, last)
-    first, last = s.search_range([1,2], 1)
-    print(first, last)
-    first, last = s.search_range([1,2], 2)
-    print(first, last)
-    first, last = s.search_range([], 0)
-    print(first, last)
+    import sys
+    import os
+
+    # Add the project root to sys.path
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    problem_dir = os.path.dirname(current_dir)
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(problem_dir)))
+    
+    sys.path.append(project_root)
+    sys.path.append(problem_dir)
+
+    from utils.judge_utils import test_solution
+    from tests.cases import TEST_CASES
+
+    def run_case_logic(SolutionClass, case):
+        instance = SolutionClass()
+        result = instance.search_range(list(case.nums), case.target)
+        return result == case.expected
+    
+    test_solution(Solution, TEST_CASES, run_case_logic)
+
