@@ -31,6 +31,7 @@ google-interview/
 │   │   ├── locate-first-last-float/
 │   │   ├── locate-first-last-position/
 │   │   ├── search-insert-position/
+│   │   ├── search-insert-position-left/
 │   │   ├── search-rotated-sorted-array/
 │   │   ├── search-rotated-sorted-array-descending/
 │   │   └── target-index-search/
