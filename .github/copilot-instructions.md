@@ -203,14 +203,26 @@ solution   | Not found | PASS   | 0.1
 - All problems use: `run_judge_from_file(__file__, TEST_CASES, run_case_logic)`
 - Judge auto-discovers and tests all `solution_*.py` files (except `solution_template.py`)
 
+**Testing Individual Solutions:**
+- Solutions can be tested directly: `python algorithms/search/find-first-occurrence/solutions/solution_naive.py`
+- Each solution's `__main__` block uses `test_solution()` helper for isolated testing
+- Preferred for development: test individual solutions before running full judge
+
+**Documentation Standards:**
+- `ALGORITHM_ANALYSIS.md`: Complexity analysis, pseudocode (CLRS style), step-by-step walkthroughs
+- `PSEUDOCODE.md`: Alternative format for algorithm guides (used in some data structures)
+- `README.md`: Problem statement, examples, constraints
+- Use LaTeX for math: `$O(n)$` inline, `$$...$$` for blocks
+
 ## Key Files to Reference
 
-- **Solution class pattern:** [algorithms/search/find-first-occurrence/solutions/solution_optimized.py](algorithms/search/find-first-occurrence/solutions/solution_optimized.py)
+- **Solution class pattern:** [algorithms/search/find-first-occurrence/solutions/solution_naive.py](algorithms/search/find-first-occurrence/solutions/solution_naive.py)
 - **Judge pattern:** [algorithms/search/find-first-occurrence/judge.py](algorithms/search/find-first-occurrence/judge.py)
 - **Test case pattern:** [algorithms/search/find-first-occurrence/tests/cases.py](algorithms/search/find-first-occurrence/tests/cases.py)
-- **Test runner:** [utils/judge_utils.py](utils/judge_utils.py) — `run_judge_from_file()`, `load_classes()`
+- **Test runner:** [utils/judge_utils.py](utils/judge_utils.py) — `run_judge_from_file()`, `load_classes()`, `test_solution()`
 - **Validation rules:** [tools/validate_main_branch.py](tools/validate_main_branch.py) — main branch policy
-- **Data structure example:** [data-structures/heaps/min-heap/judge.py](data-structures/heaps/min-heap/judge.py)
+- **Data structure example:** [data-structures/heaps/min-heap/solutions/solution_optimized.py](data-structures/heaps/min-heap/solutions/solution_optimized.py)
+- **Algorithm analysis example:** [algorithms/search/find-first-occurrence/ALGORITHM_ANALYSIS.md](algorithms/search/find-first-occurrence/ALGORITHM_ANALYSIS.md)
 
 
 
