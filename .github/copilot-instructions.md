@@ -214,6 +214,48 @@ solution   | Not found | PASS   | 0.1
 - `README.md`: Problem statement, examples, constraints
 - Use LaTeX for math: `$O(n)$` inline, `$$...$$` for blocks
 
+## Branch Strategy & CI/CD
+
+**Main Branch Protection:**
+- **Enforced policy:** Only `solution_naive.py`, `solution_optimized.py`, `solution_template.py` allowed in `solutions/`
+- **CI workflow:** [.github/workflows/branch-policy.yml](.github/workflows/branch-policy.yml) runs `validate_main_branch.py` on PRs
+- **Syntax check:** All Python files compiled with `python -m compileall` to catch syntax errors
+
+**Contributed Solutions:**
+- `solutions/contributed/` folder for user/experimental implementations
+- Not tested by default in main branch judges
+- Can be enabled via `load_classes(solutions_dir, "Solution", subfolder="contributed")`
+- Use `contributed` branch for PRs with non-standard solution files
+
+## Common Edge Cases & Testing Patterns
+
+**Universal Edge Cases (include in all `tests/cases.py`):**
+- **Empty input:** `nums=[]`, `arr=[]` — test boundary handling
+- **Single element:** `nums=[x]` — minimal valid input
+- **Duplicates:** `nums=[2, 2, 2]` — repeated values
+- **Not found:** `target=10, nums=[1, 2, 3]` — search miss scenarios
+
+**Search-Specific:**
+- **First/Last element:** Target at array boundaries
+- **All equal:** `nums=[5, 5, 5]` — uniform array
+
+**Sorting-Specific:**
+- **Already sorted:** `nums=[1, 2, 3]` — best case
+- **Reverse sorted:** `nums=[3, 2, 1]` — worst case
+- **Negative numbers:** `nums=[-3, -1, 0, 2, 5]` — signed integers
+
+**Data Structure:**
+- **Multiple operations:** Sequence of insert/delete to test state consistency
+- **Capacity tests:** Fill, empty, refill patterns
+
+**TestCase ID Convention:**
+```python
+TestCase(id="Example", ...)       # Primary example from problem statement
+TestCase(id="Edge case", ...)     # Boundary condition
+TestCase(id="Not found", ...)     # Failure case
+TestCase(id="Duplicates", ...)    # Repeated values
+```
+
 ## Key Files to Reference
 
 - **Solution class pattern:** [algorithms/search/find-first-occurrence/solutions/solution_naive.py](algorithms/search/find-first-occurrence/solutions/solution_naive.py)
@@ -223,6 +265,7 @@ solution   | Not found | PASS   | 0.1
 - **Validation rules:** [tools/validate_main_branch.py](tools/validate_main_branch.py) — main branch policy
 - **Data structure example:** [data-structures/heaps/min-heap/solutions/solution_optimized.py](data-structures/heaps/min-heap/solutions/solution_optimized.py)
 - **Algorithm analysis example:** [algorithms/search/find-first-occurrence/ALGORITHM_ANALYSIS.md](algorithms/search/find-first-occurrence/ALGORITHM_ANALYSIS.md)
+- **CI workflow:** [.github/workflows/branch-policy.yml](.github/workflows/branch-policy.yml) — branch policy enforcement
 
 
 
