@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Virtual Judge System** for algorithm & data structure interview problems. Solutions use **class-based patterns** with solutions naming per problem (e.g., `solution_naive.py`, `solution_optimized.py`) exporting a unified `Solution` class. Each problem auto-runs all solutions against test suites with timing/benchmarking.
+**Virtual Judge System** for algorithm & data structure interview problems. Solutions use **class-based patterns** with descriptive filenames (e.g., `solution_naive.py`, `solution_iterative.py`, `solution_recursive.py`) all exporting a unified `Solution` class. Each problem auto-runs all solutions against test suites with μs-scale timing/benchmarking.
 
 ## Core Architecture: Solution Loading & Judging
 
@@ -141,20 +141,32 @@ solution   | Not found | PASS   | 0.1
 problem-name/
   ├── judge.py              # Test runner using run_judge_from_file()
   ├── README.md             # Problem description
-  ├── PSEUDOCODE.md         # Algorithm pseudocode guide
+  ├── ALGORITHM_ANALYSIS.md # Complexity analysis (REQUIRED)
   ├── solutions/
-  │   ├── solution_naive.py       # First implementation approach
-  │   ├── solution_optimized.py   # Optimized approach (both export Solution class)
-  │   └── solution_template.py    # Guiding template (not auto-tested)
+  │   ├── __init__.py             # Package marker (REQUIRED)
+  │   ├── solution_template.py    # Starter template (not auto-tested)
+  │   ├── solution_naive.py       # Brute-force approach
+  │   ├── solution_iterative.py   # Iterative implementation
+  │   ├── solution_recursive.py   # Recursive implementation
+  │   └── contributed/            # User/experimental solutions
   └── tests/
+      ├── __init__.py       # Package marker (REQUIRED)
       └── cases.py          # TestCase dataclass + TEST_CASES list
 ```
 
+**Naming Conventions:**
+- **Solution files:** Use descriptive names (`solution_naive.py`, `solution_iterative.py`, `solution_recursive.py`, `solution_optimized.py`)
+- **Class name:** ALL solution files MUST export a class named `Solution` (enables auto-discovery)
+- **Method names:** Vary per problem (e.g., `find_first_occurrence()`, `insert()`, `quickselect()`)
+- **Package markers:** Both `solutions/__init__.py` and `tests/__init__.py` are REQUIRED
+
 **Main Branch Validation** ([tools/validate_main_branch.py](tools/validate_main_branch.py)):
-- ✅ Allowed: `solution_*.py` files in `solutions/` (all test reference implementations)
+- ✅ Allowed: `solution_*.py` files in `solutions/` (naive, iterative, recursive, optimized, etc.)
 - ✅ Allowed: `solution_template.py` (guidance, not tested)
+- ✅ Required: `__init__.py` in both `solutions/` and `tests/` folders
 - ❌ Rejected on main: Non-standard filenames like `my_solution.py`, `hints.py`
-- ✅ Allowed: contributed/ folder (future user submissions)
+- ✅ Allowed: `solutions/contributed/` folder for user/experimental implementations
+- ⚠️ Legacy pattern: `solutions/reference/` with `naive.py`, `optimized.py` (still supported)
 
 ## Development Workflows
 
@@ -175,11 +187,13 @@ solution   | Not found | PASS   | 0.1
 
 ### Adding a New Problem
 1. Create `[category]/[problem]/` folder with `solutions/` and `tests/` subfolders
-2. Write `tests/cases.py`: define `TestCase` dataclass with `id` field and `TEST_CASES` list
-3. Implement `solutions/solution_naive.py` and `solutions/solution_optimized.py` (both export `Solution` class)
-4. Create `solutions/solution_template.py` with guidance (docstrings, helper stubs, hints)
-5. Create `judge.py`: call `run_judge_from_file(__file__, TEST_CASES, run_case_logic)`
-6. Test: `python [category]/[problem]/judge.py`
+2. Add `__init__.py` to both `solutions/` and `tests/` folders (REQUIRED for package recognition)
+3. Write `tests/cases.py`: define `TestCase` dataclass with `id` field and `TEST_CASES` list
+4. Implement `solutions/solution_naive.py` and `solutions/solution_optimized.py` (both export `Solution` class)
+5. Create `solutions/solution_template.py` with guidance (docstrings, helper stubs, hints)
+6. Create `judge.py`: call `run_judge_from_file(__file__, TEST_CASES, run_case_logic)`
+7. Write `ALGORITHM_ANALYSIS.md` with complexity analysis (REQUIRED)
+8. Test: `python [category]/[problem]/judge.py`
 
 ## Project-Specific Rules for Agents
 
