@@ -42,11 +42,15 @@ google-interview/
 ├── data-structures/
 │   ├── arrays/
 │   │   └── left-rotation/                # Function-based problem
-│   └── heaps/
-│       ├── min-heap/                     # Class-based data structure
-│       ├── max-heap/
-│       ├── median-heap/
-│       └── top-k-heap/
+│   ├── heaps/
+│   │   ├── min-heap/                     # Class-based data structure
+│   │   ├── max-heap/
+│   │   ├── median-heap/
+│   │   └── top-k-heap/
+│   └── stacks/
+│       ├── max-stack/                    # O(1) max tracking
+│       ├── min-stack/                    # O(1) min tracking
+│       └── daily-temperatures/           # Monotonic stack
 ├── utils/
 │   └── judge_utils.py                    # Utilities: load_classes(), load_solutions(), run_tests()
 └── tools/
@@ -181,6 +185,9 @@ python algorithms/search/find-first-occurrence/judge.py
 
 # Data structure example: Heap problem
 python data-structures/heaps/min-heap/judge.py
+
+# Stack example: Max Stack
+python data-structures/stacks/max-stack/judge.py
 
 # Sorting example
 python algorithms/sorting/quickselect/judge.py
