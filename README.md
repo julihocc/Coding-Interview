@@ -2,6 +2,16 @@
 
 A repository of coding interview problems and solutions implementing a **Virtual Judge System** for algorithm and data structure problems. Each problem features multiple solution approaches (Naive vs. Optimized) that are automatically tested and benchmarked.
 
+## 🎓 For Students
+
+**New to this repository?** Start with the [**Learning Guide**](LEARNING_GUIDE.md) - a structured 7-week roadmap that takes you from data structure fundamentals to advanced algorithms. The guide organizes all 32 problems in optimal learning order with:
+
+- 📚 Progressive difficulty levels
+- ⏱️ Time estimates for each problem
+- 🎯 Clear learning objectives
+- 🔗 Concept dependencies
+- ✅ Progress tracking checklist
+
 ## Architecture: Virtual Judge System
 
 This repo uses a **class-based solution pattern** where solutions are implemented as reusable classes with:
@@ -163,6 +173,10 @@ Example: Queue template guides users to implement:
 - `peek()` – view front without removing
 
 ## Getting Started
+
+### For Structured Learning
+
+📖 **Follow the [Learning Guide](LEARNING_GUIDE.md)** for a curated 7-week learning path through all problems, organized from fundamentals to advanced topics.
 
 ### Prerequisites
 
