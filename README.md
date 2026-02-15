@@ -12,6 +12,16 @@ A repository of coding interview problems and solutions implementing a **Virtual
 - 🔗 Concept dependencies
 - ✅ Progress tracking checklist
 
+## 🤝 For Contributors
+
+**Want to add problems to this repository?** Check out the [**Contributing Guide**](CONTRIBUTING.md) - a comprehensive guide to AI-assisted problem creation:
+
+- 🤖 AI prompting templates for each file type
+- 📋 Step-by-step contribution workflow
+- ✅ Validation checklists
+- 💡 Example conversation flows
+- 🎯 Pattern-consistent integration
+
 ## Architecture: Virtual Judge System
 
 This repo uses a **class-based solution pattern** where solutions are implemented as reusable classes with:
