@@ -1,4 +1,4 @@
-# Google Interview Practice
+# Coding Interview Practice
 
 A repository of coding interview problems and solutions implementing a **Virtual Judge System** for algorithm and data structure problems. Each problem features multiple solution approaches (Naive vs. Optimized) that are automatically tested and benchmarked.
 
