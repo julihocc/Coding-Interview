@@ -47,6 +47,9 @@ google-interview/
 │   │   ├── max-heap/
 │   │   ├── median-heap/
 │   │   └── top-k-heap/
+│   ├── queues/
+│   │   ├── basic-queue/                  # FIFO queue implementation
+│   │   └── printer-queue/                # Real-world queue application
 │   └── stacks/
 │       ├── max-stack/                    # O(1) max tracking
 │       ├── min-stack/                    # O(1) min tracking
@@ -84,7 +87,7 @@ instance = BinarySearchFinder(list(case.nums))
 result = instance.find_first_occurrence(case.target)
 ```
 
-### 2. Data Structure Problems (Heaps, Arrays)
+### 2. Data Structure Problems (Heaps, Stacks, Queues, Arrays)
 
 **Pattern:** Class-based implementations with structural helpers
 
@@ -138,7 +141,7 @@ Example: Quickselect template guides users to implement:
 - `_partition(left, right, pivot_index)` – split around pivot
 - `_swap(i, j)` – element exchange helper
 
-### Data Structures (Heaps, Arrays)
+### Data Structures (Heaps, Stacks, Queues, Arrays)
 
 Templates show:
 
@@ -152,6 +155,12 @@ Example: MedianHeap template guides users to implement:
 - `insert(elt)` – add element and rebalance
 - `get_median()` – retrieve median efficiently
 - `_rebalance()` – maintain heap balance invariants
+
+Example: Queue template guides users to implement:
+
+- `enqueue(element)` – add element to end (O(1))
+- `dequeue()` – remove from front (O(1))
+- `peek()` – view front without removing
 
 ## Getting Started
 
@@ -188,6 +197,9 @@ python data-structures/heaps/min-heap/judge.py
 
 # Stack example: Max Stack
 python data-structures/stacks/max-stack/judge.py
+
+# Queue example: Basic Queue
+python data-structures/queues/basic-queue/judge.py
 
 # Sorting example
 python algorithms/sorting/quickselect/judge.py

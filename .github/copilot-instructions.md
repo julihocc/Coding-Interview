@@ -23,6 +23,7 @@ algorithms/
 data-structures/
   ├── arrays/          # left-rotation (function-based, not class)
   ├── heaps/           # min/max/median heaps, top-k selection
+  ├── queues/          # basic-queue, printer-queue (FIFO applications)
   └── stacks/          # monotonic stacks, max/min tracking
 
 utils/
@@ -101,6 +102,27 @@ class Solution:
         pass
 ```
 
+### Queue Pattern (e.g., basic-queue)
+
+```python
+from collections import deque
+
+class Solution:
+    """Queue operations with O(1) enqueue/dequeue."""
+    
+    def __init__(self):
+        self.queue = deque()  # Use deque for O(1) operations
+    
+    def enqueue(self, element):
+        self.queue.append(element)
+    
+    def dequeue(self):
+        return self.queue.popleft() if self.queue else None
+    
+    def peek(self):
+        return self.queue[0] if self.queue else None
+```
+
 ## Developer Workflows
 
 ### Running Tests
@@ -108,6 +130,10 @@ class Solution:
 ```bash
 # Run all solutions against all test cases for one problem
 python algorithms/search/find-first-occurrence/judge.py
+
+# Data structure examples
+python data-structures/heaps/min-heap/judge.py
+python data-structures/queues/basic-queue/judge.py
 
 # Test a single solution file
 python algorithms/search/find-first-occurrence/solutions/solution_naive.py
@@ -180,8 +206,9 @@ TEST_CASES = [
 1. **Reflection-based discovery**: No hardcoded imports; judges find solutions dynamically
 2. **Data initialization in init**: All array/list problems store data in `__init__()` to enable stateful method calls
 3. **Heap problems use 1-indexed arrays**: `self.H = [None]` is standard to simplify parent/child index math
-4. **No external file I/O**: All solutions are pure functions/classes; test data passed via constructor
-5. **Method naming reflects problem**: `find_first_occurrence()`, `delete_min()`, etc., not generic names
+4. **Queue problems use collections.deque**: `self.queue = deque()` for O(1) enqueue/dequeue operations
+5. **No external file I/O**: All solutions are pure functions/classes; test data passed via constructor
+6. **Method naming reflects problem**: `find_first_occurrence()`, `delete_min()`, `enqueue()`, etc., not generic names
 
 ## When Creating New Solutions
 
