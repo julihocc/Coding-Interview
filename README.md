@@ -69,7 +69,9 @@ google-interview/
 │   │   └── top-k-heap/
 │   ├── queues/
 │   │   ├── basic-queue/                  # FIFO queue implementation
-│   │   └── printer-queue/                # Real-world queue application
+│   │   ├── printer-queue/                # Real-world queue application
+│   │   ├── queue-interleaving/           # Interleave approach
+│   │   └── moving-average-from-data-stream/ # Sliding window
 │   └── stacks/
 │       ├── max-stack/                    # O(1) max tracking
 │       ├── min-stack/                    # O(1) min tracking
