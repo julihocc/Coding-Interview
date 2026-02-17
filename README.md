@@ -71,6 +71,7 @@ google-interview/
 │   │   ├── basic-queue/                  # FIFO queue implementation
 │   │   ├── printer-queue/                # Real-world queue application
 │   │   ├── queue-interleaving/           # Interleave approach
+│   │   ├── interleave-two-queues/        # Interleave two queues
 │   │   └── moving-average-from-data-stream/ # Sliding window
 │   └── stacks/
 │       ├── max-stack/                    # O(1) max tracking
