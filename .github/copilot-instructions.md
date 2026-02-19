@@ -47,37 +47,59 @@ problem-name/
 │   └── cases.py             # @dataclass TestCase + TEST_CASES list
 └── solutions/
     ├── __init__.py
-    ├── solution_template.py # Starter code with NotImplementedError
-    ├── solution_naive.py    # Brute-force approach
-    ├── solution_optimized.py # Efficient approach (may also have solution_recursive.py)
-    └── contributed/         # (optional) Community solutions
+    ├── solution_template.py  # Starter code with NotImplementedError
+    ├── solution_naive.py     # Brute-force approach
+    ├── solution_optimized.py # Efficient approach
+    ├── solution_iterative.py # Variant approach (optional)
+    ├── solution_recursive.py # Variant approach (optional)
+    ├── contributed/          # Community solutions (optional)
+    └── reference/            # Legacy pattern: naive.py, optimized.py (optional)
 ```
 
 **Critical invariants**:
 - Solution class **must** be named `Solution` (not problem-specific names)
 - Test class **must** be named `TestCase` with `TEST_CASES` list
 - `judge.py` must define `run_case_logic(SolutionClass, case)` function
+- All `.py` files in solutions/ must have a `Solution` class (excludes `__init__.py`, `solution_template.py`)
+- `contributed/` folder holds community solutions without validation requirements
 
 ### Algorithm Solution Pattern (e.g., find-first-occurrence)
 
 ```python
+from typing import List
+
 class Solution:
     """Descriptive docstring of algorithm strategy."""
     
     def __init__(self, nums: List[int]):
-        """Store test data """
+        """Store test data once for all method calls."""
         self.nums = nums
     
     def find_first_occurrence(self, target: int) -> int:
+        """Find index of first occurrence of target.
+        
+        Args:
+            target: Value to search for
+        
+        Returns:
+            Index of first occurrence, or -1 if not found
+        """
         # Implementation
         pass
 ```
 
 **Judge call pattern**:
 ```python
-instance = Solution(case.nums)
-result = instance.find_first_occurrence(case.target)
-assert result == case.expected
+# In judge.py
+def run_case_logic(SolutionClass, case):
+    """Test a single case."""
+    instance = SolutionClass(case.nums)  # Initialize with test data
+    result = instance.find_first_occurrence(case.target)  # Call method with only problem params
+    return result == case.expected
+
+# In main judge invocation
+from utils.judge_utils import run_judge_from_file
+run_judge_from_file(__file__, TEST_CASES, run_case_logic)
 ```
 
 ### Data Structure Pattern (e.g., min-heap)
@@ -159,13 +181,17 @@ pytest --cov=. --cov-report=html
 
 ### CI Validation (validate_main_branch.py)
 
-PR validation enforces:
-- Solution files ONLY: `solution_naive.py`, `solution_optimized.py`, `solution_template.py`, `__init__.py`
-- Legacy support: `reference/` subfolder with `naive.py`, `optimized.py`
-- **Disallowed**: mystery files, misnamed classes, random subfolders
-- Test files in `tests/` root, not in solutions/
+**Enforced naming rules**:
+- **solutions/ root**: Only `solution_naive.py`, `solution_optimized.py`, `solution_template.py`, `__init__.py` allowed
+- **Variant solutions**: `solution_iterative.py`, `solution_recursive.py` also permitted
+- **Legacy reference/ subfolder**: `naive.py`, `optimized.py` for backward compatibility
+- **Allowed subdirectories**: `reference/`, `contributed/`, `__pycache__/`
+- **Disallowed**: Any other `.py` files, random subfolders, or misnamed solution files
+- **Test files**: Must reside in `tests/` root (not nested in solutions/)
 
-Run validation: `python tools/validate_main_branch.py`
+**Run validation**: `python tools/validate_main_branch.py`
+
+This ensures all PRs maintain consistent structure and prevents accidental invalid patterns.
 
 ## Testing & Assertions
 
@@ -197,9 +223,10 @@ TEST_CASES = [
 
 ## Key Utilities (utils/judge_utils.py)
 
-- `load_classes(dir, class_name, subfolder='reference')` → list of (name, class) tuples
-- `run_judge_from_file(__file__, test_cases, run_case_logic)` → execute judge
-- `test_solution(SolutionClass, test_cases, run_case_logic)` → test one solution
+- `load_classes(dir, class_name, subfolder='reference', file_pattern="*.py")` → list of (name, class) tuples. Pass `subfolder=None` to load from directory root.
+- `load_classes_with_method(dir, method_name, subfolder='reference')` → finds classes defining a specific method (useful when class names vary)
+- `run_judge_from_file(__file__, test_cases, run_case_logic)` → execute judge with formatted output and timing
+- `run_tests(solutions, test_cases, runner_func, section_name, report_dir)` → generic test runner with report generation
 
 ## Common Patterns to Recognize
 
