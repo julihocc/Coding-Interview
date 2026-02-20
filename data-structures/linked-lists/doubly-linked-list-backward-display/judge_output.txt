@@ -1,0 +1,14 @@
+
+=== SOLUTIONS ===
+Solution         | Case                       | Status     | Time (μs) 
+-----------------------------------------------------------------------
+solution_naive   | jupiter_removal_backward   | PASS       | 18.3      
+solution_naive   | three_planets_backward     | PASS       | 5.7       
+solution_naive   | empty_list                 | PASS       | 1.2       
+solution_naive   | single_element             | PASS       | 2.0       
+solution_naive   | delete_head                | PASS       | 4.0       
+solution_naive   | delete_tail                | PASS       | 3.6       
+solution_naive   | delete_middle              | PASS       | 2.6       
+solution_naive   | delete_nonexistent         | PASS       | 2.5       
+solution_naive   | delete_only_element        | PASS       | 5.1       
+-----------------------------------------------------------------------
