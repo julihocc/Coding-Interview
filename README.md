@@ -4,7 +4,7 @@ A repository of coding interview problems and solutions implementing a **Virtual
 
 ## 🎓 For Students
 
-**New to this repository?** Start with the [**Learning Guide**](LEARNING_GUIDE.md) - a structured 7-week roadmap that takes you from data structure fundamentals to advanced algorithms. The guide organizes all 32 problems in optimal learning order with:
+**New to this repository?** Start with the [**Learning Guide**](LEARNING_GUIDE.md) - a structured 7-week roadmap that takes you from data structure fundamentals to advanced algorithms. The guide organizes all 35 problems in optimal learning order with:
 
 - 📚 Progressive difficulty levels
 - ⏱️ Time estimates for each problem
@@ -67,6 +67,13 @@ google-interview/
 │   │   ├── max-heap/
 │   │   ├── median-heap/
 │   │   └── top-k-heap/
+│   ├── linked-lists/
+│   │   ├── linked-list/                  # Singly linked list fundamentals
+│   │   ├── doubly-linked-list/           # Doubly linked list fundamentals
+│   │   ├── circular-linked-list/         # Circular linked list
+│   │   ├── doubly-linked-list-backward-display/ # Backward traversal after deletion
+│   │   ├── linked-list-size-tracker/     # Debugging: size counter bug fix
+│   │   └── linked-list-insert-after-head/ # O(1) insert after head
 │   ├── queues/
 │   │   ├── basic-queue/                  # FIFO queue implementation
 │   │   ├── printer-queue/                # Real-world queue application

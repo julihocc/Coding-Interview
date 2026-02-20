@@ -87,6 +87,31 @@ This guide provides a structured learning path through the repository's problems
 
 ---
 
+### 1.4 Pointer-Based Structures: Linked Lists
+**Goal**: Understand nodes and pointer manipulation in singly and doubly linked lists
+
+#### Foundation:
+- **Problem**: [linked-list-insert-after-head](data-structures/linked-lists/linked-list-insert-after-head/)
+  - **Concepts**: Singly linked list, O(1) pointer manipulation, `push` vs `insert_after`
+  - **Why first**: Simplest linked-list operation — only two pointer reassignments
+  - **Time to complete**: 1-2 hours
+
+#### Debugging Practice:
+- **Problem**: [linked-list-size-tracker](data-structures/linked-lists/linked-list-size-tracker/)
+  - **Concepts**: Counter invariants, debugging logic errors vs syntax errors
+  - **Why second**: Reinforces insert/delete mechanics while practicing bug identification
+  - **Time to complete**: 1-2 hours
+
+#### Bidirectional Traversal:
+- **Problem**: [doubly-linked-list-backward-display](data-structures/linked-lists/doubly-linked-list-backward-display/)
+  - **Concepts**: `prev` pointers, tail pointer benefits, O(1) vs O(2n) traversal
+  - **Why last**: Introduces the `prev` pointer and shows the value of maintaining a `tail`
+  - **Time to complete**: 2-3 hours
+
+**Key Learning**: Linked lists teach pointer discipline and O(1) insertions/deletions that arrays cannot match.
+
+---
+
 ## Phase 2: Hierarchical Structures: Heaps (Week 3)
 
 ### 2.1 Basic Heap Operations
@@ -244,11 +269,11 @@ This guide provides a structured learning path through the repository's problems
 
 | Phase | Focus | Duration | Problems |
 |-------|-------|----------|----------|
-| 1 | Linear Data Structures | 2 weeks | 11 problems |
+| 1 | Linear Data Structures | 2 weeks | 14 problems |
 | 2 | Heaps | 1 week | 4 problems |
 | 3 | Binary Search | 2 weeks | 10 problems |
 | 4 | Sorting & Selection | 2 weeks | 7 problems |
-| **Total** | **Complete Roadmap** | **7 weeks** | **32 problems** |
+| **Total** | **Complete Roadmap** | **7 weeks** | **35 problems** |
 
 ---
 
@@ -315,6 +340,11 @@ Queues → BFS (future topic)
 Stacks → DFS (future topic)
 Stacks → Expression Parsing
 
+Linked Lists → Trees (future topic)
+Linked Lists → Graph adjacency lists (future topic)
+insert-after-head → size-tracker (same insert/delete mechanics)
+size-tracker → doubly-linked-list-backward-display (adds prev pointers)
+
 Heaps → Priority Queues
 Heaps → Multiway Merge
 
@@ -332,12 +362,12 @@ Quicksort → Quickselect
 
 Track your progress through the roadmap:
 
-- [ ] **Phase 1 Complete**: Linear Data Structures (11/11)
+- [ ] **Phase 1 Complete**: Linear Data Structures (14/14)
 - [ ] **Phase 2 Complete**: Heaps (4/4)
 - [ ] **Phase 3 Complete**: Binary Search (10/10)
 - [ ] **Phase 4 Complete**: Sorting & Selection (7/7)
 
-**Total Progress**: ___/32 problems completed
+**Total Progress**: ___/35 problems completed
 
 ---
 
