@@ -12,34 +12,36 @@ Reference: See ../README.md for the target tree structure and expected output.
 
 
 class Solution:
-    def build_and_traverse(self) -> list[int]:
-        """Build a binary tree and return its in-order traversal.
+    def build_and_inorder(self) -> list[int]:
+        """Build the BST and return its IN-ORDER traversal (Left → Root → Right).
 
-        Target tree:
-                4
-               / \\
-              2   6
-             / \\ / \\
-            1  3 5  7
-
-        Expected in-order output: [1, 2, 3, 4, 5, 6, 7]
+        Steps:
+          1. Define a Node class with value, left, right.
+          2. Build the tree from README.md.
+          3. Implement in-order traversal → returns [1, 2, 3, 4, 5, 6, 7].
         """
-
-        # TODO 1: Define your Node class
-        # class Node:
-        #     def __init__(self, value):
-        #         ...
-
-        # TODO 2: Build the binary tree
-        # root = Node(4)
-        # root.left = ...
-
-        # TODO 3: Implement in-order traversal
-        # def in_order(node, result):
-        #     ...
-
-        # TODO 4: Collect and return the traversal result
+        # TODO: Implement your solution here
         raise NotImplementedError("Solution not implemented yet")
+
+    def build_and_preorder(self) -> list[int]:
+        """Build the BST and return its PRE-ORDER traversal (Root → Left → Right).
+
+        Expected output: [4, 2, 1, 3, 6, 5, 7]
+        """
+        # TODO: Implement your solution here
+        raise NotImplementedError("Solution not implemented yet")
+
+    def build_and_postorder(self) -> list[int]:
+        """Build the BST and return its POST-ORDER traversal (Left → Right → Root).
+
+        Expected output: [1, 3, 2, 5, 7, 6, 4]
+        """
+        # TODO: Implement your solution here
+        raise NotImplementedError("Solution not implemented yet")
+
+    # Alias kept for convenience
+    def build_and_traverse(self) -> list[int]:
+        return self.build_and_inorder()
 
 
 if __name__ == "__main__":

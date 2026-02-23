@@ -12,9 +12,14 @@ from utils.judge_utils import run_judge_from_file  # noqa: E402
 
 
 def run_test_case(sol_class, case):
-    """Test a single case for binary tree build-and-traverse."""
+    """Test a single case for binary tree build-and-traverse.
+
+    Dispatches to the method named by case.traversal, allowing
+    in-order, pre-order, and post-order cases to share the same judge.
+    """
     sol = sol_class()
-    result = sol.build_and_traverse()
+    method = getattr(sol, case.traversal)
+    result = method()
     return result == case.expected
 
 
