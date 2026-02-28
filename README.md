@@ -80,10 +80,14 @@ google-interview/
 │   │   ├── queue-interleaving/           # Interleave approach
 │   │   ├── interleave-two-queues/        # Interleave two queues
 │   │   └── moving-average-from-data-stream/ # Sliding window
-│   └── stacks/
-│       ├── max-stack/                    # O(1) max tracking
-│       ├── min-stack/                    # O(1) min tracking
-│       └── daily-temperatures/           # Monotonic stack
+│   ├── stacks/
+│   │   ├── max-stack/                    # O(1) max tracking
+│   │   ├── min-stack/                    # O(1) min tracking
+│   │   └── daily-temperatures/           # Monotonic stack
+│   └── trees/
+│       ├── binary-tree-traversal/        # In-order traversal
+│       ├── planet-continents-dfs/        # DFS traversal
+│       └── breadth-first-search-tree/    # BFS practice in Python
 ├── utils/
 │   └── judge_utils.py                    # Utilities: load_classes(), load_solutions(), run_tests()
 └── tools/
