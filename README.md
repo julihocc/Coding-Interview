@@ -90,7 +90,8 @@ google-interview/
 │       ├── breadth-first-search-tree/    # BFS practice in Python
 │       ├── rainforest-bfs/               # BFS applied to forests
 │       ├── planet-network-bfs/           # Planetary network BFS
-│       └── company-hierarchy-bfs/        # BFS on team tree chart with bug fix
+│       ├── company-hierarchy-bfs/        # BFS on team tree chart with bug fix
+│       └── family-tree-level-bfs/        # BFS level calculation on family tree
 ├── utils/
 │   └── judge_utils.py                    # Utilities: load_classes(), load_solutions(), run_tests()
 └── tools/
