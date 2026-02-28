@@ -15,6 +15,7 @@ This guide provides a structured learning path through the repository's problems
 ## Phase 1: Data Structure Fundamentals (Week 1-2)
 
 ### 1.1 Linear Data Structures: Arrays
+
 **Goal**: Master basic array manipulation and understand memory contiguity
 
 - **Problem**: [left-rotation](data-structures/arrays/left-rotation/)
@@ -27,15 +28,18 @@ This guide provides a structured learning path through the repository's problems
 ---
 
 ### 1.2 FIFO Structures: Queues
+
 **Goal**: Understand First-In-First-Out (FIFO) principle and its applications
 
-#### Start Here:
+#### Start Here
+
 - **Problem**: [basic-queue](data-structures/queues/basic-queue/)
   - **Concepts**: FIFO ordering, `collections.deque`, O(1) operations
   - **Implementation focus**: Compare list vs. deque performance
   - **Time to complete**: 2-3 hours
 
-#### Then Apply:
+#### Then Apply
+
 - **Problem**: [printer-queue](data-structures/queues/printer-queue/)
   - **Concepts**: Real-world queue simulation, job management
   - **Why second**: Applies basic queue concepts to practical scenarios
@@ -46,25 +50,30 @@ This guide provides a structured learning path through the repository's problems
 ---
 
 ### 1.3 LIFO Structures: Stacks
+
 **Goal**: Master Last-In-First-Out (LIFO) principle and stack applications
 
-#### Foundation:
+#### Foundation
+
 - **Problem**: [reverse-string](data-structures/stacks/reverse-string/)
   - **Concepts**: Basic stack operations (push, pop, peek)
   - **Why first**: Simplest stack application to understand LIFO
   - **Time to complete**: 1 hour
 
-#### Pattern Matching:
+#### Pattern Matching
+
 - **Problem**: [balanced-brackets](data-structures/stacks/balanced-brackets/)
   - **Concepts**: Stack for validation, matching pairs
   - **Time to complete**: 2 hours
 
-#### Expression Evaluation:
+#### Expression Evaluation
+
 - **Problem**: [evaluate-postfix](data-structures/stacks/evaluate-postfix/)
   - **Concepts**: Stack-based calculation, postfix notation
   - **Time to complete**: 2 hours
 
-#### Optimization Techniques:
+#### Optimization Techniques
+
 - **Problem**: [min-stack](data-structures/stacks/min-stack/)
   - **Concepts**: Auxiliary stack, O(1) min tracking
   - **Time to complete**: 2-3 hours
@@ -73,7 +82,8 @@ This guide provides a structured learning path through the repository's problems
   - **Concepts**: Similar to min-stack, understand the pattern
   - **Time to complete**: 1-2 hours
 
-#### Advanced Stack Patterns:
+#### Advanced Stack Patterns
+
 - **Problem**: [previous-smaller-element](data-structures/stacks/previous-smaller-element/)
   - **Concepts**: Monotonic stack, O(n) solutions
   - **Time to complete**: 3-4 hours
@@ -88,21 +98,25 @@ This guide provides a structured learning path through the repository's problems
 ---
 
 ### 1.4 Pointer-Based Structures: Linked Lists
+
 **Goal**: Understand nodes and pointer manipulation in singly and doubly linked lists
 
-#### Foundation:
+#### Foundation
+
 - **Problem**: [linked-list-insert-after-head](data-structures/linked-lists/linked-list-insert-after-head/)
   - **Concepts**: Singly linked list, O(1) pointer manipulation, `push` vs `insert_after`
   - **Why first**: Simplest linked-list operation — only two pointer reassignments
   - **Time to complete**: 1-2 hours
 
-#### Debugging Practice:
+#### Debugging Practice
+
 - **Problem**: [linked-list-size-tracker](data-structures/linked-lists/linked-list-size-tracker/)
   - **Concepts**: Counter invariants, debugging logic errors vs syntax errors
   - **Why second**: Reinforces insert/delete mechanics while practicing bug identification
   - **Time to complete**: 1-2 hours
 
-#### Bidirectional Traversal:
+#### Bidirectional Traversal
+
 - **Problem**: [doubly-linked-list-backward-display](data-structures/linked-lists/doubly-linked-list-backward-display/)
   - **Concepts**: `prev` pointers, tail pointer benefits, O(1) vs O(2n) traversal
   - **Why last**: Introduces the `prev` pointer and shows the value of maintaining a `tail`
@@ -112,9 +126,70 @@ This guide provides a structured learning path through the repository's problems
 
 ---
 
-## Phase 2: Hierarchical Structures: Heaps (Week 3)
+## Phase 2: Hierarchical Structures: Trees (Week 3)
+
+### 2.1 Tree Fundamentals and DFS
+
+**Goal**: Understand basic tree structures and Depth-First Search traversal
+
+#### Binary Trees
+
+- **Problem**: [binary-tree-traversal](data-structures/trees/binary-tree-traversal/)
+  - **Concepts**: In-order traversal, recursive tree navigation
+  - **Why first**: Fundamental tree traversal pattern
+  - **Time to complete**: 2-3 hours
+
+#### N-ary Trees & DFS
+
+- **Problem**: [planet-continents-dfs](data-structures/trees/planet-continents-dfs/)
+  - **Concepts**: Depth-First Search on non-binary trees
+  - **Time to complete**: 2-3 hours
+
+---
+
+### 2.2 Breadth-First Search (BFS)
+
+**Goal**: Master level-by-level traversal using queues
+
+#### Core Pattern
+
+- **Problem**: [breadth-first-search-tree](data-structures/trees/breadth-first-search-tree/)
+  - **Concepts**: Queue-based BFS traversal
+  - **Why first**: Canonical BFS introduction
+  - **Time to complete**: 2 hours
+
+#### Applied BFS
+
+- **Problem**: [rainforest-bfs](data-structures/trees/rainforest-bfs/)
+  - **Concepts**: BFS applied to real-world domain (forests)
+  - **Time to complete**: 1-2 hours
+  
+- **Problem**: [planet-network-bfs](data-structures/trees/planet-network-bfs/)
+  - **Concepts**: BFS starting from arbitrary nodes
+  - **Time to complete**: 1-2 hours
+
+#### Advanced BFS
+
+- **Problem**: [company-hierarchy-bfs](data-structures/trees/company-hierarchy-bfs/)
+  - **Concepts**: Bug fixing BFS traversal on N-ary trees
+  - **Time to complete**: 2 hours
+
+- **Problem**: [family-tree-level-bfs](data-structures/trees/family-tree-level-bfs/)
+  - **Concepts**: Tracking distances/levels from root using BFS
+  - **Time to complete**: 2-3 hours
+
+- **Problem**: [network-bfs](data-structures/trees/network-bfs/)
+  - **Concepts**: BFS on graph-like network structures
+  - **Time to complete**: 2 hours
+
+**Key Learning**: Trees introduce non-linear relationships, where DFS explores depth and BFS uses queues to explore breadth.
+
+---
+
+## Phase 3: Hierarchical Structures: Heaps (Week 4)
 
 ### 2.1 Basic Heap Operations
+
 **Goal**: Understand heap property and tree-based operations
 
 - **Problem**: [min-heap](data-structures/heaps/min-heap/)
@@ -145,18 +220,21 @@ This guide provides a structured learning path through the repository's problems
 
 ---
 
-## Phase 3: Searching Algorithms (Week 4-5)
+## Phase 4: Searching Algorithms (Week 5-6)
 
 ### 3.1 Binary Search Fundamentals
+
 **Goal**: Master the binary search template and invariants
 
-#### Core Pattern:
+#### Core Pattern
+
 - **Problem**: [find-first-occurrence](algorithms/search/find-first-occurrence/)
   - **Concepts**: Binary search template, loop invariants
   - **Why first**: Canonical binary search introduction
   - **Time to complete**: 3-4 hours
 
-#### Variations:
+#### Variations
+
 - **Problem**: [target-index-search](algorithms/search/target-index-search/)
   - **Concepts**: Standard binary search
   - **Time to complete**: 2 hours
@@ -172,6 +250,7 @@ This guide provides a structured learning path through the repository's problems
 ---
 
 ### 3.2 Range Queries
+
 **Goal**: Find ranges and boundaries efficiently
 
 - **Problem**: [locate-first-last-position](algorithms/search/locate-first-last-position/)
@@ -211,12 +290,14 @@ This guide provides a structured learning path through the repository's problems
 
 ---
 
-## Phase 4: Sorting and Selection (Week 6-7)
+## Phase 5: Sorting and Selection (Week 7-8)
 
 ### 4.1 Divide-and-Conquer Sorting
+
 **Goal**: Master recursive sorting algorithms
 
-#### Merge Sort:
+#### Merge Sort
+
 - **Problem**: [merge-sort](algorithms/sorting/merge-sort/)
   - **Concepts**: Divide-and-conquer, stable sorting, O(n log n)
   - **Why first**: Simpler than quicksort, guaranteed performance
@@ -226,7 +307,8 @@ This guide provides a structured learning path through the repository's problems
   - **Concepts**: Merge sort on array segments
   - **Time to complete**: 3 hours
 
-#### Multiway Operations:
+#### Multiway Operations
+
 - **Problem**: [multiway-merge](algorithms/sorting/multiway-merge/)
   - **Concepts**: Merging k sorted arrays, heap-based merging
   - **Time to complete**: 4 hours
@@ -270,31 +352,36 @@ This guide provides a structured learning path through the repository's problems
 | Phase | Focus | Duration | Problems |
 |-------|-------|----------|----------|
 | 1 | Linear Data Structures | 2 weeks | 14 problems |
-| 2 | Heaps | 1 week | 4 problems |
-| 3 | Binary Search | 2 weeks | 10 problems |
-| 4 | Sorting & Selection | 2 weeks | 7 problems |
-| **Total** | **Complete Roadmap** | **7 weeks** | **35 problems** |
+| 2 | Trees | 1 week | 8 problems |
+| 3 | Heaps | 1 week | 4 problems |
+| 4 | Binary Search | 2 weeks | 10 problems |
+| 5 | Sorting & Selection | 2 weeks | 7 problems |
+| **Total** | **Complete Roadmap** | **8 weeks** | **43 problems** |
 
 ---
 
 ## 🎯 Learning Milestones
 
 ### Week 2 Checkpoint: Linear Structures
+
 - ✅ Can implement queue and stack from scratch
 - ✅ Understand when to use FIFO vs LIFO
 - ✅ Recognize stack patterns in problems
 
-### Week 3 Checkpoint: Heaps
+### Week 4 Checkpoint: Heaps
+
 - ✅ Can maintain heap property through operations
 - ✅ Understand heap vs. sorting trade-offs
 - ✅ Can solve streaming/online problems
 
-### Week 5 Checkpoint: Binary Search
+### Week 6 Checkpoint: Binary Search
+
 - ✅ Can write bug-free binary search
 - ✅ Recognize when binary search applies
 - ✅ Can handle edge cases and boundaries
 
-### Week 7 Checkpoint: Sorting
+### Week 8 Checkpoint: Sorting
+
 - ✅ Understand time/space trade-offs in sorting
 - ✅ Can implement partition-based algorithms
 - ✅ Recognize when O(n log n) is optimal
@@ -303,7 +390,7 @@ This guide provides a structured learning path through the repository's problems
 
 ## 💡 Study Tips
 
-### For Each Problem:
+### For Each Problem
 
 1. **Read thoroughly**: Understand the problem statement and examples
 2. **Attempt template first**: Try implementing before looking at solutions
@@ -312,7 +399,7 @@ This guide provides a structured learning path through the repository's problems
 5. **Compare complexities**: Understand why optimization matters
 6. **Run judges**: Verify correctness and see performance differences
 
-### When Stuck:
+### When Stuck
 
 1. **Review ALGORITHM_ANALYSIS.md**: Understand the approach
 2. **Draw examples**: Visualize small test cases
@@ -320,7 +407,7 @@ This guide provides a structured learning path through the repository's problems
 4. **Use debugger**: Step through solution code
 5. **Compare with template**: Ensure you understand the structure
 
-### Active Learning:
+### Active Learning
 
 - **Implement from scratch**: Don't just read solutions
 - **Explain to others**: Teaching solidifies understanding
@@ -340,8 +427,8 @@ Queues → BFS (future topic)
 Stacks → DFS (future topic)
 Stacks → Expression Parsing
 
-Linked Lists → Trees (future topic)
-Linked Lists → Graph adjacency lists (future topic)
+Linked Lists → Trees
+Linked Lists → Graph adjacency lists
 insert-after-head → size-tracker (same insert/delete mechanics)
 size-tracker → doubly-linked-list-backward-display (adds prev pointers)
 
@@ -363,11 +450,12 @@ Quicksort → Quickselect
 Track your progress through the roadmap:
 
 - [ ] **Phase 1 Complete**: Linear Data Structures (14/14)
-- [ ] **Phase 2 Complete**: Heaps (4/4)
-- [ ] **Phase 3 Complete**: Binary Search (10/10)
-- [ ] **Phase 4 Complete**: Sorting & Selection (7/7)
+- [ ] **Phase 2 Complete**: Trees (8/8)
+- [ ] **Phase 3 Complete**: Heaps (4/4)
+- [ ] **Phase 4 Complete**: Binary Search (10/10)
+- [ ] **Phase 5 Complete**: Sorting & Selection (7/7)
 
-**Total Progress**: ___/35 problems completed
+**Total Progress**: ___/43 problems completed
 
 ---
 
@@ -375,7 +463,7 @@ Track your progress through the roadmap:
 
 Once you've completed this roadmap, you'll be ready for:
 
-1. **Graph Algorithms**: BFS, DFS, Dijkstra's (use queue/stack knowledge)
+1. **Graph Algorithms**: Advanced BFS, DFS, Dijkstra's (use tree/queue/stack knowledge)
 2. **Dynamic Programming**: Build on divide-and-conquer understanding
 3. **Advanced Trees**: Use heap concepts for segment trees, tries
 4. **String Algorithms**: Apply binary search to pattern matching
