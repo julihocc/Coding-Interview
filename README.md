@@ -89,7 +89,8 @@ google-interview/
 │       ├── planet-continents-dfs/        # DFS traversal
 │       ├── breadth-first-search-tree/    # BFS practice in Python
 │       ├── rainforest-bfs/               # BFS applied to forests
-│       └── planet-network-bfs/           # Planetary network BFS
+│       ├── planet-network-bfs/           # Planetary network BFS
+│       └── company-hierarchy-bfs/        # BFS on team tree chart with bug fix
 ├── utils/
 │   └── judge_utils.py                    # Utilities: load_classes(), load_solutions(), run_tests()
 └── tools/
