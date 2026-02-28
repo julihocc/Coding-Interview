@@ -88,7 +88,8 @@ google-interview/
 │       ├── binary-tree-traversal/        # In-order traversal
 │       ├── planet-continents-dfs/        # DFS traversal
 │       ├── breadth-first-search-tree/    # BFS practice in Python
-│       └── rainforest-bfs/               # BFS applied to forests
+│       ├── rainforest-bfs/               # BFS applied to forests
+│       └── planet-network-bfs/           # Planetary network BFS
 ├── utils/
 │   └── judge_utils.py                    # Utilities: load_classes(), load_solutions(), run_tests()
 └── tools/
