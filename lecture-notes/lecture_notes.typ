@@ -1,14 +1,13 @@
-#import "@preview/min-book:0.1.1": (
-  book, note, horizontalrule, hr, blockquote, appendices, annexes
-)
+#import "@preview/ilm:1.4.0": *
 
-#show: book.with(
-  title: "Lecture Notes",
-  subtitle: "Coding Interview Practice Foundations",
-  authors: "Virtual Judge System Contributor",
-  date: (2025, 03, 01),
-  part: "Data Structures",
-  chapter: "Topic",
+#show: ilm.with(
+  title: [Lecture Notes],
+  author: "Virtual Judge System Contributor",
+  date: datetime(year: 2025, month: 3, day: 1),
+  abstract: [
+    A cohesive guide to the theoretical foundations necessary to tackle algorithmic challenges in modern coding interviews. Covers data structures, algorithms, and complexity analysis.
+  ],
+  paper-size: "a4",
 )
 
 = Basics
