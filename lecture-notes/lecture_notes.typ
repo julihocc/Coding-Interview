@@ -10,13 +10,7 @@
   paper-size: "a4",
 )
 
-= Basics
-
 #include "chapters/01-introduction.typ"
-
-#pagebreak()
-
-= Linear Structures
 
 #include "chapters/02-arrays.typ"
 
@@ -24,17 +18,9 @@
 
 #include "chapters/04-stacks-queues.typ"
 
-#pagebreak()
-
-= Hierarchical Structures
-
 #include "chapters/05-trees.typ"
 
 #include "chapters/06-heaps.typ"
-
-#pagebreak()
-
-= Algorithms
 
 #include "chapters/07-binary-search.typ"
 
