@@ -10,7 +10,11 @@
   paper-size: "a4",
 )
 
+= Introduction
+
 #include "chapters/01-introduction.typ"
+
+= Data Structures
 
 #include "chapters/02-arrays.typ"
 
@@ -21,6 +25,8 @@
 #include "chapters/05-trees.typ"
 
 #include "chapters/06-heaps.typ"
+
+= Algorithms
 
 #include "chapters/07-binary-search.typ"
 

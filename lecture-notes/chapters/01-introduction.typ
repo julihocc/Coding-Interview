@@ -1,5 +1,3 @@
-= Introduction
-
 Welcome to the *Coding Interview Practice Lecture Notes*. This book is designed to serve as a comprehensive theoretical companion to our problem repository. While the repository provides hands-on practice via a *Virtual Judge System*, these notes provide the underlying mathematical and algorithmic intuition necessary to conquer the challenges.
 
 == The Virtual Judge System
