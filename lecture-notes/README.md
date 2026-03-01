@@ -30,7 +30,7 @@ You need to have `typst` installed on your system.
 To generate the `lecture_notes.pdf` file, run the following command from this directory:
 
 ```bash
-typst compile main.typ lecture_notes.pdf
+typst compile lecture_notes.typ lecture_notes.pdf
 ```
 
 The resulting PDF will be generated instantly and feature a beautiful, typeset layout using the `min-book` template.
