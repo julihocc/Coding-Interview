@@ -16,44 +16,39 @@ Space complexity: O(n)
 
 import heapq
 
-# Create an empty MaxHeap (a plain Python list)
-maxHeap = []
 
+class Solution:
+    """Implement MaxHeap using Python's heapq."""
 
-def insert(nodes):
-    """Insert a list of license numbers into the MaxHeap.
+    def __init__(self):
+        """Initialize empty heap."""
+        self.maxHeap = []
 
-    We negate the values before pushing to simulate a max-heap.
+    def insert(self, elt):
+        """Insert element into heap, maintaining max-heap property.
 
-    Args:
-        nodes: Iterable of integers (spaceship license numbers).
-    """
-    for node in nodes:
-        heapq.heappush(maxHeap, -node)
+        We negate the value before pushing to simulate a max-heap.
+        """
+        heapq.heappush(self.maxHeap, -elt)
 
-    # Optional: Display the logical max-heap (re-negating to show original values)
-    logical_heap = [-x for x in maxHeap]
-    print(f"Max Heap after insertion: {logical_heap}")
+    def delete_max(self):
+        """Remove and return the maximum element.
 
+        We pop the minimum (most negative) value and negate it back to get the maximum.
+        """
+        if not self.maxHeap:
+            return None
+        return -heapq.heappop(self.maxHeap)
 
-def delete():
-    """Remove and return the largest license number from the MaxHeap.
+    def max_element(self):
+        """Return the maximum element without removing it."""
+        if not self.maxHeap:
+            return None
+        return -self.maxHeap[0]
 
-    We pop the minimum (most negative) value and negate it back to get the maximum.
-
-    Returns:
-        The largest element, or None if the heap is empty.
-    """
-    try:
-        largest = -heapq.heappop(maxHeap)
-
-        # Optional: Display the logical max-heap
-        logical_heap = [-x for x in maxHeap]
-        print(f"Max Heap after deletion of largest node: {logical_heap}")
-
-        return largest
-    except IndexError:
-        return None
+    def size(self):
+        """Return the number of elements in the heap."""
+        return len(self.maxHeap)
 
 
 # ── Demo ──────────────────────────────────────────────────────────────────────
@@ -61,9 +56,22 @@ if __name__ == "__main__":
     # Spaceships identified by the last 2 digits of their license numbers
     spaceships = [28, 14, 35, 55, 68, 72, 47, 19, 11, 32]
 
+    heap = Solution()
     # Add all spacecrafts to the queue
-    insert(spaceships)
+    for spaceship in spaceships:
+        heap.insert(spaceship)
+
+    print(f"Heap size: {heap.size()}")
+    print(f"Max element: {heap.max_element()}")
 
     # Delete the spacecraft with the largest license number
-    largest_removed = delete()
+    largest_removed = heap.delete_max()
     print(f"Removed spaceship with license number: {largest_removed}")
+    print(f"Heap size after deletion: {heap.size()}")
+    print(f"New max element: {heap.max_element()}")
+
+    # Demonstrate further deletions
+    print(f"Removed: {heap.delete_max()}")
+    print(f"Removed: {heap.delete_max()}")
+    print(f"Current max element: {heap.max_element()}")
+    print(f"Current heap size: {heap.size()}")
