@@ -9,6 +9,7 @@ Implement a MaxHeap with the following operations:
 - `insert(elt)`: Insert an element (O(log n))
 - `delete_max()`: Remove the maximum element (O(log n))
 - `max_element()`: Get the maximum element (O(1))
+- `size()`: Get the number of elements
 
 ## Scenario
 
