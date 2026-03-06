@@ -66,6 +66,7 @@ google-interview/
 │   │   ├── min-heap/                     # Class-based data structure
 │   │   ├── max-heap/
 │   │   ├── median-heap/
+│   │   ├── median-finder/                # Real-world data stream median
 │   │   └── top-k-heap/
 │   ├── linked-lists/
 │   │   ├── linked-list/                  # Singly linked list fundamentals

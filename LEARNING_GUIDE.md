@@ -216,6 +216,10 @@ This guide provides a structured learning path through the repository's problems
   - **Why last**: Most complex - requires mastery of both heap types
   - **Time to complete**: 4-5 hours
 
+- **Problem**: [median-finder](data-structures/heaps/median-finder/)
+  - **Concepts**: Dual heap structure, streaming algorithms, real-world application
+  - **Time to complete**: 3-4 hours
+
 **Key Learning**: Heaps enable efficient priority queues, streaming algorithms, and order statistics.
 
 ---
@@ -353,10 +357,10 @@ This guide provides a structured learning path through the repository's problems
 |-------|-------|----------|----------|
 | 1 | Linear Data Structures | 2 weeks | 14 problems |
 | 2 | Trees | 1 week | 8 problems |
-| 3 | Heaps | 1 week | 4 problems |
+| 3 | Heaps | 1 week | 5 problems |
 | 4 | Binary Search | 2 weeks | 10 problems |
 | 5 | Sorting & Selection | 2 weeks | 7 problems |
-| **Total** | **Complete Roadmap** | **8 weeks** | **43 problems** |
+| **Total** | **Complete Roadmap** | **8 weeks** | **44 problems** |
 
 ---
 
@@ -451,11 +455,11 @@ Track your progress through the roadmap:
 
 - [ ] **Phase 1 Complete**: Linear Data Structures (14/14)
 - [ ] **Phase 2 Complete**: Trees (8/8)
-- [ ] **Phase 3 Complete**: Heaps (4/4)
+- [ ] **Phase 3 Complete**: Heaps (5/5)
 - [ ] **Phase 4 Complete**: Binary Search (10/10)
 - [ ] **Phase 5 Complete**: Sorting & Selection (7/7)
 
-**Total Progress**: ___/43 problems completed
+**Total Progress**: ___/44 problems completed
 
 ---
 

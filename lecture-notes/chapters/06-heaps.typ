@@ -25,4 +25,4 @@ In a $0$-indexed array `H`:
 
 Heaps are used primarily to implement Priority Queues.
 - *Top-K Problems:* Instead of sorting the entire array ($O(n log n)$), maintain a Min-Heap of size $K$. At the end, the heap contains the $k$-largest elements in $O(n log k)$ time.
-- *Streaming Algorithms:* Finding the median of a constantly growing stream using a Max-Heap for the smaller half and a Min-Heap for the larger half.
+- *Streaming Algorithms:* Finding the median of a constantly growing stream using a Max-Heap for the smaller half and a Min-Heap for the larger half (e.g., the Median Finder problem).
