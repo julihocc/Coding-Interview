@@ -88,7 +88,8 @@ google-interview/
 │   └── trees/
 │       ├── binary-tree-traversal/        # In-order traversal
 │   │   ├── binary-search-tree/           # BST Insert, Search, Delete
-│   │   ├── bst-interview-problems/       # Balance checking, K-th smallest
+│   │   ├── check-bst-balance/            # Balance checking
+│   │   ├── kth-smallest-bst/             # K-th smallest element
 │   │   ├── planet-continents-dfs/        # DFS traversal
 │       ├── breadth-first-search-tree/    # BFS practice in Python
 │       ├── rainforest-bfs/               # BFS applied to forests
