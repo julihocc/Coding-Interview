@@ -89,6 +89,7 @@ google-interview/
 │       ├── binary-tree-traversal/        # In-order traversal
 │   │   ├── binary-search-tree/           # BST Insert, Search, Delete
 │   │   ├── check-bst-balance/            # Balance checking
+│   │   ├── max-height-diff-bst/          # Max subtree height diff
 │   │   ├── kth-smallest-bst/             # K-th smallest element
 │   │   ├── planet-continents-dfs/        # DFS traversal
 │       ├── breadth-first-search-tree/    # BFS practice in Python

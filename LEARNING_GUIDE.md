@@ -148,6 +148,10 @@ This guide provides a structured learning path through the repository's problems
   - **Why advanced**: Tests recursive calculation of heights and depth bounds
   - **Time to complete**: 1-2 hours
 
+- **Problem**: [max-height-diff-bst](data-structures/trees/max-height-diff-bst/)
+  - **Concepts**: Subtree height comparisons, bottom-up tree traversal
+  - **Time to complete**: 1-2 hours
+
 - **Problem**: [kth-smallest-bst](data-structures/trees/kth-smallest-bst/)
   - **Concepts**: In-order traversal, subtree counting
   - **Time to complete**: 1-2 hours
@@ -369,11 +373,11 @@ This guide provides a structured learning path through the repository's problems
 | Phase | Focus | Duration | Problems |
 |-------|-------|----------|----------|
 | 1 | Linear Data Structures | 2 weeks | 14 problems |
-| 2 | Trees | 1 week | 11 problems |
+| 2 | Trees | 1 week | 12 problems |
 | 3 | Heaps | 1 week | 5 problems |
 | 4 | Binary Search | 2 weeks | 10 problems |
 | 5 | Sorting & Selection | 2 weeks | 7 problems |
-| **Total** | **Complete Roadmap** | **8 weeks** | **47 problems** |
+| **Total** | **Complete Roadmap** | **8 weeks** | **48 problems** |
 
 ---
 
@@ -467,12 +471,12 @@ Quicksort → Quickselect
 Track your progress through the roadmap:
 
 - [ ] **Phase 1 Complete**: Linear Data Structures (14/14)
-- [ ] **Phase 2 Complete**: Trees (11/11)
+- [ ] **Phase 2 Complete**: Trees (12/12)
 - [ ] **Phase 3 Complete**: Heaps (5/5)
 - [ ] **Phase 4 Complete**: Binary Search (10/10)
 - [ ] **Phase 5 Complete**: Sorting & Selection (7/7)
 
-**Total Progress**: ___/47 problems completed
+**Total Progress**: ___/48 problems completed
 
 ---
 
