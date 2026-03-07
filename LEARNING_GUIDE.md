@@ -143,6 +143,11 @@ This guide provides a structured learning path through the repository's problems
   - **Concepts**: BST properties, insertion, searching, deletion
   - **Time to complete**: 3-4 hours
 
+- **Problem**: [bst-interview-problems](data-structures/trees/bst-interview-problems/)
+  - **Concepts**: Balance checking, K-th smallest element
+  - **Why advanced**: Tests recursion and structural understanding of BSTs
+  - **Time to complete**: 2-3 hours
+
 #### N-ary Trees & DFS
 
 - **Problem**: [planet-continents-dfs](data-structures/trees/planet-continents-dfs/)
@@ -360,11 +365,11 @@ This guide provides a structured learning path through the repository's problems
 | Phase | Focus | Duration | Problems |
 |-------|-------|----------|----------|
 | 1 | Linear Data Structures | 2 weeks | 14 problems |
-| 2 | Trees | 1 week | 9 problems |
+| 2 | Trees | 1 week | 10 problems |
 | 3 | Heaps | 1 week | 5 problems |
 | 4 | Binary Search | 2 weeks | 10 problems |
 | 5 | Sorting & Selection | 2 weeks | 7 problems |
-| **Total** | **Complete Roadmap** | **8 weeks** | **45 problems** |
+| **Total** | **Complete Roadmap** | **8 weeks** | **46 problems** |
 
 ---
 
@@ -458,12 +463,12 @@ Quicksort → Quickselect
 Track your progress through the roadmap:
 
 - [ ] **Phase 1 Complete**: Linear Data Structures (14/14)
-- [ ] **Phase 2 Complete**: Trees (9/9)
+- [ ] **Phase 2 Complete**: Trees (10/10)
 - [ ] **Phase 3 Complete**: Heaps (5/5)
 - [ ] **Phase 4 Complete**: Binary Search (10/10)
 - [ ] **Phase 5 Complete**: Sorting & Selection (7/7)
 
-**Total Progress**: ___/45 problems completed
+**Total Progress**: ___/46 problems completed
 
 ---
 
