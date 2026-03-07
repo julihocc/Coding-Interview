@@ -87,6 +87,7 @@ google-interview/
 │   │   └── daily-temperatures/           # Monotonic stack
 │   └── trees/
 │       ├── binary-tree-traversal/        # In-order traversal
+│       ├── binary-search-tree/           # BST Insert, Search, Delete
 │       ├── planet-continents-dfs/        # DFS traversal
 │       ├── breadth-first-search-tree/    # BFS practice in Python
 │       ├── rainforest-bfs/               # BFS applied to forests
