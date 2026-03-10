@@ -368,6 +368,20 @@ This guide provides a structured learning path through the repository's problems
 
 ---
 
+## Phase 6: Graph Algorithms (Week 9)
+
+### 6.1 Graph Representation Fundamentals
+
+**Goal**: Understand structural graph relationships
+
+- **Problem**: [adjacency-matrix](data-structures/graphs/adjacency-matrix/)
+  - **Concepts**: Graph connectivity representation, mutual friendships, graph traversal
+  - **Time to complete**: 3-4 hours
+
+**Key Learning**: Graph representation techniques like adjacency matrices simplify connectivity lookups for dense relationships.
+
+---
+
 ## 📊 Estimated Timeline
 
 | Phase | Focus | Duration | Problems |
@@ -377,7 +391,8 @@ This guide provides a structured learning path through the repository's problems
 | 3 | Heaps | 1 week | 5 problems |
 | 4 | Binary Search | 2 weeks | 10 problems |
 | 5 | Sorting & Selection | 2 weeks | 7 problems |
-| **Total** | **Complete Roadmap** | **8 weeks** | **48 problems** |
+| 6 | Graphs | 1 week | 1 problem |
+| **Total** | **Complete Roadmap** | **9 weeks** | **49 problems** |
 
 ---
 
@@ -475,8 +490,9 @@ Track your progress through the roadmap:
 - [ ] **Phase 3 Complete**: Heaps (5/5)
 - [ ] **Phase 4 Complete**: Binary Search (10/10)
 - [ ] **Phase 5 Complete**: Sorting & Selection (7/7)
+- [ ] **Phase 6 Complete**: Graphs (1/1)
 
-**Total Progress**: ___/48 problems completed
+**Total Progress**: ___/49 problems completed
 
 ---
 
