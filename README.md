@@ -99,7 +99,8 @@ google-interview/
 │       ├── family-tree-level-bfs/        # BFS level calculation on family tree
 │       └── network-bfs/                  # Network concept BFS
 │   └── graphs/
-│       └── adjacency-matrix/             # Graph connectivity and representation
+│       ├── adjacency-matrix/             # Graph connectivity and representation
+│       └── detect-cycle/                 # Cycle detection in undirected graphs
 ├── utils/
 │   └── judge_utils.py                    # Utilities: load_classes(), load_solutions(), run_tests()
 └── tools/

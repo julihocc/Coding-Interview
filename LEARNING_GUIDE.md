@@ -378,7 +378,11 @@ This guide provides a structured learning path through the repository's problems
   - **Concepts**: Graph connectivity representation, mutual friendships, graph traversal
   - **Time to complete**: 3-4 hours
 
-**Key Learning**: Graph representation techniques like adjacency matrices simplify connectivity lookups for dense relationships.
+- **Problem**: [detect-cycle](data-structures/graphs/detect-cycle/)
+  - **Concepts**: DFS, cycle detection in undirected graphs, connected components
+  - **Time to complete**: 2-3 hours
+
+**Key Learning**: Graph representation techniques like adjacency matrices simplify connectivity lookups for dense relationships. DFS enables component exploration.
 
 ---
 
@@ -391,8 +395,8 @@ This guide provides a structured learning path through the repository's problems
 | 3 | Heaps | 1 week | 5 problems |
 | 4 | Binary Search | 2 weeks | 10 problems |
 | 5 | Sorting & Selection | 2 weeks | 7 problems |
-| 6 | Graphs | 1 week | 1 problem |
-| **Total** | **Complete Roadmap** | **9 weeks** | **49 problems** |
+| 6 | Graphs | 1 week | 2 problems |
+| **Total** | **Complete Roadmap** | **9 weeks** | **50 problems** |
 
 ---
 
@@ -490,9 +494,9 @@ Track your progress through the roadmap:
 - [ ] **Phase 3 Complete**: Heaps (5/5)
 - [ ] **Phase 4 Complete**: Binary Search (10/10)
 - [ ] **Phase 5 Complete**: Sorting & Selection (7/7)
-- [ ] **Phase 6 Complete**: Graphs (1/1)
+- [ ] **Phase 6 Complete**: Graphs (2/2)
 
-**Total Progress**: ___/49 problems completed
+**Total Progress**: ___/50 problems completed
 
 ---
 
